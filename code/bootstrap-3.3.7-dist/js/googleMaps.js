@@ -1,52 +1,87 @@
-    function init() {
-        if (navigator.geolocation) {
+       var watchID;
+       var geo; // for the geolocation object
+       var map; // for the google map object
+       var mapMarker; // the google map marker object
 
-            navigator.geolocation.getCurrentPosition(function (position) {
-                    var coords = position.coords;
+       // position options
+       var MAXIMUM_AGE = 200; // miliseconds
+       var TIMEOUT = 300000;
+       var HIGHACCURACY = true;
 
-                    var latlng = new google.maps.LatLng(coords.latitude, coords.longitude);
-                    var myOptions = {
-                        zoom: 16,
-                        center: latlng,
-                        mapTypeId: google.maps.MapTypeId.ROADMAP
-                    };
+       function getGeoLocation() {
+           try {
+               if (!!navigator.geolocation) return navigator.geolocation;
+               else return undefined;
+           } catch (e) {
+               return undefined;
+           }
+       }
 
-                    var map = new google.maps.Map(document.getElementById("map"), myOptions);
+       function show_map(position) {
+           var lat = position.coords.latitude;
+           var lon = position.coords.longitude;
+           var latlng = new google.maps.LatLng(lat, lon);
 
-                    var marker = new google.maps.Marker({
-                        position: latlng,
-                        map: map
-                    });
+           if (map) {
+               map.panTo(latlng);
+               mapMarker.setPosition(latlng);
+           } else {
+               var myOptions = {
+                   zoom: 18,
+                   center: latlng,
 
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: "Current Location：<br/>longitude：" + latlng.lat() + "<br/>latitude：" + latlng.lng() //提示窗体内的提示信息
-                    });
+                   // mapTypeID --
+                   // ROADMAP displays the default road map view
+                   // SATELLITE displays Google Earth satellite images
+                   // HYBRID displays a mixture of normal and satellite views
+                   // TERRAIN displays a physical map based on terrain information.
+                   mapTypeId: google.maps.MapTypeId.ROADMAP
+               };
+               map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+               map.setTilt(0); // turns off the annoying default 45-deg view
 
-                    infoWindow.open(map, marker);
+               mapMarker = new google.maps.Marker({
+                   position: latlng,
+                   title: "You are here."
+               });
+               mapMarker.setMap(map);
+           }
+       }
 
+       function geo_error(error) {
+           stopWatching();
+           switch (error.code) {
+           case error.TIMEOUT:
+               alert('Geolocation Timeout');
+               break;
+           case error.POSITION_UNAVAILABLE:
+               alert('Geolocation Position unavailable');
+               break;
+           case error.PERMISSION_DENIED:
+               alert('Geolocation Permission denied');
+               break;
+           default:
+               alert('Geolocation returned an unknown error code: ' + error.code);
+           }
+       }
 
-                },
-                function (error) {
+       function stopWatching() {
+           if (watchID) geo.clearWatch(watchID);
+           watchID = null;
+       }
 
-                    switch (error.code) {
-                    case 1:
-                        alert("Location serves deined.");
-                        break;
-                    case 2:
-                        alert("can not get location information");
-                        break;
-                    case 3:
-                        alert("overtime.");
-                        break;
-                    default:
-                        alert("unknow error");
-                        break;
-                    }
-                });
-        } else {
-            alert("你的浏览器不支持HTML5来获取地理位置信息。");
-        }
+       function startWatching() {
+           watchID = geo.watchPosition(show_map, geo_error, {
+               enableHighAccuracy: HIGHACCURACY,
+               maximumAge: MAXIMUM_AGE,
+               timeout: TIMEOUT
+           });
+       }
 
-
-    }
-
+       window.onload = function () {
+           if ((geo = getGeoLocation())) {
+               startWatching();
+           } else {
+               alert('Geolocation not supported.')
+           }
+       }

@@ -12,6 +12,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="custom.css" rel="stylesheet">
 
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,8 +66,25 @@
             <div class="column-padding">
 
                 <div class="col-md-4">
-                    <p>[Add weather logo]</p>
-                    <p>This will contain the weather information. Current weather and the weather in the next hour for mothers to plan their walks.</p>
+                    <div class="tableContainer">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Current weather (C)</th>
+                                    <th>Next hour weather (C)</th>
+                                    <th>Weather tonight (C)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr id="weatherData">
+                                    <td id="currentTemperature"></td>
+                                    <td id="hourlyWeather"></td>
+                                    <td id="tonightWeather"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
                 <div class="col-md-4">
                     <p>[Add air quality logo]</p>
@@ -83,6 +101,11 @@
     <div class="feedback">
         <p id="feedback">We'd love to hear your feedback!</p>
     </div>
+
+
+    <script src="js/weatherRequest.js"></script>
+
+
 
 
 </body>

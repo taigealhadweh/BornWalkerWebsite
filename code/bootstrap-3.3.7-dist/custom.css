@@ -1,5 +1,4 @@
 .column-padding {
-
     padding: 100px;
 }
 
@@ -7,21 +6,31 @@
     text-align: center;
 }
 
-.map {
-    align-content: center;
+html {
+    height: 100%
 }
 
-.heading2{
+body {
+    height: 100%;
+    margin: 0px;
+    padding: 0px
+}
+
+#map_canvas {
+    height: 100%;
+    width: 100%
+}
+
+.heading2 {
     padding-top: 100px;
     text-align: center;
 }
 
-.heading3{
+.heading3 {
     text-align: center;
 }
 
-.feedback{
+.feedback {
     text-align: center;
     padding-top: 50px;
 }
-DFS
