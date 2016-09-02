@@ -5,8 +5,16 @@ $.ajax({
     dataType: 'jsonp',
     success: function (weatherData) {
         console.log(weatherData);
-        $("#currentTemperature").text(weatherData.currently.apparentTemperature.toString())
-        $("#hourlyWeather").text(weatherData.hourly.data[1].apparentTemperature.toString())
+        //Convert the farenheit temp to celcius with 2 decimal places
+        var currentTemperatureCelcius = Math.round((weatherData.currently.apparentTemperature - 32) * (5 / 9) * 100) / 100
+
+        //console.log(currentTemperatureCelcius)
+        //Display the current temperature in the table
+        $("#currentTemperature").text(currentTemperatureCelcius.toString())
+
+        var hourlyWeatherCelcius = Math.round((weatherData.hourly.data[1].apparentTemperature - 32) * (5 / 9) * 100) / 100
+
+        $("#hourlyWeather").text(hourlyWeatherCelcius).toString()
         $("#")
     }
 });
