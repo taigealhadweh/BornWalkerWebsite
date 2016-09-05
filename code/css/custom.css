@@ -40,3 +40,7 @@ BODY {
     text-align: center;
     padding-top: 50px;
 }
+
+.registrationForm {
+    content: 600px;
+}
