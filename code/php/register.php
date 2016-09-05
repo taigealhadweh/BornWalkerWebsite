@@ -27,35 +27,29 @@
 
                 <form>
                     <h1>BornWalker Registration</h1>
-                    <div class="span 3">
-                        <p>Name:
-                            <input type="text" name="userName">
-                        </p>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Name:</label>
+                        <input type="text" name="userName">
                     </div>
-                    <div class="span 3">
-                        <p>Password:
-                            <input type="password" name="pwv">
-                        </p>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Password:</label>
+                        <input type="password" name="pwv">
                     </div>
-                    <div class="span 3">
-                        <p>Confirm password:
-                            <input type="password" name="cpwv">
-                        </p>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Confirm password:</label>
+                        <input type="password" name="cpwv">
                     </div>
-                    <div class="span 3">
-                        <p>Email:
-                            <input type="text" name="mailv">
-                        </p>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Email:</label>
+                        <input type="text" name="mailv">
                     </div>
-                    <div class="span 3">
-                        <p>Phone:
-                            <input type="text" name="pv">
-                        </p>
+                    <div class="row">
+                        <label class="col-sm-2 col-form-label">Phone:</label>
+                        <input type="text" name="pv">
                     </div>
-                    <div class="span 3">
-                        <p>
-                            <input type="submit" value="Register">
-                        </p>
+                    <div class="row">
+                        <label class="col-form-label"></label>
+                        <input type="submit" value="Register">
                     </div>
                     <h3>Already registered?&nbsp<a href="login.php">Login here</a></h3>
                 </form>

@@ -28,21 +28,21 @@
                 <form>
                     <h1>Please login</h1>
                     <div class="span 3">
-                        <p>Email:
-                            <input type="text" name="userEmail">
-                        </p>
+                        <label class="col-sm-2 col-form-label">Email:</label>
+                        <input type="text" name="userEmail">
                     </div>
                     <div class="span 3">
-                        <p>Password:
-                            <input type="password" name="userPassword">
-                        </p>
+                        <label class="col-sm-2 col-form-label">Password:</label>
+                        <input type="password" name="userPassword">
                     </div>
                     <div class="span 3">
-                        <p>
+                        <label class="col-sm-2 col-form-label">
                             <input type="submit" value="Log in">
-                        </p>
+                        </label>
                     </div>
+
                     <h3>New member? <a href="register.php">Register now</a></h3>
+
                 </form>
             </div>
         </div>
