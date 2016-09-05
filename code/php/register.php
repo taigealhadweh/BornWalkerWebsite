@@ -8,19 +8,19 @@
     <form>
         <h1>Register to BornWalker</h1></br>
         <p>Please fill the fields below to complete your registration</p>
-        <p>Name:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-            <input type="text" name="nv">
+        <p>Name:
+            <input type="text" name="userName">
         </p>
-        <p>Password: &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <p>Password:
             <input type="password" name="pwv">
         </p>
         <p>Confirm password:
             <input type="password" name="cpwv">
         </p>
-        <p>Email:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <p>Email:
             <input type="text" name="mailv">
         </p>
-        <p>Phone:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+        <p>Phone:
             <input type="text" name="pv">
         </p>
         <p>
@@ -30,9 +30,9 @@
     </form>
 </body>
 <?php
-	if(isset($_GET['nv'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
+	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
 	{
-		$name=$_GET['nv'];
+		$name=$_GET['userName'];
 		$password=$_GET['pwv'];
 		$conpassword=$_GET['cpwv'];
 		$mail=checkemail($_GET['mailv']);

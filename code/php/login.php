@@ -7,7 +7,7 @@
 <body>
     <h1>Login to BornWalker</h1>
     <form>
-        <p>Email:&nbsp&nbsp&nbsp
+        <p>Email:
             <input type="text" name="userEmail">
         </p>
         <p>Password:
@@ -16,7 +16,7 @@
         <p>
             <input type="submit" value="Log in">
         </p>
-        <h3>New member?&nbsp<a href="register.php">Register now</a></h3>
+        <h3>New member? <a href="register.php">Register now</a></h3>
     </form>
 </body>
 <?php
@@ -29,25 +29,24 @@
 		die("<p>connect error</p>");
 		@mysqli_select_db($conn,'bornWalkerMap') or die('database error:'.mysql_error());
 		$log="SELECT * FROM user WHERE email='$mail'";
-		$cn="SELECT userid FROM user WHERE email='$mail'";
-		$cr=mysqli_query($conn,$cn);
-		$rcn=mysqli_fetch_row($cr)or die(location('ID or password does not exist.','login.php'));
-		$result=mysqli_query($conn,$log);
-		$row=mysqli_fetch_row($result) or die('search error'.mysqli_error());
-		if($row[2]===$password) //check password
+		$databaseQuery="SELECT userid FROM user WHERE email='$mail'";
+		$sendDatabaseQuery = mysqli_query($conn, $databaseQuery);
+		$resultOfDatabaseQuery = mysqli_fetch_row($sendDatabaseQuery)or die(location('ID or password does not exist.','login.php'));
+		$errorDatabaseQuery = mysqli_query($conn,$log);
+		$resultArrayPosition = mysqli_fetch_row($errorDatabaseQuery) or die('search error'.mysqli_error());
+		if($resultArrayPosition[2]===$password) //check password
 		{
-			setcookies($rcn[0]);
-			echo "Your name is ".$row[1]." .</br>Your phone number is ".$row[4]." .</br>";
+			setcookies($resultOfDatabaseQuery[0]);
 			sleep(2);
-			location('Login success.','booking.php');
+			location('Login success.','profile.php');
 		}else
 		{
 			location('ID or password does not exist.','login.php');
 		}
 	}
 	
-	function setcookies($rcn){
-		setcookie('userid',$rcn);
+	function setcookies($resultOfDatabaseQuery){
+		setcookie('userid', $resultOfDatabaseQuery);
 	}
 	
 	function location($_info,$_url) {
