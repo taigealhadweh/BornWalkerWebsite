@@ -1,47 +1,63 @@
 <html>
 
 <head>
-    <title>User Login Form</title>
+    <title>BornWalker--login</title>
 </head>
 
 <body>
-    <h1>User Login Form</h1>
-    <?php
-if (!isset($_POST['submit'])){
-?>
-        <!-- The HTML login form -->
-        <form action="<?=$_SERVER['PHP_SELF']?>" method="post">
-            Username:
-            <input type="text" name="username" />
-            <br /> Password:
-            <input type="password" name="password" />
-            <br />
-
-            <input type="submit" name="submit" value="Login" />
-        </form>
-        <?php
-} else {
-	require_once("db_const.php");
-	$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-	# check connection
-	if ($mysqli->connect_errno) {
-		echo "<p>MySQL error no {$mysqli->connect_errno} : {$mysqli->connect_error}</p>";
-		exit();
+    <h1>Login to BornWalker</h1>
+    <form>
+        <p>Email:&nbsp&nbsp&nbsp
+            <input type="text" name="userEmail">
+        </p>
+        <p>Password:
+            <input type="password" name="userPassword">
+        </p>
+        <p>
+            <input type="submit" value="Log in">
+        </p>
+        <h3>New member?&nbsp<a href="register.php">Register now</a></h3>
+    </form>
+</body>
+<?php
+	if(isset($_GET['userEmail'])&&isset($_GET['userPassword']))
+	{
+		$mail=$_GET['userEmail'];
+		$password=$_GET['userPassword'];
+		@$conn=mysqli_connect("40.126.240.245","k10838a","password"); //connect database
+		if(!$conn)
+		die("<p>connect error</p>");
+		@mysqli_select_db($conn,'bornWalkerMap') or die('database error:'.mysql_error());
+		$log="SELECT * FROM user WHERE email='$mail'";
+		$cn="SELECT userid FROM user WHERE email='$mail'";
+		$cr=mysqli_query($conn,$cn);
+		$rcn=mysqli_fetch_row($cr)or die(location('ID or password does not exist.','login.php'));
+		$result=mysqli_query($conn,$log);
+		$row=mysqli_fetch_row($result) or die('search error'.mysqli_error());
+		if($row[2]===$password) //check password
+		{
+			setcookies($rcn[0]);
+			echo "Your name is ".$row[1]." .</br>Your phone number is ".$row[4]." .</br>";
+			sleep(2);
+			location('Login success.','booking.php');
+		}else
+		{
+			location('ID or password does not exist.','login.php');
+		}
 	}
-
-	$username = $_POST['username'];
-	$password = $_POST['password'];
-
-	$sql = "SELECT * from users WHERE username LIKE '{$username}' AND password LIKE '{$password}' LIMIT 1";
-	$result = $mysqli->query($sql);
-	if (!$result->num_rows == 1) {
-		echo "<p>Invalid username/password combination</p>";
+	
+	function setcookies($rcn){
+		setcookie('userid',$rcn);
+	}
+	
+	function location($_info,$_url) {
+	if (!empty($_info)) {
+		echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
+		exit();
 	} else {
-		echo "<p>Logged in successfully</p>";
-		// do stuffs
+		header('Location:'.$_url);
 	}
 }
 ?>
-</body>
 
 </html>
