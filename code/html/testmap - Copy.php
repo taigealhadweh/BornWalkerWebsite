@@ -1,27 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+	<script type='text/javascript' src='jquery-1.6.2.min.js'></script>
+	<script type='text/javascript' src='jquery-ui-1.8.14.custom.min.js'></script>
+	<style>
 
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- this is for the size, so if mobile show mobile size and if ipad show ipad size etc -->
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>BornWalker</title>
-    <!-- Bootstrap -->
-    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/custom.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->;
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <script type='text/javascript' src='../js/jquery-1.6.2.min.js'></script>
-    <script type='text/javascript' src='../js/jquery-ui-1.8.14.custom.min.js'></script>
-    <style>
-      BODY {font-family : Verdana,Arial,Helvetica,sans-serif; color: #000000; font-size : 13px ; }
+		BODY {font-family : Verdana,Arial,Helvetica,sans-serif; color: #000000; font-size : 13px ; }
 		
 		#map_canvas { width:100%; height: 100%; z-index: 0; }
 		#floating-panel {
@@ -37,11 +20,11 @@
         line-height: 30px;
         padding-left: 10px;
       }
-      }
-    </style>
-    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&sensor=false"></script>
-    <script type='text/javascript'>
-       jQuery(document).ready( function($){
+	</style>
+	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&sensor=false" /></script>
+	<script type='text/javascript'>
+	
+	jQuery(document).ready( function($){
 	
 		//Get data, and replace it on the form
 		var geocoder;
@@ -260,7 +243,34 @@
 	   
 	   
 	   
-	
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+				
 		
 		function closeInfos(){
 	   if(infos.length > 0){
@@ -275,43 +285,9 @@
 	</script>
 
 
-
-</head>
-
-<body>
-
-    <!-- navbar code should be same on all pages -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only"> Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Need to resize the logo to fit in line with the navbar -->
-                <a href="" class="navbar-left"><img src=""></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../index.html">Home</a></li>
-                    <li class="active"><a href="takeawalk.html">Take a walk</a></li>
-                    <li><a href="../php/profile.php">Profile</a></li>
-                    <li><a href="../php/login.php">Login</a></li>
-
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-
-
-    <!--map code -->
-    <div id='input'>
+	</head>
+	<body>
+	<div id='input'>
 	<?php
 	
 	
@@ -362,9 +338,5 @@
 	  <p>End:<input type="text" id="end"></p>
 	  <input type="submit" id="submit" value="Route">
     </div>
-
-
-
-</body>
-
+	</body>
 </html>

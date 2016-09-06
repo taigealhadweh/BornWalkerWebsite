@@ -11,7 +11,7 @@ if (logged_in() == false) {
 
     <head>
         <title>User Profile </title>
-        <script src="script.js" type="text/javascript"></script>
+        <script src="../js/script.js" type="text/javascript"></script>
         <!-- put it on user area pages -->
     </head>
 
@@ -55,7 +55,7 @@ if (logged_in() == false) {
 			# echo the user profile data
 			echo "<p>User ID: {$user['id']}</p>";
 			echo "<p>Username: {$user['username']}</p>";
-			echo "<p>Status: {$status}</p>";			
+			echo "<p>Status: {$status}</p>";
 		} else { // 0 = invalid user id
 			echo "<p><b>Error:</b> Invalid user ID.</p>";
 		}
