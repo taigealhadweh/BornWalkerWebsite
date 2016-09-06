@@ -77,50 +77,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <?php
+    if(isset($_POST['userEmail'])&&isset($_POST['userPassword']))
+    {
+        $mail=$_POST['userEmail'];
+        $password=$_POST['userPassword'];
+        @$conn=mysqli_connect("40.126.240.245","k10838a","password"); //connect database
+        if(!$conn)
+            die("<p>connect error</p>");
+        @mysqli_select_db($conn,'bornWalkerMap') or die('database error:'.mysql_error());
+        $log="SELECT * FROM user WHERE email='$mail'";
+        $databaseQuery="SELECT userid FROM user WHERE email='$mail'";
+        $sendDatabaseQuery = mysqli_query($conn, $databaseQuery);
+        $resultOfDatabaseQuery = mysqli_fetch_row($sendDatabaseQuery)or die(location('ID or password does not exist.','login.php'));
+        $errorDatabaseQuery = mysqli_query($conn,$log);
+        $resultArrayPosition = mysqli_fetch_row($errorDatabaseQuery) or die('search error'.mysqli_error());
+        if($resultArrayPosition[2]===$password) //check password
+        {
+            setcookies($resultOfDatabaseQuery[0]);
+            // Authenticated, set session variables
+            $user = $resultOfDatabaseQuery->fetch_array();
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
 
+            // update status to online
+            //$timestamp = time();
+            //$sql = "UPDATE users SET status={$timestamp} WHERE id={$_SESSION['user_id']}";
+            //$result = $mysqli->query($sql);
+            //print_r($_SESSION);
+            redirect_to("profile.php?id={$_SESSION['user_id']}");
+        }else
+        {
+            location('ID or password does not exist.','login.php');
+        }
+    }
+
+    function setcookies($resultOfDatabaseQuery){
+        setcookie('userid', $resultOfDatabaseQuery);
+    }
+
+    function location($_info,$_url) {
+        if (!empty($_info)) {
+            echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
+            exit();
+        } else {
+            header('Location:'.$_url);
+        }
+    }
+    ?>
 
 </body>
 
 
 
-<?php
-	if(isset($_GET['userEmail'])&&isset($_GET['userPassword']))
-	{
-		$mail=$_GET['userEmail'];
-		$password=$_GET['userPassword'];
-		@$conn=mysqli_connect("40.126.240.245","k10838a","password"); //connect database
-		if(!$conn)
-		die("<p>connect error</p>");
-		@mysqli_select_db($conn,'bornWalkerMap') or die('database error:'.mysql_error());
-		$log="SELECT * FROM user WHERE email='$mail'";
-		$databaseQuery="SELECT userid FROM user WHERE email='$mail'";
-		$sendDatabaseQuery = mysqli_query($conn, $databaseQuery);
-		$resultOfDatabaseQuery = mysqli_fetch_row($sendDatabaseQuery)or die(location('ID or password does not exist.','login.php'));
-		$errorDatabaseQuery = mysqli_query($conn,$log);
-		$resultArrayPosition = mysqli_fetch_row($errorDatabaseQuery) or die('search error'.mysqli_error());
-		if($resultArrayPosition[2]===$password) //check password
-		{
-			setcookies($resultOfDatabaseQuery[0]);
-			sleep(2);
-			location('Login success.','profile.php');
-		}else
-		{
-			location('ID or password does not exist.','login.php');
-		}
-	}
-	
-	function setcookies($resultOfDatabaseQuery){
-		setcookie('userid', $resultOfDatabaseQuery);
-	}
-	
-	function location($_info,$_url) {
-	if (!empty($_info)) {
-		echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
-		exit();
-	} else {
-		header('Location:'.$_url);
-	}
-}
-?>
+
 
 </html>
