@@ -25,7 +25,7 @@
     <div class="container">
         <div class="row-fluid">
             <div class="column-padding">
-                <form>
+                <form method="post" action="profile.php">
                     <h1>Please login</h1>
                     <div class="span 3">
                         <label class="col-sm-2 col-form-label">Email:</label>
@@ -82,6 +82,7 @@
     {
         $mail=$_POST['userEmail'];
         $password=$_POST['userPassword'];
+
         @$conn=mysqli_connect("40.126.240.245","k10838a","password"); //connect database
         if(!$conn)
             die("<p>connect error</p>");
