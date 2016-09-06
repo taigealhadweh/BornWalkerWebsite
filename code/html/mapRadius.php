@@ -106,8 +106,9 @@
                 
             }
             
-            //show_loc(position);
             initMap();
+            
+            
             
             
         }
@@ -123,12 +124,7 @@
             }
             markersArray.length = 0;
         }
-        /*
-        function showLoc()
-        {
-            document.getElementById("submit").addEventListener("click", function(){show_map(position);});
-        }
-        */
+       
         
         
         function show_loc(position) {
@@ -150,11 +146,7 @@
             walkingTime = document.getElementById("walkingTime").value;
             
             
-            //var walkingTime = "120";
-            
             radius = parseInt(walkingTime) * 80;
-        
-            //document.getElementById("submit").addEventListener("click", function(){show_map(position);});
             
             var x;
 
@@ -167,9 +159,8 @@
                 var databsemarker;
 
                 addressDetails = databaseLocationArray[x].split("&&&");
-
-
-
+                
+                
                 var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
                 
                 //if within radius, show marker
@@ -182,16 +173,17 @@
 
                             position: lat,
 
-                            content: addressDetails[0]
+                            content: addressDetails[3] + "<br>" + addressDetails[4] + "</br>"
 
-                        });
+                        }); 
                     
                         markersArray.push(databsemarker);
                     
-                    
-
                         google.maps.event.addListener( databsemarker, 'click', function () {
 
+                            
+                            //clearEndInput();
+                            
                             closeInfos();
 
                             var info = new google.maps.InfoWindow({content: this.content});
@@ -199,6 +191,16 @@
                             info.open(map,this);
 
                             infos[0]=info;
+                            
+                            var fullAdd = this.content;
+                            
+                            var firstHalfAdd = fullAdd.split("<br>");
+                            
+                            var endAdd = firstHalfAdd[1].split("</br>");
+                            
+                            document.getElementById("end").value = endAdd[0];
+                            
+                            
 
                         });
                 
@@ -210,6 +212,17 @@
             
             
         }
+        
+        
+        
+        /*
+        //clear previous user input
+        function clearEndInput()
+        {   
+            document.getElementById("end").value = "";
+        }
+        */
+        
         
         function initMap() {
         var directionsService = new google.maps.DirectionsService;
@@ -230,10 +243,7 @@
         document.getElementById('end').addEventListener('change', onChangeHandler);
       }
 
-      
-        ////////////////////////////////////
-        
-        function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
           origin: document.getElementById('start').value,///////route start point
           destination: document.getElementById('end').value,///////route end point
@@ -246,9 +256,8 @@
           }
         });
       }
-	   
         
-
+        
         function geo_error(error) {
             stopWatching();
             switch(error.code) {
@@ -301,8 +310,14 @@
 	   }
 }
 
-	}
+	
+
+    
+    
+    
+    }
 	);
+
 	</script>
 
 
@@ -338,14 +353,16 @@
              //    Each row in the database is separated in the string by four *'s
                  $separator = "****";
             }
+            
             //Saving to the String, each variable is separated by three &'s
             $encodedString = $encodedString.$separator.
             "<p class='content'><b>Lat:</b> ".$row[1].
             "<br><b>Long:</b> ".$row[2].
             "<br><b>Name: </b>".$row[3].
             "<br><b>Address: </b>".$row[4].
-            "</p>&&&".$row[1]."&&&".$row[2];
+            "</p>&&&".$row[1]."&&&".$row[2]."&&&".$row[3]."&&&".$row[4];
             $x = $x + 1;
+            
         }        
 		
 	?>
