@@ -7,7 +7,7 @@
 		BODY {font-family : Verdana,Arial,Helvetica,sans-serif; color: #000000; font-size : 13px ; }
 		
 		#map_canvas { width:100%; height: 100%; z-index: 0; }
-        #xxx {
+        #walkingTimePanel {
        position: absolute;
        top: 10px;
        left: 25%;
@@ -26,9 +26,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
     <script type='text/javascript'>
     
-	//<div id="">
-    //<p>stert:<input type="text" id="start"></p>    
-    //</div>    
+	   
 	jQuery(document).ready( function($){
 	
 		//Get data, and replace it on the form
@@ -41,6 +39,9 @@
 		var mapMarker;
 		var markersArray = [];
 		var infos = [];
+        var radius;
+        var walkingTime;
+        
 		
 		
         function getGeoLocation() {
@@ -51,7 +52,19 @@
                 return undefined;
             }
         }
+        
+        /*
+        //calculate distance: radius = walkingTime(min) * 80(m)
+        function getRadius ()
+        {
+            var walkingTime = document.getElementById("walkingTime");
+            radius = walkingTime * 80;
+            return 80000;
+        }
+        */
+        
 
+        
         function show_map(position) {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
@@ -80,9 +93,78 @@
                     title:"You are here."
                 });
                 mapMarker.setMap(map);
+                
+                //walkingTime = "120";
+                
+                
+                //radius = parseInt(walkingTime) * 80;
+                
+                document.getElementById('submit').addEventListener('click', function() {clearOverlays(); show_loc(position);});
+                
+                
             }
+            
+            //show_loc(position);
+            
+            
+        }
+        
+        
+        ///////////////////////////////////////////////////
+        
+        function clearOverlays() 
+        {
+            for (var i = 0; i < markersArray.length; i++ ) 
+            {
+                markersArray[i].setMap(null);
+            }
+            markersArray.length = 0;
+        }
+        /*
+        function showLoc()
+        {
+            document.getElementById("submit").addEventListener("click", function(){show_map(position);});
+        }
+        */
+        
+        
+        function show_loc(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            var latlng = new google.maps.LatLng(lat, lon);
+
+            
+            /*
+            if(map) {
+                map.panTo(latlng);
+                mapMarker.setPosition(latlng);
+            } else {
+                var myOptions = {
+                    zoom: 18,
+                    center: latlng,
+
+                    // mapTypeID --
+                    // ROADMAP displays the default road map view
+                    // SATELLITE displays Google Earth satellite images
+                    // HYBRID displays a mixture of normal and satellite views
+                    // TERRAIN displays a physical map based on terrain information.
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                map.setTilt(0); // turns off the annoying default 45-deg view
+
+                mapMarker = new google.maps.Marker({
+                    position: latlng,
+                    title: "You are here."
+                });
+                mapMarker.setMap(map);
+            }
+            */
+            
 			
-       ////////////////////////////////////////////////////// 
+       //////////////////////////////////////////////////////
+
+        
             
             
             
@@ -95,6 +177,16 @@
             encodedString = document.getElementById("encodedString").value;
 
             databaseLocationArray = encodedString.split("****");
+        
+            
+            walkingTime = document.getElementById("walkingTime").value;
+            
+            
+            //var walkingTime = "120";
+            
+            radius = parseInt(walkingTime) * 80;
+        
+            //document.getElementById("submit").addEventListener("click", function(){show_map(position);});
             
             var x;
 
@@ -112,9 +204,8 @@
 
                 var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
                 
-                //var latlngTest = new google.maps.LatLng(-37.837292, 144.999733);
-                
-                if (google.maps.geometry.spherical.computeDistanceBetween(lat,latlng) <= 8000)
+                //if within radius, show marker
+                if (google.maps.geometry.spherical.computeDistanceBetween(lat,latlng) <= radius)
                     {
                         databsemarker = new google.maps.Marker
                         ({
@@ -147,18 +238,12 @@
 
 
             
-            }//map.fitBounds(bounds);
+            }
             
             
         }
         
         
-        /*
-        function locFromDatabase ()
-        {
-            
-        }
-        */
 
         
 
@@ -266,8 +351,13 @@
 	 <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
 			</div>
 	<div id="map_canvas"></div>
-        <div id="xxx">
-    <p>start:<input type="text" id="start"></p>    
-    </div>    
+    
+    
+    <div id="walkingTimePanel">
+        <p>Walking time (minutes):<input type="text" id="walkingTime" value="0"></p>
+        <br>
+        <input type="submit" id="submit">
+    </div> 
+        
 	</body>
 </html>
