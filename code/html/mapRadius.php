@@ -34,8 +34,7 @@
        padding-left: 10px;
      }
 	</style>
-        <!-- add comment -->
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&sensor=false" /></script>
+    <!-- add comment -->
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
     <script type='text/javascript'>
     
@@ -56,7 +55,7 @@
         var walkingTime;
         
 		
-		
+////////-----function: 1------///////////////		
         function getGeoLocation() {
             try {
                 if( !! navigator.geolocation ) return navigator.geolocation;
@@ -66,56 +65,87 @@
             }
         }
         
-        
+
+////////---fuction: 2---initiate map, then show current location////////        
         function show_map(position) {
+            
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
             var latlng = new google.maps.LatLng(lat, lon);
+            geocoder = new google.maps.Geocoder();
 
-            if(map) {
+            if (map) 
+            {
                 map.panTo(latlng);
                 mapMarker.setPosition(latlng);
-            } else {
-                var myOptions = {
-                    zoom: 18,
-                    center: latlng,
+            } 
+            else 
+            {
+                var myOptions = 
+                    {
+                        zoom: 18,
+                        center: latlng,
 
-                    // mapTypeID --
-                    // ROADMAP displays the default road map view
-                    // SATELLITE displays Google Earth satellite images
-                    // HYBRID displays a mixture of normal and satellite views
-                    // TERRAIN displays a physical map based on terrain information.
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
+                        // mapTypeID --
+                        // ROADMAP displays the default road map view
+                        // SATELLITE displays Google Earth satellite images
+                        // HYBRID displays a mixture of normal and satellite views
+                        // TERRAIN displays a physical map based on terrain information.
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                
                 map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                
                 map.setTilt(0); // turns off the annoying default 45-deg view
 
-                mapMarker = new google.maps.Marker({
+                
+                ////show marker on current location/////
+                mapMarker = new google.maps.Marker
+                ({
                     position: latlng,
-                    title:"You are here."
+                    content: "You are here"
                 });
+        
+                ////show click-on info window of current location marker////
+                google.maps.event.addListener( mapMarker, 'click', function () {
+                            
+                            closeInfos();
+
+                            var info = new google.maps.InfoWindow({content: this.content});
+
+                            info.open(map,this);
+
+                            infos[0]=info;
+                    
+                            geocoder.geocode({'latLng': latlng}, function (results, status) {
+                        
+                                if (status == google.maps.GeocoderStatus.OK) {
+                          
+                                    if (results[1]) {
+                            
+                                        document.getElementById("start").value = results[1].formatted_address;
+                          
+                                    } 
+                                    else {
+                            
+                                        alert('No results found');
+                          
+                                    }
+                        
+                                }
+                      
+                            });
+                });
+                
                 mapMarker.setMap(map);
                 
-                //walkingTime = "120";
-                
-                
-                //radius = parseInt(walkingTime) * 80;
-                
                 document.getElementById('submit').addEventListener('click', function() {clearOverlays(); show_loc(position);});
-                
-                
             }
-            
+
             initMap();
-            
-            
-            
-            
         }
-        
-        
-        ///////////////////////////////////////////////////
-        
+       
+////////---function: 3---clear previous markers from database. only keep current location marker///////
         function clearOverlays() 
         {
             for (var i = 0; i < markersArray.length; i++ ) 
@@ -124,14 +154,20 @@
             }
             markersArray.length = 0;
         }
-       
-        
-        
+      
+////////---function: 4---show markers from database////////      
         function show_loc(position) {
+            
+            //////current location////////////////
             var lat = position.coords.latitude;
+            
             var lon = position.coords.longitude;
+            
             var latlng = new google.maps.LatLng(lat, lon);
-                      
+            
+            
+            
+            /////location from database//////
             geocoder = new google.maps.Geocoder();
 
             var encodedString;
@@ -163,7 +199,7 @@
                 
                 var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
                 
-                //if within radius, show marker
+                ////////////if within radius, show marker
                 if (google.maps.geometry.spherical.computeDistanceBetween(lat,latlng) <= radius)
                     {
                         databsemarker = new google.maps.Marker
@@ -179,10 +215,8 @@
                     
                         markersArray.push(databsemarker);
                     
+                        ////pop out click-on info window////
                         google.maps.event.addListener( databsemarker, 'click', function () {
-
-                            
-                            //clearEndInput();
                             
                             closeInfos();
 
@@ -192,6 +226,7 @@
 
                             infos[0]=info;
                             
+                            ///show address to 'end' box when click on marker///
                             var fullAdd = this.content;
                             
                             var firstHalfAdd = fullAdd.split("<br>");
@@ -200,66 +235,58 @@
                             
                             document.getElementById("end").value = endAdd[0];
                             
-                            
-
                         });
                 
                     }
 
-
-            
             }
+
+        }
+
+////////---function: 5---set up map for calculating route////////
+        function initMap() 
+        {
+            var directionsService = new google.maps.DirectionsService;
+            var directionsDisplay = new google.maps.DirectionsRenderer;
+
+            directionsDisplay.setMap(map);
+
+            var onChangeHandler = function() 
+            {
+              calculateAndDisplayRoute(directionsService, directionsDisplay);
+            };
             
+            document.getElementById("route").addEventListener('click', function() {
+              calculateAndDisplayRoute(directionsService, directionsDisplay);
+            });
             
+            document.getElementById('start').addEventListener('change', onChangeHandler);
+            
+            document.getElementById('end').addEventListener('change', onChangeHandler);
+        }
+
+////////---function: 6---calculte route///////////////////
+        function calculateAndDisplayRoute(directionsService, directionsDisplay) 
+        {
+            directionsService.route({
+              
+                origin: document.getElementById('start').value,///////route start point
+                destination: document.getElementById('end').value,///////route end point
+                travelMode: 'WALKING'
+            }, function(response, status) {
+              
+                if (status === 'OK') 
+                {
+                    directionsDisplay.setDirections(response);
+                }
+            });
         }
         
-        
-        
-        /*
-        //clear previous user input
-        function clearEndInput()
-        {   
-            document.getElementById("end").value = "";
-        }
-        */
-        
-        
-        function initMap() {
-        var directionsService = new google.maps.DirectionsService;
-        var directionsDisplay = new google.maps.DirectionsRenderer;
-       /*  var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 16,
-          center: {lat: -37.8776209, lng: 145.04413679999993}
-        }); */
-        directionsDisplay.setMap(map);
-
-        var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        };
-		document.getElementById('submit').addEventListener('click', function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
-        });
-        document.getElementById('start').addEventListener('change', onChangeHandler);
-        document.getElementById('end').addEventListener('change', onChangeHandler);
-      }
-
-      function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-        directionsService.route({
-          origin: document.getElementById('start').value,///////route start point
-          destination: document.getElementById('end').value,///////route end point
-          travelMode: 'WALKING'
-        }, function(response, status) {
-          if (status === 'OK') {
-            directionsDisplay.setDirections(response);
-          } else {
-            window.alert('Directions request failed due to ' + status);
-          }
-        });
-      }
-        
-        
-        function geo_error(error) {
+////////---function: 7---error management////////        
+        function geo_error(error) 
+        { 
             stopWatching();
+            
             switch(error.code) {
                 case error.TIMEOUT:
                     alert('Geolocation Timeout');
@@ -275,48 +302,48 @@
             }
         }
 
-        function stopWatching() {
+////////---function: 8---////////
+        function stopWatching() 
+        {
             if(watchID) geo.clearWatch(watchID);
             watchID = null;
         }
 
-        function startWatching() {
+////////---function: 9---////////
+        function startWatching() 
+        {
             watchID = geo.watchPosition(show_map, geo_error, {
                 enableHighAccuracy: HIGHACCURACY,
                 maximumAge: MAXIMUM_AGE,
                 timeout: TIMEOUT
             });
         }
-
-         window.onload = function() {
-            if((geo = getGeoLocation())) {
+        
+////////---function: 10---////////
+         window.onload = function() 
+         {
+            if((geo = getGeoLocation())) 
+            {
                 startWatching();
-            } else {
+            } 
+            else 
+            {
                 alert('Geolocation not supported.')
             }
         } 
 		
+////////---function: 11---////////
+		function closeInfos()
+        {
+	       if(infos.length > 0)
+           {
+              infos[0].set("databsemarker",null);
+              infos[0].close();
+              infos.length = 0;
+	       }
+        }   
 
-
-           
-       
-				
-		
-		function closeInfos(){
-	   if(infos.length > 0){
-		  infos[0].set("databsemarker",null);
-		  infos[0].close();
-		  infos.length = 0;
-	   }
-}
-
-	
-
-    
-    
-    
-    }
-	);
+    });
 
 	</script>
 
@@ -326,31 +353,27 @@
 	<div id='input'>
 	<?php
 	
-	
-	
-        //Connect to the MySQL database that is holding your data, replace the x's with your data
+        //Connect to the MySQL database
         mysql_connect("40.126.240.245", "k10838a", "password") or
          die("Could not connect: " . mysql_error());
         mysql_select_db("bornWalkerMap");
  
-        // Initialize your first couple variables
-        $encodedString = ""; //This is the string that will hold all your location data
-        $x = 0; //This is a trigger to keep the string tidy
+        // Initialize the first couple variables
+        $encodedString = ""; //hold location data
+        $x = 0; //trigger to keep the string tidy
  
-        // Now we do a simple query to the database
         $result = mysql_query("SELECT * FROM Cafe");
  
-        // Multiple rows are returned
         while ($row = mysql_fetch_array($result, MYSQL_NUM))
         {
-         //   This is to keep an empty first or last line from forming, when the string is split
+         //keep an empty first or last line from forming, when the string is split
             if ( $x == 0 )
             {
                  $separator = "";
             }
             else
             {
-             //    Each row in the database is separated in the string by four *'s
+             //Each row in the database is separated in the string by four *'s
                  $separator = "****";
             }
             
@@ -367,7 +390,7 @@
 		
 	?>
 				
-	 <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
+    <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
 			</div>
 	<div id="map_canvas"></div>
     
@@ -377,10 +400,11 @@
         <br>
         <input type="submit" id="submit">
     </div>
+    
     <div id="floating-panel">
       <p>Start:<input type="text" id="start"></p>
 	  <p>End:<input type="text" id="end"></p>
-	  <input type="submit" id="submit" value="Route">
+	  <input type="submit" id="route" value="Route">
     </div>
         
 	</body>
