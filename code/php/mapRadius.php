@@ -1,214 +1,220 @@
 <html>
-	<head>
-	<script type='text/javascript' src='jquery-1.6.2.min.js'></script>
-	<script type='text/javascript' src='jquery-ui-1.8.14.custom.min.js'></script>
-	<style>
 
-		BODY {font-family : Verdana,Arial,Helvetica,sans-serif; color: #000000; font-size : 13px ; }
-		
-		#map_canvas { width:100%; height: 100%; z-index: 0; }
+<head>
+    <script type='text/javascript' src='../js/jquery-1.6.2.min.js'></script>
+    <script type='text/javascript' src='../js/jquery-ui-1.8.14.custom.min.js'></script>
+    <style>
+        BODY {
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            color: #000000;
+            font-size: 13px;
+        }
+        
+        #map_canvas {
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+        }
+        
         #walkingTimePanel {
-       position: absolute;
-       top: 10px;
-       left: 25%;
-       z-index: 5;
-       background-color: #fff;
-       padding: 5px;
-       border: 1px solid #999;
-       text-align: center;
-       font-family: 'Roboto','sans-serif';
-       line-height: 30px;
-       padding-left: 10px;
-     }
-	</style>
-        <!-- add comment -->
-	<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&sensor=false" /></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 1px solid #999;
+            text-align: center;
+            font-family: 'Roboto', 'sans-serif';
+            line-height: 30px;
+            padding-left: 10px;
+        }
+    </style>
+    <!-- add comment -->
+    <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&sensor=false" /></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
     <script type='text/javascript'>
-    
-	   
-	jQuery(document).ready( function($){
-	
-		//Get data, and replace it on the form
-		var geocoder;
-		var map;
-		var geo;
-		var MAXIMUM_AGE = 200; // miliseconds
-        var TIMEOUT = 300000;
-        var HIGHACCURACY = true;
-		var mapMarker;
-		var markersArray = [];
-		var infos = [];
-        var radius;
-        var walkingTime;
-        
-		
-		
-        function getGeoLocation() {
-            try {
-                if( !! navigator.geolocation ) return navigator.geolocation;
-                else return undefined;
-            } catch(e) {
-                return undefined;
+        jQuery(document).ready(function ($) {
+
+            //Get data, and replace it on the form
+            var geocoder;
+            var map;
+            var geo;
+            var MAXIMUM_AGE = 200; // miliseconds
+            var TIMEOUT = 300000;
+            var HIGHACCURACY = true;
+            var mapMarker;
+            var markersArray = [];
+            var infos = [];
+            var radius;
+            var walkingTime;
+
+
+
+            function getGeoLocation() {
+                try {
+                    if (!!navigator.geolocation) return navigator.geolocation;
+                    else return undefined;
+                } catch (e) {
+                    return undefined;
+                }
             }
-        }
-        
-        /*
-        //calculate distance: radius = walkingTime(min) * 80(m)
-        function getRadius ()
-        {
-            var walkingTime = document.getElementById("walkingTime");
-            radius = walkingTime * 80;
-            return 80000;
-        }
-        */
-        
 
-        
-        function show_map(position) {
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            var latlng = new google.maps.LatLng(lat, lon);
-
-            if(map) {
-                map.panTo(latlng);
-                mapMarker.setPosition(latlng);
-            } else {
-                var myOptions = {
-                    zoom: 18,
-                    center: latlng,
-
-                    // mapTypeID --
-                    // ROADMAP displays the default road map view
-                    // SATELLITE displays Google Earth satellite images
-                    // HYBRID displays a mixture of normal and satellite views
-                    // TERRAIN displays a physical map based on terrain information.
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                map.setTilt(0); // turns off the annoying default 45-deg view
-
-                mapMarker = new google.maps.Marker({
-                    position: latlng,
-                    title:"You are here."
-                });
-                mapMarker.setMap(map);
-                
-                //walkingTime = "120";
-                
-                
-                //radius = parseInt(walkingTime) * 80;
-                
-                document.getElementById('submit').addEventListener('click', function() {clearOverlays(); show_loc(position);});
-                
-                
-            }
-            
-            //show_loc(position);
-            
-            
-        }
-        
-        
-        ///////////////////////////////////////////////////
-        
-        function clearOverlays() 
-        {
-            for (var i = 0; i < markersArray.length; i++ ) 
-            {
-                markersArray[i].setMap(null);
-            }
-            markersArray.length = 0;
-        }
-        /*
-        function showLoc()
-        {
-            document.getElementById("submit").addEventListener("click", function(){show_map(position);});
-        }
-        */
-        
-        
-        function show_loc(position) {
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            var latlng = new google.maps.LatLng(lat, lon);
-
-            
             /*
-            if(map) {
-                map.panTo(latlng);
-                mapMarker.setPosition(latlng);
-            } else {
-                var myOptions = {
-                    zoom: 18,
-                    center: latlng,
-
-                    // mapTypeID --
-                    // ROADMAP displays the default road map view
-                    // SATELLITE displays Google Earth satellite images
-                    // HYBRID displays a mixture of normal and satellite views
-                    // TERRAIN displays a physical map based on terrain information.
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-                map.setTilt(0); // turns off the annoying default 45-deg view
-
-                mapMarker = new google.maps.Marker({
-                    position: latlng,
-                    title: "You are here."
-                });
-                mapMarker.setMap(map);
+            //calculate distance: radius = walkingTime(min) * 80(m)
+            function getRadius ()
+            {
+                var walkingTime = document.getElementById("walkingTime");
+                radius = walkingTime * 80;
+                return 80000;
             }
             */
-            
-			
-       //////////////////////////////////////////////////////
 
-        
-            
-            
-            
-            geocoder = new google.maps.Geocoder();
 
-            var encodedString;
 
-            var databaseLocationArray = [];
+            function show_map(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                var latlng = new google.maps.LatLng(lat, lon);
 
-            encodedString = document.getElementById("encodedString").value;
+                if (map) {
+                    map.panTo(latlng);
+                    mapMarker.setPosition(latlng);
+                } else {
+                    var myOptions = {
+                        zoom: 18,
+                        center: latlng,
 
-            databaseLocationArray = encodedString.split("****");
-        
-            
-            walkingTime = document.getElementById("walkingTime").value;
-            
-            
-            //var walkingTime = "120";
-            
-            radius = parseInt(walkingTime) * 80;
-        
-            //document.getElementById("submit").addEventListener("click", function(){show_map(position);});
-            
-            var x;
+                        // mapTypeID --
+                        // ROADMAP displays the default road map view
+                        // SATELLITE displays Google Earth satellite images
+                        // HYBRID displays a mixture of normal and satellite views
+                        // TERRAIN displays a physical map based on terrain information.
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    map.setTilt(0); // turns off the annoying default 45-deg view
 
-            for (x = 0; x < databaseLocationArray.length; x = x + 1)
+                    mapMarker = new google.maps.Marker({
+                        position: latlng,
+                        title: "You are here."
+                    });
+                    mapMarker.setMap(map);
 
+                    //walkingTime = "120";
+
+
+                    //radius = parseInt(walkingTime) * 80;
+
+                    document.getElementById('submit').addEventListener('click', function () {
+                        clearOverlays();
+                        show_loc(position);
+                    });
+
+
+                }
+
+                //show_loc(position);
+
+
+            }
+
+
+            ///////////////////////////////////////////////////
+
+            function clearOverlays() {
+                for (var i = 0; i < markersArray.length; i++) {
+                    markersArray[i].setMap(null);
+                }
+                markersArray.length = 0;
+            }
+            /*
+            function showLoc()
             {
-                
-                var addressDetails = [];
-
-                var databsemarker;
-
-                addressDetails = databaseLocationArray[x].split("&&&");
+                document.getElementById("submit").addEventListener("click", function(){show_map(position);});
+            }
+            */
 
 
+            function show_loc(position) {
+                var lat = position.coords.latitude;
+                var lon = position.coords.longitude;
+                var latlng = new google.maps.LatLng(lat, lon);
 
-                var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
-                
-                //if within radius, show marker
-                if (google.maps.geometry.spherical.computeDistanceBetween(lat,latlng) <= radius)
-                    {
-                        databsemarker = new google.maps.Marker
-                        ({
+
+                /*
+                if(map) {
+                    map.panTo(latlng);
+                    mapMarker.setPosition(latlng);
+                } else {
+                    var myOptions = {
+                        zoom: 18,
+                        center: latlng,
+
+                        // mapTypeID --
+                        // ROADMAP displays the default road map view
+                        // SATELLITE displays Google Earth satellite images
+                        // HYBRID displays a mixture of normal and satellite views
+                        // TERRAIN displays a physical map based on terrain information.
+                        mapTypeId: google.maps.MapTypeId.ROADMAP
+                    };
+                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    map.setTilt(0); // turns off the annoying default 45-deg view
+
+                    mapMarker = new google.maps.Marker({
+                        position: latlng,
+                        title: "You are here."
+                    });
+                    mapMarker.setMap(map);
+                }
+                */
+
+
+                //////////////////////////////////////////////////////
+
+
+
+
+
+                geocoder = new google.maps.Geocoder();
+
+                var encodedString;
+
+                var databaseLocationArray = [];
+
+                encodedString = document.getElementById("encodedString").value;
+
+                databaseLocationArray = encodedString.split("****");
+
+
+                walkingTime = document.getElementById("walkingTime").value;
+
+
+                //var walkingTime = "120";
+
+                radius = parseInt(walkingTime) * 80;
+
+                //document.getElementById("submit").addEventListener("click", function(){show_map(position);});
+
+                var x;
+
+                for (x = 0; x < databaseLocationArray.length; x = x + 1)
+
+                {
+
+                    var addressDetails = [];
+
+                    var databsemarker;
+
+                    addressDetails = databaseLocationArray[x].split("&&&");
+
+
+
+                    var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
+
+                    //if within radius, show marker
+                    if (google.maps.geometry.spherical.computeDistanceBetween(lat, latlng) <= radius) {
+                        databsemarker = new google.maps.Marker({
 
                             map: map,
 
@@ -217,39 +223,41 @@
                             content: addressDetails[0]
 
                         });
-                    
-                        markersArray.push(databsemarker);
-                    
-                    
 
-                        google.maps.event.addListener( databsemarker, 'click', function () {
+                        markersArray.push(databsemarker);
+
+
+
+                        google.maps.event.addListener(databsemarker, 'click', function () {
 
                             closeInfos();
 
-                            var info = new google.maps.InfoWindow({content: this.content});
+                            var info = new google.maps.InfoWindow({
+                                content: this.content
+                            });
 
-                            info.open(map,this);
+                            info.open(map, this);
 
-                            infos[0]=info;
+                            infos[0] = info;
 
                         });
-                
+
                     }
 
 
-            
+
+                }
+
+
             }
-            
-            
-        }
-        
-        
 
-        
 
-        function geo_error(error) {
-            stopWatching();
-            switch(error.code) {
+
+
+
+            function geo_error(error) {
+                stopWatching();
+                switch (error.code) {
                 case error.TIMEOUT:
                     alert('Geolocation Timeout');
                     break;
@@ -261,53 +269,53 @@
                     break;
                 default:
                     alert('Geolocation returned an unknown error code: ' + error.code);
+                }
             }
-        }
 
-        function stopWatching() {
-            if(watchID) geo.clearWatch(watchID);
-            watchID = null;
-        }
-
-        function startWatching() {
-            watchID = geo.watchPosition(show_map, geo_error, {
-                enableHighAccuracy: HIGHACCURACY,
-                maximumAge: MAXIMUM_AGE,
-                timeout: TIMEOUT
-            });
-        }
-
-         window.onload = function() {
-            if((geo = getGeoLocation())) {
-                startWatching();
-            } else {
-                alert('Geolocation not supported.')
+            function stopWatching() {
+                if (watchID) geo.clearWatch(watchID);
+                watchID = null;
             }
-        } 
-		
+
+            function startWatching() {
+                watchID = geo.watchPosition(show_map, geo_error, {
+                    enableHighAccuracy: HIGHACCURACY,
+                    maximumAge: MAXIMUM_AGE,
+                    timeout: TIMEOUT
+                });
+            }
+
+            window.onload = function () {
+                if ((geo = getGeoLocation())) {
+                    startWatching();
+                } else {
+                    alert('Geolocation not supported.')
+                }
+            }
 
 
-           
-       
-				
-		
-		function closeInfos(){
-	   if(infos.length > 0){
-		  infos[0].set("databsemarker",null);
-		  infos[0].close();
-		  infos.length = 0;
-	   }
-}
-
-	}
-	);
-	</script>
 
 
-	</head>
-	<body>
-	<div id='input'>
-	<?php
+
+
+
+            function closeInfos() {
+                if (infos.length > 0) {
+                    infos[0].set("databsemarker", null);
+                    infos[0].close();
+                    infos.length = 0;
+                }
+            }
+
+        });
+    </script>
+
+
+</head>
+
+<body>
+    <div id='input'>
+        <?php
 	
 	
 	
@@ -347,17 +355,20 @@
         }        
 		
 	?>
-				
-	 <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
-			</div>
-	<div id="map_canvas"></div>
-    
-    
+
+            <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
+    </div>
+    <div id="map_canvas"></div>
+
+
     <div id="walkingTimePanel">
-        <p>Walking time (minutes):<input type="text" id="walkingTime" value="0"></p>
+        <p>Walking time (minutes):
+            <input type="text" id="walkingTime" value="0">
+        </p>
         <br>
         <input type="submit" id="submit">
-    </div> 
-        
-	</body>
+    </div>
+
+</body>
+
 </html>

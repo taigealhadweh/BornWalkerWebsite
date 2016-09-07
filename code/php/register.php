@@ -72,7 +72,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="../index.html">Home</a></li>
-                    <li><a href="../html/takeawalk.html">Take a walk</a></li>
+                    <li><a href="../html/mapRadius.php">Take a walk</a></li>
                     <li><a href="profile.php">Profile</a></li>
                     <li class="active"><a href="login.php">Login</a></li>
 
