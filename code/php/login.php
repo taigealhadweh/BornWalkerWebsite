@@ -20,7 +20,7 @@
     <![endif]-->
 </head>
 
-<body>
+<body style="background-image:url(flower.jpg); background-position: center">
 
     <div class="container">
         <div class="row-fluid">

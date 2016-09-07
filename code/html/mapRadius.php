@@ -180,23 +180,24 @@
 
             ////////---function: 3---clear previous markers from database. only keep current location marker///////
             function clearOverlays() {
-                for (var i = 0; i < markersArray.length; i++) {
+                
+                for (var i = 0; i < markersArray.length; i++) 
+                {
                     markersArray[i].setMap(null);
                 }
+                
                 markersArray.length = 0;
             }
 
             ////////---function: 4---show markers from database////////      
-            function show_loc(position) {
-
+            function show_loc(position) 
+            {
                 //////current location////////////////
                 var lat = position.coords.latitude;
 
                 var lon = position.coords.longitude;
 
                 var latlng = new google.maps.LatLng(lat, lon);
-
-
 
                 /////location from database//////
                 geocoder = new google.maps.Geocoder();
