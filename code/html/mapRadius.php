@@ -69,7 +69,7 @@
         }
     </style>
     <!-- add comment -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry=false"></script>
     <script type='text/javascript'>
         jQuery(document).ready(function ($) {
 
