@@ -1,6 +1,8 @@
+<!DOCTYPE html>
 <html>
 
 <head>
+    <title>Take a walk</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -42,8 +44,9 @@
         
         #floating-panel {
             position: absolute;
-            top: 100px;
-            left: 5%;
+            border: 1px solid transparent;
+            top: 80px;
+            left: 2%;
             z-index: 5;
             background-color: #fff;
             padding: 5px;
@@ -52,12 +55,15 @@
             font-family: 'Roboto', 'sans-serif';
             line-height: 30px;
             padding-left: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            outline: none;
         }
         
         #walkingTimePanel {
             position: absolute;
-            top: 100px;
-            left: 25%;
+            border: 1px solid transparent;
+            top: 80px;
+            left: 20%;
             z-index: 5;
             background-color: #fff;
             padding: 5px;
@@ -66,10 +72,63 @@
             font-family: 'Roboto', 'sans-serif';
             line-height: 30px;
             padding-left: 10px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            outline: none;
         }
+       
+        
+        
+        
+
+      #pac-input {
+        position: absolute;
+          top: 80px;
+            left: 45%;
+          background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        position: absolute;
+          top: 80px;
+            left: 70%;
+          color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+        
+        
+        
+        
+        
+        
+        
+
     </style>
     <!-- add comment -->
-    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry=false"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry&sensor=false"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOhKItk8j4WXYO_DDxfL7XT4JiUlrA0bI&libraries=places&callback=testAuto"
+        async defer></script>
     <script type='text/javascript'>
         jQuery(document).ready(function ($) {
 
@@ -102,8 +161,11 @@
             function show_map(position) {
 
                 var lat = position.coords.latitude;
+                
                 var lon = position.coords.longitude;
+               
                 var latlng = new google.maps.LatLng(lat, lon);
+                
                 geocoder = new google.maps.Geocoder();
 
                 if (map) {
@@ -111,7 +173,7 @@
                     mapMarker.setPosition(latlng);
                 } else {
                     var myOptions = {
-                        zoom: 18,
+                        zoom: 17,
                         center: latlng,
 
                         // mapTypeID --
@@ -132,6 +194,29 @@
                         position: latlng,
                         content: "You are here"
                     });
+                    
+                    
+                    ////show user current location in 'start' box///
+                    geocoder.geocode({
+                            'latLng': latlng
+                        }, function (results, status) {
+
+                            if (status == google.maps.GeocoderStatus.OK) {
+
+                                if (results[1]) {
+
+                                    document.getElementById("start").value = results[1].formatted_address;
+
+                                } else {
+
+                                    alert('No results found');
+
+                                }
+
+                            }
+
+                        });
+                    
 
                     ////show click-on info window of current location marker////
                     google.maps.event.addListener(mapMarker, 'click', function () {
@@ -168,6 +253,7 @@
                     });
 
                     mapMarker.setMap(map);
+                    //testAuto();
 
                     document.getElementById('submit').addEventListener('click', function () {
                         clearOverlays();
@@ -175,7 +261,9 @@
                     });
                 }
 
+                
                 initMap();
+                testAuto();
             }
 
             ////////---function: 3---clear previous markers from database. only keep current location marker///////
@@ -194,7 +282,7 @@
             {
                 //////current location////////////////
                 var lat = position.coords.latitude;
-
+                
                 var lon = position.coords.longitude;
 
                 var latlng = new google.maps.LatLng(lat, lon);
@@ -309,6 +397,90 @@
                     }
                 });
             }
+            
+            
+            
+                       function testAuto() {
+        /*
+                var map = new google.maps.Map(document.getElementById('map_canvas'), {
+          center: {lat: -33.8688, lng: 151.2195},
+          zoom: 13
+        });
+        */
+    
+        
+        var input = /** @type {!HTMLInputElement} */(
+            document.getElementById('pac-input'));
+
+        var types = document.getElementById('type-selector');
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(types);
+
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.bindTo('bounds', map);
+
+        var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+        
+            if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+            
+
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+
+        // Sets a listener on a radio button to change the filter type on Places
+        // Autocomplete.
+        function setupClickListener(id, types) {
+          var radioButton = document.getElementById(id);
+          radioButton.addEventListener('click', function() {
+            autocomplete.setTypes(types);
+          });
+        }
+
+        setupClickListener('changetype-all', []);
+        setupClickListener('changetype-address', ['address']);
+        setupClickListener('changetype-establishment', ['establishment']);
+        setupClickListener('changetype-geocode', ['geocode']);
+      }
+
 
             ////////---function: 7---error management////////        
             function geo_error(error) {
@@ -361,7 +533,9 @@
                     infos.length = 0;
                 }
             }
-
+            
+            ////////////////////////////////////////////
+ 
         });
     </script>
 
@@ -451,7 +625,7 @@
 
     <div id="walkingTimePanel">
         <p>Walking time (minutes):
-            <input type="text" id="walkingTime" value="0">
+            <input type="text" id="walkingTime" placeholder="Enter a walking time">
         </p>
         <br>
         <input type="submit" id="submit">
@@ -459,12 +633,30 @@
 
     <div id="floating-panel">
         <p>Start:
-            <input type="text" id="start">
+            <input type="text" id="start" placeholder="You are here">
         </p>
         <p>End:
-            <input type="text" id="end">
+            <input type="text" id="end" placeholder="Pick a marker">
         </p>
         <input type="submit" id="route" value="Route">
+    </div>
+
+    
+    
+    <input id="pac-input" class="controls" type="text"
+        placeholder="Enter a location">
+    <div id="type-selector" class="controls">
+      <input type="radio" name="type" id="changetype-all" checked="checked">
+      <label for="changetype-all">All</label>
+
+      <input type="radio" name="type" id="changetype-establishment">
+      <label for="changetype-establishment">Establishments</label>
+
+      <input type="radio" name="type" id="changetype-address">
+      <label for="changetype-address">Addresses</label>
+
+      <input type="radio" name="type" id="changetype-geocode">
+      <label for="changetype-geocode">Geocodes</label>
     </div>
 
 </body>
