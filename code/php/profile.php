@@ -4,70 +4,93 @@ require_once("db-const.php");
 session_start();
 if (logged_in() == false) {
 	redirect_to("login.php");
-} else {
+}
+
+
+
+
+$userName = $_SESSION['username'];
+$userEmail = $_SESSION['userEmail'];
+$userPhone = $_SESSION['userPhone'];
 ?>
+
+
+
 
     <html>
 
     <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- this is for the size, so if mobile show mobile size and if ipad show ipad size etc -->
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <title>BornWalker</title>
+        <!-- Bootstrap -->
+        <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../css/custom.css" rel="stylesheet">
+
+
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
         <title>User Profile </title>
-        <script src="../js/script.js" type="text/javascript"></script>
-        <!-- put it on user area pages -->
+
     </head>
 
     <body>
-        <h1>User Profile </h1>
+        <!-- navbar code should be same on all pages -->
+        <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only"> Toggle Navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!-- Need to resize the logo to fit in line with the navbar -->
+                    <!-- <a href="" class="navbar-left"><img src=""></a> -->
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../html/mapRadius.php">Take a walk</a></li>
+                        <li class="active"><a href="profile.php">Profile</a></li>
+                        <li><a href="logout.php">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-        <hr />
-        <?php
-	if (isset($_GET['id']) && $_GET['id'] != "") {
-		$id = $_GET['id'];
-	} else {
-		$id = $_SESSION['user_id'];
-	}
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-	## connect mysql server
-		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-		# check connection
-		if ($mysqli->connect_errno) {
-			echo "<p>MySQL error no {$mysqli->connect_errno} : {$mysqli->connect_error}</p>";
-			exit();
-		}
-	## query database
-		# fetch data from mysql database
-		$sql = "SELECT * FROM users WHERE id = {$id} LIMIT 1";
 
-		if ($result = $mysqli->query($sql)) {
-			$user = $result->fetch_array();
-		} else {
-			echo "<p>MySQL error no {$mysqli->errno} : {$mysqli->error}</p>";
-			exit();
-		}
+        <div class="userNameDisplay">
+            Welcome back
+            <?php echo $userName; ?>!
+        </div>
+        <div class="userStats">
 
-		if ($result->num_rows == 1) {
-			# calculating online status
-			if (time() - $user['status'] <= (5*60)) { // 300 seconds = 5 minutes timeout
-				$status = "Online";
-			} else {
-				$status = "Offline";
-			}
+        </div>
 
-			# echo the user profile data
-			echo "<p>User ID: {$user['id']}</p>";
-			echo "<p>Username: {$user['username']}</p>";
-			echo "<p>Status: {$status}</p>";
-		} else { // 0 = invalid user id
-			echo "<p><b>Error:</b> Invalid user ID.</p>";
-		}
-}
+        <div class="userEmail">
+            Your email:
+            <?php echo $userEmail; ?>
+        </div>
 
-// showing the login & register or logout link
-if (logged_in() == true) {
-	echo '<a href="logout.php">Log Out</a>';
-} else {
-	echo '<a href="login.php">Login</a> | <a href="register.php">Register</a>';
-}
-?>
+        <div class="userPhone">
+            Your contact number:
+            <?php echo $userPhone; ?>
+        </div>
+
 
     </body>
 

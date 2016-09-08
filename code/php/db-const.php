@@ -3,5 +3,5 @@
     const DB_HOST = '40.126.240.245';
     const DB_USER = 'k10838a';
     const DB_PASS = 'password';
-    const DB_NAME = 'php_mysql_login_system';
+    const DB_NAME = 'bornWalkerMap';
 ?>

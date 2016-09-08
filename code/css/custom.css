@@ -44,3 +44,7 @@ BODY {
 .registrationForm {
     content: 600px;
 }
+
+.userNameDisplay {
+    padding-top: 50px;
+}

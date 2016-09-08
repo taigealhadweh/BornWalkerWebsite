@@ -26,15 +26,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             // Authenticated, set session variables
             $_SESSION['user_id'] = $resultArray[0];
             $_SESSION['username'] = $resultArray[1];
+            $_SESSION['userPassword'] = $resultArray[2];
+            $_SESSION['userEmail'] = $resultArray[3];
+            $_SESSION['userPhone'] = $resultArray[4];
+            
             printArray("_SESSION", $_SESSION);
 
-            // update status to online
-            //$timestamp = time();
-            //$sql = "UPDATE users SET status={$timestamp} WHERE id={$_SESSION['user_id']}";
-            //$result = $mysqli->query($sql);
-            //print_r($_SESSION);
-//print_r("profile.php?id={$_SESSION['user_id']}");
-//print_r("OI");
+            
 //            redirect_to("profile.php");
             redirect_to("profile.php");
         } else {
