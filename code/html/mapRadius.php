@@ -36,7 +36,7 @@
             font-size: 13px;
         }
         
-        #map_canvas {
+        #map {
             width: 100%;
             height: 100%;
             z-index: 0;
@@ -95,6 +95,8 @@
             var walkingTime;
 
 
+            google.maps.event.addDomListener(window, "load", show_map);
+            
             ////////-----function: 1------///////////////		
             function getGeoLocation() {
                 try {
@@ -133,7 +135,7 @@
                         mapTypeId: google.maps.MapTypeId.ROADMAP
                     };
 
-                    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+                    map = new google.maps.Map(document.getElementById("map"), myOptions);
 
                     map.setTilt(0); // turns off the annoying default 45-deg view
 
@@ -158,7 +160,7 @@
 
                                 } else {
 
-                                    alert('No results found');
+                                    alert("No results found");
 
                                 }
 
@@ -168,7 +170,7 @@
                     
 
                     ////show click-on info window of current location marker////
-                    google.maps.event.addListener(mapMarker, 'click', function () {
+                    google.maps.event.addListener(mapMarker, "click", function () {
 
                         closeInfos();
 
@@ -192,7 +194,7 @@
 
                                 } else {
 
-                                    alert('No results found');
+                                    alert("No results found");
 
                                 }
 
@@ -204,7 +206,7 @@
                     mapMarker.setMap(map);
                     //testAuto();
 
-                    document.getElementById('submit').addEventListener('click', function () {
+                    document.getElementById("submit").addEventListener("click", function () {
                         clearOverlays();
                         show_loc(position);
                     });
@@ -284,7 +286,7 @@
                         markersArray.push(databsemarker);
 
                         ////pop out click-on info window////
-                        google.maps.event.addListener(databsemarker, 'click', function () {
+                        google.maps.event.addListener(databsemarker, "click", function () {
 
                             closeInfos();
 
@@ -324,25 +326,25 @@
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                 };
 
-                document.getElementById("route").addEventListener('click', function () {
+                document.getElementById("route").addEventListener("click", function () {
                     calculateAndDisplayRoute(directionsService, directionsDisplay);
                 });
 
-                document.getElementById('start').addEventListener('change', onChangeHandler);
+                document.getElementById("start").addEventListener("change", onChangeHandler);
 
-                document.getElementById('end').addEventListener('change', onChangeHandler);
+                document.getElementById("end").addEventListener("change", onChangeHandler);
             }
 
             ////////---function: 6---calculte route///////////////////
             function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 directionsService.route({
 
-                    origin: document.getElementById('start').value, ///////route start point
-                    destination: document.getElementById('end').value, ///////route end point
-                    travelMode: 'WALKING'
+                    origin: document.getElementById("start").value, ///////route start point
+                    destination: document.getElementById("end").value, ///////route end point
+                    travelMode: "WALKING"
                 }, function (response, status) {
 
-                    if (status === 'OK') {
+                    if (status === "OK") {
                         directionsDisplay.setDirections(response);
                     }
                 });
@@ -353,13 +355,13 @@
             function endLocAuto() 
             {
         
-                var input = (document.getElementById('end'));
+                var input = (document.getElementById("end"));
 
-                var types = 'address';  ///user input type: address
+                var types = "address";  ///user input type: address
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 
-                autocomplete.bindTo('bounds', map);
+                autocomplete.bindTo("bounds", map);
 
                 var infowindow = new google.maps.InfoWindow();
                 
@@ -371,7 +373,7 @@
                 
                 });
 
-                autocomplete.addListener('place_changed', function() {
+                autocomplete.addListener("place_changed", function() {
                   
                     infowindow.close();
                   
@@ -431,13 +433,13 @@
             function startLocAuto() 
             {
         
-                var input = (document.getElementById('start'));
+                var input = (document.getElementById("start"));
 
-                var types = 'address';  ///user input type: address
+                var types = "address";  ///user input type: address
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
                 
-                autocomplete.bindTo('bounds', map);
+                autocomplete.bindTo("bounds", map);
 
                 var infowindow = new google.maps.InfoWindow();
                 
@@ -449,7 +451,7 @@
                 
                 });
 
-                autocomplete.addListener('place_changed', function() {
+                autocomplete.addListener("place_changed", function() {
                   
                     infowindow.close();
                   
@@ -600,7 +602,7 @@
 
 
 
-    <div id='input'>
+    <div id="input">
         <?php
 	
         //Connect to the MySQL database
@@ -642,7 +644,7 @@
 
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
     </div>
-    <div id="map_canvas"></div>
+    <div id="map"></div>
 
 
     <div id="walkingTimePanel">
