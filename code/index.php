@@ -1,6 +1,6 @@
 <?php 
-require_once("/php/printXML.php");
-//session_start();
+require_once("php/printXML.php");
+session_start();
 
 $uvIndex = $_SESSION['uvIndex'];
 //print_r($uvIndex);
