@@ -1,6 +1,10 @@
 <?php 
-require_once("php/printXML.php");
+require_once("/php/printXML.php");
+//session_start();
 
+$uvIndex = $_SESSION['uvIndex'];
+//print_r($uvIndex);
+//echo $uvIndex;
 ?>
 
     <!DOCTYPE html>
@@ -92,32 +96,43 @@ require_once("php/printXML.php");
 
                     </div>
                     <div class="col-md-4">
-                        <?php echo $location->index; ?>
+                        [air quality table]
+                    </div>
 
-                            <div class="col-md-4">
-                                <p>[add uv-vis logo]</p>
-                                <p>This will contain the uv-vis information. With suggestions of what to protect themselves and kids with.</p>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="tableContainer">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Current uv index</th>
+                                        <th>Suggestion</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr id="uvIndexData">
+
+                                        <td id="currentUvIndex">
+                                            <?php print_r($uvIndex); ?>
+                                        </td>
+                                        <td id="suggestion"></td>
+                                        <td id=""></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="feedback">
-                <p id="feedback">We'd love to hear your feedback!</p>
-            </div>
+        <div class="feedback">
+            <p id="feedback">We'd love to hear your feedback!</p>
+        </div>
 
 
-            <script src="js/weatherRequest.js"></script>
-            <script type="text/javascript" src="js/jkl-parsexml.js"></script>
-            <script>
-                //        <!--
-                var url = "http://www.arpansa.gov.au/uvindex/realtime/xml/uvvalues.xml";
-                var xml = new JKL.ParseXML(url);
-                var data = xml.parse();
-                document.write(data["stations"]["melbourne"]["index"]);
-                document.write(data.stations.melbourne.index);
-                // -->
-            </script>
+        <script src="js/weatherRequest.js"></script>
+
 
 
 
