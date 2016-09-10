@@ -48,31 +48,31 @@
         #routePanel {
             position: absolute;
             top: 65px;
-            left: 2%;
+            /*            left: %;*/
             z-index: 5;
             background-color: #fff;
-            padding: 5px;
-            border: 1px solid transparent;
+            /*            padding: 5px;*/
+            /*            border: 1px solid transparent;*/
             font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            /*            line-height: 30px;*/
+            padding-left: 500px;
+            /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
-            width: 380px;
+            /*            width: 380px;*/
         }
         
         #walkingTimePanel {
             position: absolute;
             top: 65px;
-            left: 35%;
-            z-index: 5;
+            /*            left: 35%;*/
+            z-index: 6;
             background-color: #fff;
-            padding: 5px;
-            border: 1px solid transparent;
+            /*            padding: 5px;*/
+            /*            border: 1px solid transparent;*/
             font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            /*            line-height: 30px;*/
+            left: 30px;
+            /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
         }
     </style>
@@ -631,28 +631,36 @@
 
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
     </div>
+
+    <div class="form-group" id="walkingTimePanel">
+        <div class="col-lg-8">
+            Walking time (minutes):
+            <input type="text" id="walkingTime" placeholder="Enter a walking time">
+
+            <input type="submit" id="submit">
+        </div>
+    </div>
+
+
+    <div id="routePanel" class="form-group">
+        <div class="col-md-4">
+            <label for="start">Start</label>
+            <input class="form-control" type="text" id="start" placeholder="You are here">
+        </div>
+        <div class="col-md-4">
+            <label for="end">End</label>
+            <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address">
+        </div>
+        <input type="submit" id="route" value="Route">
+    </div>
+
+
     <div id="map"></div>
 
 
-    <div id="walkingTimePanel">
-        <p>Walking time (minutes):
-            <input type="text" id="walkingTime" placeholder="Enter a walking time">
-        </p>
-        <br>
-        <input type="submit" id="submit">
-    </div>
 
-    <div id="routePanel" class="col-xs-2">
-        <p>
-            <label for="start">Start</label>
-            <input class="form-control" type="text" id="start" placeholder="You are here">
-        </p>
-        <p>
-            <label for="end">End</label>
-            <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address">
-        </p>
-        <input type="submit" id="route" value="Route">
-    </div>
+
+
 
 </body>
 
