@@ -8,7 +8,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         if (!$conn) {
             die("<p>connect error</p>");
         }
-        //mysqli_select_db($conn, 'bornWalkerMap.user') or die('database error:' . mysqli_error());
         $userQuery = "SELECT * FROM user WHERE email='$mail'";
         $databaseQuery = "SELECT userid FROM user";
         $sendDatabaseQuery = mysqli_query($conn, $userQuery);
@@ -18,10 +17,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $resultArray = mysqli_fetch_row($errorDatabaseQuery) or die('search error' . mysqli_error());
         if ($resultArray[2] === $password) //check password
         {
-            print_r("PASSWORD OK<br>");
-            print_r("POST=$_POST<br>");
-            print_r("SESSION=$_SESSION<br>");
-            printArray("resultArray", $resultArray);
+            //these print_r are for testing purposes
+//            print_r("PASSWORD OK<br>");
+//            print_r("POST=$_POST<br>");
+//            print_r("SESSION=$_SESSION<br>");
+//            printArray("resultArray", $resultArray);
 
             // Authenticated, set session variables
             $_SESSION['user_id'] = $resultArray[0];
@@ -30,10 +30,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['userEmail'] = $resultArray[3];
             $_SESSION['userPhone'] = $resultArray[4];
             
-            printArray("_SESSION", $_SESSION);
+            // printArray("_SESSION", $_SESSION);
 
-            
-//            redirect_to("profile.php");
             redirect_to("profile.php");
         } else {
             //location('ID or password does not exist.', 'login.php');
@@ -61,9 +59,6 @@ function redirect_to($location)
     exit;
 }
 
-function setcookies($resultOfDatabaseQuery){
-    setcookie('userid', $resultOfDatabaseQuery);
-}
 
 function location($_info,$_url) {
     if (!empty($_info)) {
@@ -73,8 +68,9 @@ function location($_info,$_url) {
         header('Location:'.$_url);
     }
 }
-?>
 
+
+?>
     <html>
 
     <head>
@@ -156,9 +152,5 @@ function location($_info,$_url) {
         <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
     </body>
-
-
-
-
 
     </html>
