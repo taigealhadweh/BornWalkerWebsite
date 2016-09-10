@@ -104,7 +104,16 @@
 
 
     <script src="js/weatherRequest.js"></script>
-    <script src="js/uvIndexXMLParse.js"></script>
+    <script type="text/javascript" src="js/jkl-parsexml.js"></script>
+    <script>
+        //        <!--
+        var url = "http://www.arpansa.gov.au/uvindex/realtime/xml/uvvalues.xml";
+        var xml = new JKL.ParseXML(url);
+        var data = xml.parse();
+        document.write(data["stations"]["melbourne"]["index"]);
+        document.write(data.stations.melbourne.index);
+        // -->
+    </script>
 
 
 
