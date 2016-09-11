@@ -1,10 +1,9 @@
 <?php 
 require_once("php/printXML.php");
+//any page that has sessions needs this session_start()
 session_start();
 
 $uvIndex = $_SESSION['uvIndex'];
-//print_r($uvIndex);
-//echo $uvIndex;
 ?>
 
     <!DOCTYPE html>
