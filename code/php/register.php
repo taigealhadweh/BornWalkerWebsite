@@ -92,7 +92,7 @@
 <?php
 	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
 	{
-		$name=$_GET['userName'];
+		$name=checkUserName($_GET['userName']);
 		$password=$_GET['pwv'];
 		$conpassword=$_GET['cpwv'];
 		$mail=checkemail($_GET['mailv']);
@@ -145,9 +145,38 @@
         
     }
     
+    /**
+	 * checkPhone() check the format of this phone number
+	 * @param string $_string the phone number entered by user.
+	 * @return string $_string the checked phone number.
+	 */
     function checkPhone($_string) {
 		if (!preg_match('/^[0-9]{9,10}$/',$_string)) {
 			location('Invalid phone number, please try again :)','register.php');
+		}
+	return $_string;
+    }
+    
+    /**
+	 * checkUserName() check the format of this user name
+	 * @param string $_string the user name entered by user.
+	 * @return string $_string the checked user name.
+	 */
+    function checkUserName($_string) {
+		if (!preg_match('/^[\w]+$/',$_string)) {
+			location('User name can not begin with a space, please try again :)','register.php');
+		}
+	return $_string;
+    }
+    
+    /**
+	 * checkPassword() check the format of this user name
+	 * @param string $_string the password entered by user.
+	 * @return string $_string the checked password.
+	 */
+    function checkPassword($_string) {
+		if (!preg_match('/^[\w]+$/',$_string)) {
+			location(' :)','register.php');
 		}
 	return $_string;
     }
