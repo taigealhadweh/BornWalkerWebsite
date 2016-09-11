@@ -1,114 +1,4 @@
-<?php
 
-	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
-
-	{
-
-		$name=$_GET['userName'];
-
-		$password=$_GET['pwv'];
-
-		$conpassword=$_GET['cpwv'];
-
-		$mail=checkemail($_GET['mailv']);
-
-		$phone=$_GET['pv'];
-
-	
-
-		if($password===$conpassword)
-
-		{
-
-			@$conn=mysqli_connect("40.126.240.245","k10838a","password");
-
-			if(!$conn)
-
-			die("<p>connect error</p>");
-
-			@mysqli_select_db($conn,'bornWalkerMap') or die('database error:'.mysql_error());
-
-			$check="SELECT * FROM user WHERE email='$mail'";
-
-			$result=@mysqli_query($conn,$check);
-
-			if(!!$row=mysqli_fetch_array($result))
-
-			{
-
-				location('This E-mail had been used.','register.php');
-
-			}
-
-			$reg="INSERT INTO user(name,password,email,phone) VALUE('$name','$password','$mail',$phone)";
-
-			@mysqli_query($conn,$reg) or die('add error'.mysql_error());
-
-			
-
-			
-
-		}
-
-		
-
-	}
-
-	
-
-	/**
-
-	 * location() pop up a alert and get in a web address.
-
-	 * @param string $_info the text of alert.
-
-	 * @param string $_url the page address will jump to.
-
-	 */
-
-	function location($_info,$_url) {
-
-		if (!empty($_info)) {
-
-			echo "<script type='text/javascript'>alert('$_info');location.href='$_url';</script>";
-
-			exit();
-
-		} else {
-
-			header('Location:'.$_url);
-
-		}
-
-	}
-
-	
-
-	/**
-
-	 * checkemail() check the format of this email
-
-	 * @param string $_string the email entered by user.
-
-	 * @return string $_string the checked email address.
-
-	 */
-
-	function checkemail($_string) {
-
-		if (!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/',$_string)) {
-
-			location('Incorrect E-mail format.','register.php');
-
-		}
-
-	return $_string;
-
-}
-
-
-
-?>
 
 
 <html>
@@ -202,12 +92,12 @@
 
 
 </body>
-<<<<<<< HEAD
+
 <?php
 	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
 	{
 		$name=checkUserName($_GET['userName']);
-		$password=$_GET['pwv'];
+		$password=checkPassword($_GET['pwv']);
 		$conpassword=$_GET['cpwv'];
 		$mail=checkemail($_GET['mailv']);
 		$phone=checkPhone($_GET['pv']);
@@ -229,6 +119,11 @@
 			
 			
 		}
+        else
+        {
+            location('Password does not match the confirmed password. Please try again :)','register.php');
+        }
+        
 		
 	}
 	
@@ -278,7 +173,7 @@
 	 */
     function checkUserName($_string) {
 		if (!preg_match('/^[\w]+$/',$_string)) {
-			location('User name can not begin with a space, please try again :)','register.php');
+			location('User name can not begin with a space. Please try again :)','register.php');
 		}
 	return $_string;
     }
@@ -290,12 +185,8 @@
 	 */
     function checkPassword($_string) {
 		if (!preg_match('/^[\w]+$/',$_string)) {
-			location(' :)','register.php');
+			location('Password can not be blank. Please try again :)','register.php');
 		}
 	return $_string;
     }
-=======
->>>>>>> f1db12afa3de7fa25f2eac197d27185b3ae2971f
 
-
-</html>
