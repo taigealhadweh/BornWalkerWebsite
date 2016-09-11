@@ -14,18 +14,11 @@ $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
 if (!$conn) {
             die("<p>connect error</p>");
         }
-//print_r($conn);
-$userQuery = "SELECT * FROM user WHERE userid <> $_SESSION[user_id]";
-//print_r($userQuery);
 
+$userQuery = "SELECT * FROM user WHERE userid <> $_SESSION[user_id]";
 $users = mysqli_query($conn, $userQuery);
-//    print_r($users);
-//    while($row = mysqli_fetch_assoc($users)){
-//        echo $row['name'] ; 
-//    }
 
 ?>
-
     <html>
 
     <head>
