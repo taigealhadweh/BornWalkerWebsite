@@ -37,47 +37,48 @@
         }
         
         #map {
-            width: 100%;
-            height: 100%;
-            z-index: 0;
+            position: relative;
+            top: 120px;
+            left: 30px;
+            border: 3px solid #73AD21;
+            width: 95%;
+            padding-bottom: 40%;
         }
         
         #routePanel {
             position: absolute;
             top: 65px;
-            left: 2%;
+            /*            left: %;*/
             z-index: 5;
             background-color: #fff;
-            padding: 5px;
-            border: 1px solid transparent;
+            /*            padding: 5px;*/
+            /*            border: 1px solid transparent;*/
             font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            /*            line-height: 30px;*/
+            padding-left: 500px;
+            /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
-            width: 380px;
+            /*            width: 380px;*/
         }
         
         #walkingTimePanel {
             position: absolute;
             top: 65px;
-            left: 35%;
-            z-index: 5;
+            /*            left: 35%;*/
+            z-index: 6;
             background-color: #fff;
-            padding: 5px;
-            border: 1px solid transparent;
+            /*            padding: 5px;*/
+            /*            border: 1px solid transparent;*/
             font-family: 'Roboto', 'sans-serif';
-            line-height: 30px;
-            padding-left: 10px;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+            /*            line-height: 30px;*/
+            left: 30px;
+            /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
         }
-       
     </style>
     <!-- add comment -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOhKItk8j4WXYO_DDxfL7XT4JiUlrA0bI&libraries=places"
-        async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOhKItk8j4WXYO_DDxfL7XT4JiUlrA0bI&libraries=places" async defer></script>
     <script type='text/javascript'>
         jQuery(document).ready(function ($) {
 
@@ -96,7 +97,7 @@
 
 
             google.maps.event.addDomListener(window, "load", show_map);
-            
+
             ////////-----function: 1------///////////////		
             function getGeoLocation() {
                 try {
@@ -112,11 +113,11 @@
             function show_map(position) {
 
                 var lat = position.coords.latitude;
-                
+
                 var lon = position.coords.longitude;
-               
+
                 var latlng = new google.maps.LatLng(lat, lon);
-                
+
                 geocoder = new google.maps.Geocoder();
 
                 if (map) {
@@ -145,29 +146,29 @@
                         position: latlng,
                         content: "You are here"
                     });
-                    
-                    
+
+
                     ////show user current location in 'start' box///
                     geocoder.geocode({
-                            'latLng': latlng
-                        }, function (results, status) {
+                        'latLng': latlng
+                    }, function (results, status) {
 
-                            if (status == google.maps.GeocoderStatus.OK) {
+                        if (status == google.maps.GeocoderStatus.OK) {
 
-                                if (results[1]) {
+                            if (results[1]) {
 
-                                    document.getElementById("start").value = results[1].formatted_address;
+                                document.getElementById("start").value = results[1].formatted_address;
 
-                                } else {
+                            } else {
 
-                                    alert("No results found");
-
-                                }
+                                alert("No results found");
 
                             }
 
-                        });
-                    
+                        }
+
+                    });
+
 
                     ////show click-on info window of current location marker////
                     google.maps.event.addListener(mapMarker, "click", function () {
@@ -212,7 +213,7 @@
                     });
                 }
 
-                
+
                 initMap();
                 startLocAuto();
                 endLocAuto();
@@ -220,21 +221,19 @@
 
             ////////---function: 3---clear previous markers from database. only keep current location marker///////
             function clearOverlays() {
-                
-                for (var i = 0; i < markersArray.length; i++) 
-                {
+
+                for (var i = 0; i < markersArray.length; i++) {
                     markersArray[i].setMap(null);
                 }
-                
+
                 markersArray.length = 0;
             }
 
             ////////---function: 4---show markers from database////////      
-            function show_loc(position) 
-            {
+            function show_loc(position) {
                 //////current location////////////////
                 var lat = position.coords.latitude;
-                
+
                 var lon = position.coords.longitude;
 
                 var latlng = new google.maps.LatLng(lat, lon);
@@ -349,163 +348,151 @@
                     }
                 });
             }
-            
-            
+
+
             ////////---function: 7---end location box address autocomplete////////
-            function endLocAuto() 
-            {
-        
+            function endLocAuto() {
+
                 var input = (document.getElementById("end"));
 
-                var types = "address";  ///user input type: address
+                var types = "address"; ///user input type: address
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
-                
+
                 autocomplete.bindTo("bounds", map);
 
                 var infowindow = new google.maps.InfoWindow();
-                
+
                 var marker = new google.maps.Marker({
-                  
+
                     map: map,
-                  
+
                     anchorPoint: new google.maps.Point(0, -29)
-                
+
                 });
 
-                autocomplete.addListener("place_changed", function() {
-                  
+                autocomplete.addListener("place_changed", function () {
+
                     infowindow.close();
-                  
+
                     marker.setVisible(false);
-                
+
                     var place = autocomplete.getPlace();
-                  
-                    if (!place.geometry) 
-                    {
+
+                    if (!place.geometry) {
                         window.alert("Autocomplete's returned place contains no geometry");
                         return;
                     }
 
-                  // If the place has a geometry, then present it on a map.
+                    // If the place has a geometry, then present it on a map.
 
-                    if (place.geometry.viewport) 
-                    {
+                    if (place.geometry.viewport) {
                         map.fitBounds(place.geometry.viewport);
-                    } 
-                    else 
-                    {
+                    } else {
                         map.setCenter(place.geometry.location);
                         map.setZoom(17);
                     }
-                    marker.setIcon(/** @type {google.maps.Icon} */({
+                    marker.setIcon( /** @type {google.maps.Icon} */ ({
                         url: place.icon,
                         size: new google.maps.Size(71, 71),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(17, 34),
                         scaledSize: new google.maps.Size(35, 35)
                     }));
-                  
+
                     marker.setPosition(place.geometry.location);
-                  
+
                     marker.setVisible(true);
-                  
+
                     var address = '';
-                  
-                    if (place.address_components) 
-                    {
+
+                    if (place.address_components) {
                         address = [
-                    
+
                             (place.address_components[0] && place.address_components[0].short_name || ''),
                             (place.address_components[1] && place.address_components[1].short_name || ''),
                             (place.address_components[2] && place.address_components[2].short_name || '')
                         ].join(' ');
                     }
 
-                  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                  infowindow.open(map, marker);
-                    
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                    infowindow.open(map, marker);
+
                 });
 
-          }
-            
+            }
+
             ////////---function: 8---start location box address autocomplete////////
-            function startLocAuto() 
-            {
-        
+            function startLocAuto() {
+
                 var input = (document.getElementById("start"));
 
-                var types = "address";  ///user input type: address
+                var types = "address"; ///user input type: address
 
                 var autocomplete = new google.maps.places.Autocomplete(input);
-                
+
                 autocomplete.bindTo("bounds", map);
 
                 var infowindow = new google.maps.InfoWindow();
-                
+
                 var marker = new google.maps.Marker({
-                  
+
                     map: map,
-                  
+
                     anchorPoint: new google.maps.Point(0, -29)
-                
+
                 });
 
-                autocomplete.addListener("place_changed", function() {
-                  
+                autocomplete.addListener("place_changed", function () {
+
                     infowindow.close();
-                  
+
                     marker.setVisible(false);
-                
+
                     var place = autocomplete.getPlace();
-                  
-                    if (!place.geometry) 
-                    {
+
+                    if (!place.geometry) {
                         window.alert("Autocomplete's returned place contains no geometry");
                         return;
                     }
 
-                  // If the place has a geometry, then present it on a map.
+                    // If the place has a geometry, then present it on a map.
 
-                    if (place.geometry.viewport) 
-                    {
+                    if (place.geometry.viewport) {
                         map.fitBounds(place.geometry.viewport);
-                    } 
-                    else 
-                    {
+                    } else {
                         map.setCenter(place.geometry.location);
                         map.setZoom(17);
                     }
-                    marker.setIcon(/** @type {google.maps.Icon} */({
+                    marker.setIcon( /** @type {google.maps.Icon} */ ({
                         url: place.icon,
                         size: new google.maps.Size(71, 71),
                         origin: new google.maps.Point(0, 0),
                         anchor: new google.maps.Point(17, 34),
                         scaledSize: new google.maps.Size(35, 35)
                     }));
-                  
+
                     marker.setPosition(place.geometry.location);
-                  
+
                     marker.setVisible(true);
-                  
+
                     var address = '';
-                  
-                    if (place.address_components) 
-                    {
+
+                    if (place.address_components) {
                         address = [
-                    
+
                             (place.address_components[0] && place.address_components[0].short_name || ''),
                             (place.address_components[1] && place.address_components[1].short_name || ''),
                             (place.address_components[2] && place.address_components[2].short_name || '')
                         ].join(' ');
                     }
 
-                  infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                  infowindow.open(map, marker);
-                    
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                    infowindow.open(map, marker);
+
                 });
 
-          }
+            }
 
 
             ////////---function: 9---error management////////        
@@ -559,7 +546,7 @@
                     infos.length = 0;
                 }
             }
- 
+
         });
     </script>
 
@@ -644,28 +631,36 @@
 
             <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
     </div>
+
+    <div class="form-group" id="walkingTimePanel">
+        <div class="col-lg-8">
+            Walking time (minutes):
+            <input type="text" id="walkingTime" placeholder="Enter a walking time">
+
+            <input type="submit" id="submit">
+        </div>
+    </div>
+
+
+    <div id="routePanel" class="form-group">
+        <div class="col-md-4">
+            <label for="start">Start</label>
+            <input class="form-control" type="text" id="start" placeholder="You are here">
+        </div>
+        <div class="col-md-4">
+            <label for="end">End</label>
+            <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address">
+        </div>
+        <input type="submit" id="route" value="Route">
+    </div>
+
+
     <div id="map"></div>
 
 
-    <div id="walkingTimePanel">
-        <p>Walking time (minutes):
-            <input type="text" id="walkingTime" placeholder="Enter a walking time">
-        </p>
-        <br>
-        <input type="submit" id="submit">
-    </div>
 
-    <div id="routePanel" class="col-xs-2">
-        <p>
-            <label for="start">Start</label>
-            <input class="form-control" type="text" id="start" placeholder="You are here">
-        </p>
-        <p>
-            <label for="end">End</label>
-            <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address">
-        </p>
-        <input type="submit" id="route" value="Route">
-    </div>
+
+
 
 </body>
 
