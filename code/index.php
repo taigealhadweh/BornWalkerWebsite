@@ -95,7 +95,7 @@ $uvIndex = $_SESSION['uvIndex'];
 
                     </div>
                     <div class="col-md-4">
-                        [air quality table]
+
                     </div>
 
                     <div class="col-md-4">
@@ -126,8 +126,33 @@ $uvIndex = $_SESSION['uvIndex'];
         </div>
 
         <div class="feedback">
-            <p id="feedback">We'd love to hear your feedback!</p>
+            <p id="feedback">Air quality data</p>
         </div>
+
+        <div id='map' style='width: 900px; height: 500px'>
+        </div>
+
+
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyCJkV_BpG5v_oYj6iRIcvdNOwRnCW2ns90&sensor=true"></script>
+
+        <script>
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: new google.maps.LatLng(-37.8141, 144.9633),
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                zoom: 10
+            });
+
+            var t = new Date().getTime();
+            var waqiMapOverlay = new google.maps.ImageMapType({
+                getTileUrl: function (coord, zoom) {
+                    return 'http://tiles.aqicn.org/tiles/usepa-aqi/' + zoom + "/" + coord.x + "/" + coord.y + ".png?token=31b17dfbc63f0593ce946fd22f6bacf9282da418";
+                },
+                name: "Air  Quality",
+            });
+
+            map.overlayMapTypes.insertAt(0, waqiMapOverlay);
+        </script>
+
 
 
         <script src="js/weatherRequest.js"></script>

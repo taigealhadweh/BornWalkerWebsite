@@ -75,6 +75,10 @@
             /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
         }
+        
+        #walkingTime {
+            display: inline;
+        }
     </style>
     <!-- add comment -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry"></script>
