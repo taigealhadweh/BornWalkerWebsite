@@ -96,7 +96,7 @@
 		$password=$_GET['pwv'];
 		$conpassword=$_GET['cpwv'];
 		$mail=checkemail($_GET['mailv']);
-		$phone=$_GET['pv'];
+		$phone=checkPhone($_GET['pv']);
 	
 		if($password===$conpassword)
 		{
@@ -138,11 +138,19 @@
 	 * @return string $_string the checked email address.
 	 */
 	function checkemail($_string) {
-		if (!preg_match('/^[\w\-\.]+@[\w\-\.]+(\.\w+)+$/',$_string)) {
-			location('Incorrect E-mail format.','register.php');
+		if (!preg_match('/^[a-zA-Z0-9]+[-_]*@[a-z0-9]+(\.[a-z0-9A-Z]+)+.[a-z0-9]{1,4}$/',$_string)) {
+			location('Invalid email address, please try again :)','register.php');
 		}
 	return $_string;
-}
+        
+    }
+    
+    function checkPhone($_string) {
+		if (!preg_match('/^[0-9]{9,10}$/',$_string)) {
+			location('Invalid phone number, please try again :)','register.php');
+		}
+	return $_string;
+    }
 
 ?>
 
