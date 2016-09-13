@@ -98,9 +98,11 @@
             var infos = [];
             var radius;
             var walkingTime;
+            var infoWindow;
+            var service;
 
 
-            google.maps.event.addDomListener(window, "load", show_map);
+            google.maps.event.addDomListener(window, "load", initMap);
 
             ////////-----function: 1------///////////////		
             function getGeoLocation() {
@@ -114,7 +116,7 @@
 
 
             ////////---fuction: 2---initiate map, then show current location////////        
-            function show_map(position) {
+            function initMap(position) {
 
                 var lat = position.coords.latitude;
 
@@ -142,7 +144,7 @@
 
                     map = new google.maps.Map(document.getElementById("map"), myOptions);
 
-                    map.setTilt(0); // turns off the annoying default 45-deg view
+                    map.setTilt(0); // turns off default 45-deg view
 
 
                     ////show marker on current location/////
@@ -209,293 +211,71 @@
                     });
 
                     mapMarker.setMap(map);
-                    //testAuto();
-
+                   
+                    /*
                     document.getElementById("submit").addEventListener("click", function () {
                         clearOverlays();
                         show_loc(position);
                     });
+                    */
                 }
 
-
-                initMap();
-                startLocAuto();
-                endLocAuto();
+                infoWindow = new google.maps.InfoWindow();
+                service = new google.maps.places.PlacesService(map);
+                
+                map.addListener('idle', performSearch);
+                
+                //addMarker(place);
+                //startLocAuto();
+                //endLocAuto();
             }
 
-            ////////---function: 3---clear previous markers from database. only keep current location marker///////
-            function clearOverlays() {
-
-                for (var i = 0; i < markersArray.length; i++) {
-                    markersArray[i].setMap(null);
-                }
-
-                markersArray.length = 0;
-            }
-
-            ////////---function: 4---show markers from database////////      
-            function show_loc(position) {
-                //////current location////////////////
-                var lat = position.coords.latitude;
-
-                var lon = position.coords.longitude;
-
-                var latlng = new google.maps.LatLng(lat, lon);
-
-                /////location from database//////
-                geocoder = new google.maps.Geocoder();
-
-                var encodedString;
-
-                var databaseLocationArray = [];
-
-                encodedString = document.getElementById("encodedString").value;
-
-                databaseLocationArray = encodedString.split("****");
-
-
-                walkingTime = document.getElementById("walkingTime").value;
-
-
-                radius = parseInt(walkingTime) * 80;
-
-                var x;
-
-                for (x = 0; x < databaseLocationArray.length; x = x + 1)
-
-                {
-
-                    var addressDetails = [];
-
-                    var databsemarker;
-
-                    addressDetails = databaseLocationArray[x].split("&&&");
-
-
-                    var lat = new google.maps.LatLng(addressDetails[1], addressDetails[2]);
-
-                    ////////////if within radius, show marker
-                    if (google.maps.geometry.spherical.computeDistanceBetween(lat, latlng) <= radius) {
-                        databsemarker = new google.maps.Marker({
-
-                            map: map,
-
-                            position: lat,
-
-                            content: addressDetails[3] + "<br>" + addressDetails[4] + "</br>"
-
-                        });
-
-                        markersArray.push(databsemarker);
-
-                        ////pop out click-on info window////
-                        google.maps.event.addListener(databsemarker, "click", function () {
-
-                            closeInfos();
-
-                            var info = new google.maps.InfoWindow({
-                                content: this.content
-                            });
-
-                            info.open(map, this);
-
-                            infos[0] = info;
-
-                            ///show address to 'end' box when click on marker///
-                            var fullAdd = this.content;
-
-                            var firstHalfAdd = fullAdd.split("<br>");
-
-                            var endAdd = firstHalfAdd[1].split("</br>");
-
-                            document.getElementById("end").value = endAdd[0];
-
-                        });
-
-                    }
-
-                }
-
-            }
-
-            ////////---function: 5---set up map for calculating route////////
-            function initMap() {
-                var directionsService = new google.maps.DirectionsService;
-                var directionsDisplay = new google.maps.DirectionsRenderer;
-
-                directionsDisplay.setMap(map);
-
-                var onChangeHandler = function () {
-                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+            function performSearch() 
+            {
+                var request = {
+                bounds: map.getBounds(),
+                keyword: 'cafe'
                 };
-
-                document.getElementById("route").addEventListener("click", function () {
-                    calculateAndDisplayRoute(directionsService, directionsDisplay);
-                });
-
-                document.getElementById("start").addEventListener("change", onChangeHandler);
-
-                document.getElementById("end").addEventListener("change", onChangeHandler);
+                service.radarSearch(request, callback);
             }
 
-            ////////---function: 6---calculte route///////////////////
-            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
-                directionsService.route({
-
-                    origin: document.getElementById("start").value, ///////route start point
-                    destination: document.getElementById("end").value, ///////route end point
-                    travelMode: "WALKING"
-                }, function (response, status) {
-
-                    if (status === "OK") {
-                        directionsDisplay.setDirections(response);
-                    }
-                });
+            function callback(results, status) 
+            {
+                if (status !== google.maps.places.PlacesServiceStatus.OK) 
+                {
+                    console.error(status);
+                    return;
+                }
+                for (var i = 0, result; result = results[i]; i++) {
+                addMarker(result);
+                }
             }
 
-
-            ////////---function: 7---end location box address autocomplete////////
-            function endLocAuto() {
-
-                var input = (document.getElementById("end"));
-
-                var types = "address"; ///user input type: address
-
-                var autocomplete = new google.maps.places.Autocomplete(input);
-
-                autocomplete.bindTo("bounds", map);
-
-                var infowindow = new google.maps.InfoWindow();
-
+            function addMarker(place) 
+            {
                 var marker = new google.maps.Marker({
-
-                    map: map,
-
-                    anchorPoint: new google.maps.Point(0, -29)
-
+                map: map,
+                position: place.geometry.location,
+                /*
+                    icon: {
+                url: 'http://maps.gstatic.com/mapfiles/circle.png',
+                anchor: new google.maps.Point(10, 10),
+                scaledSize: new google.maps.Size(10, 17)
+                }
+                */
                 });
 
-                autocomplete.addListener("place_changed", function () {
-
-                    infowindow.close();
-
-                    marker.setVisible(false);
-
-                    var place = autocomplete.getPlace();
-
-                    if (!place.geometry) {
-                        window.alert("Autocomplete's returned place contains no geometry");
-                        return;
-                    }
-
-                    // If the place has a geometry, then present it on a map.
-
-                    if (place.geometry.viewport) {
-                        map.fitBounds(place.geometry.viewport);
-                    } else {
-                        map.setCenter(place.geometry.location);
-                        map.setZoom(17);
-                    }
-                    marker.setIcon( /** @type {google.maps.Icon} */ ({
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(35, 35)
-                    }));
-
-                    marker.setPosition(place.geometry.location);
-
-                    marker.setVisible(true);
-
-                    var address = '';
-
-                    if (place.address_components) {
-                        address = [
-
-                            (place.address_components[0] && place.address_components[0].short_name || ''),
-                            (place.address_components[1] && place.address_components[1].short_name || ''),
-                            (place.address_components[2] && place.address_components[2].short_name || '')
-                        ].join(' ');
-                    }
-
-                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                    infowindow.open(map, marker);
-
+                google.maps.event.addListener(marker, 'click', function() {
+                    service.getDetails(place, function(result, status) {
+                        if (status !== google.maps.places.PlacesServiceStatus.OK) 
+                        {
+                            console.error(status);
+                            return;
+                        }
+                    infoWindow.setContent(result.name);
+                    infoWindow.open(map, marker);
+                    });
                 });
-
-            }
-
-            ////////---function: 8---start location box address autocomplete////////
-            function startLocAuto() {
-
-                var input = (document.getElementById("start"));
-
-                var types = "address"; ///user input type: address
-
-                var autocomplete = new google.maps.places.Autocomplete(input);
-
-                autocomplete.bindTo("bounds", map);
-
-                var infowindow = new google.maps.InfoWindow();
-
-                var marker = new google.maps.Marker({
-
-                    map: map,
-
-                    anchorPoint: new google.maps.Point(0, -29)
-
-                });
-
-                autocomplete.addListener("place_changed", function () {
-
-                    infowindow.close();
-
-                    marker.setVisible(false);
-
-                    var place = autocomplete.getPlace();
-
-                    if (!place.geometry) {
-                        window.alert("Autocomplete's returned place contains no geometry");
-                        return;
-                    }
-
-                    // If the place has a geometry, then present it on a map.
-
-                    if (place.geometry.viewport) {
-                        map.fitBounds(place.geometry.viewport);
-                    } else {
-                        map.setCenter(place.geometry.location);
-                        map.setZoom(17);
-                    }
-                    marker.setIcon( /** @type {google.maps.Icon} */ ({
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(35, 35)
-                    }));
-
-                    marker.setPosition(place.geometry.location);
-
-                    marker.setVisible(true);
-
-                    var address = '';
-
-                    if (place.address_components) {
-                        address = [
-
-                            (place.address_components[0] && place.address_components[0].short_name || ''),
-                            (place.address_components[1] && place.address_components[1].short_name || ''),
-                            (place.address_components[2] && place.address_components[2].short_name || '')
-                        ].join(' ');
-                    }
-
-                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
-                    infowindow.open(map, marker);
-
-                });
-
             }
 
 
@@ -526,7 +306,7 @@
 
             ////////---function: 11---////////
             function startWatching() {
-                watchID = geo.watchPosition(show_map, geo_error, {
+                watchID = geo.watchPosition(initMap, geo_error, {
                     enableHighAccuracy: HIGHACCURACY,
                     maximumAge: MAXIMUM_AGE,
                     timeout: TIMEOUT
@@ -593,48 +373,7 @@
 
 
 
-    <div id="input">
-        <?php
-	
-        //Connect to the MySQL database
-        mysql_connect("40.126.240.245", "k10838a", "password") or
-         die("Could not connect: " . mysql_error());
-        mysql_select_db("bornWalkerMap");
- 
-        // Initialize the first couple variables
-        $encodedString = ""; //hold location data
-        $x = 0; //trigger to keep the string tidy
- 
-        $result = mysql_query("SELECT * FROM Cafe");
- 
-        while ($row = mysql_fetch_array($result, MYSQL_NUM))
-        {
-         //keep an empty first or last line from forming, when the string is split
-            if ( $x == 0 )
-            {
-                 $separator = "";
-            }
-            else
-            {
-             //Each row in the database is separated in the string by four *'s
-                 $separator = "****";
-            }
-            
-            //Saving to the String, each variable is separated by three &'s
-            $encodedString = $encodedString.$separator.
-            "<p class='content'><b>Lat:</b> ".$row[1].
-            "<br><b>Long:</b> ".$row[2].
-            "<br><b>Name: </b>".$row[3].
-            "<br><b>Address: </b>".$row[4].
-            "</p>&&&".$row[1]."&&&".$row[2]."&&&".$row[3]."&&&".$row[4];
-            $x = $x + 1;
-            
-        }        
-		
-	?>
-
-            <input type="hidden" id="encodedString" name="encodedString" value="<?php echo $encodedString; ?>" />
-    </div>
+    
 
     <div class="form-group" id="walkingTimePanel">
         <div class="col-lg-8">
