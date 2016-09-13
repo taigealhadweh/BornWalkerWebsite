@@ -74,8 +74,8 @@ $uvIndex = $_SESSION['uvIndex'];
                     <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
                     <div class="container">
                         <div class="carousel-caption">
-                            <h1>Another example headline.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <h1>Exercise and socialise</h1>
+                            <p>Walk with your friends</p>
                             <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
                         </div>
                     </div>
@@ -84,8 +84,8 @@ $uvIndex = $_SESSION['uvIndex'];
                     <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
                     <div class="container">
                         <div class="carousel-caption text-xs-right">
-                            <h1>One more for good measure.</h1>
-                            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                            <h1>Be aware of your environment</h1>
+                            <p>All you need to know where to walk and what to bring.</p>
                             <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
                         </div>
                     </div>
@@ -113,22 +113,22 @@ $uvIndex = $_SESSION['uvIndex'];
             <div class="row">
                 <div class="col-lg-4">
                     <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
+                    <h2>Weather details</h2>
+                    <p>Get up to date weather information for the current hour, the following hour and later in the day. We figure the more information you have the better!</p>
                     <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                     <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+                    <h2>UV index</h2>
+                    <p>Get an idea of how strong the suns rays are today. This way you can protext yoourself and your children.</p>
                     <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <!-- /.col-lg-4 -->
                 <div class="col-lg-4">
                     <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>Heading</h2>
-                    <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+                    <h2>Air quality</h2>
+                    <p>Seem a bit smogy? Check out the air quality of the area you're in, and if its no good easily find surrounding areas with better air quality.</p>
                     <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
                 </div>
                 <!-- /.col-lg-4 -->
@@ -142,8 +142,8 @@ $uvIndex = $_SESSION['uvIndex'];
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    <h2 class="featurette-heading">Find places within walking distance. <span class="text-muted">It'll make life that little bit easier.</span></h2>
+                    <p class="lead">Just enter the amount of time you would like to walk for and we'll figure out points of interest within that walking distance!</p>
                 </div>
                 <div class="col-md-5">
                     <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
@@ -154,8 +154,8 @@ $uvIndex = $_SESSION['uvIndex'];
 
             <div class="row featurette">
                 <div class="col-md-7 push-md-5">
-                    <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    <h2 class="featurette-heading">Found a place you'd like to go to? <span class="text-muted">Just click on your destination and we'll plot a path for you.</span></h2>
+                    <p class="lead">You'll never have to wait for your partner to ask for directions again.</p>
                 </div>
                 <div class="col-md-5 pull-md-7">
                     <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
@@ -166,8 +166,8 @@ $uvIndex = $_SESSION['uvIndex'];
 
             <div class="row featurette">
                 <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                    <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                    <h2 class="featurette-heading">And lastly, walk with your friends. <span class="text-muted">Exercise and socialise.</span></h2>
+                    <p class="lead">Start your walk and at any time you can send a request for your friends to join you!</p>
                 </div>
                 <div class="col-md-5">
                     <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
@@ -182,7 +182,7 @@ $uvIndex = $_SESSION['uvIndex'];
             <!-- FOOTER -->
             <footer>
                 <p class="pull-xs-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+                <p>&copy; 2016 Spaghetti Structures &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
             </footer>
 
         </div>
