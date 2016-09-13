@@ -149,6 +149,7 @@
 
                     ////show marker on current location/////
                     mapMarker = new google.maps.Marker({
+                        animation: google.maps.Animation.DROP,
                         position: latlng,
                         content: "You are here"
                     });
@@ -225,16 +226,17 @@
                 
                 map.addListener('idle', performSearch);
                 
-                //addMarker(place);
-                //startLocAuto();
-                //endLocAuto();
+                directionMap();
+                startLocAuto();
+                endLocAuto();
             }
 
             function performSearch() 
             {
+        
                 var request = {
-                bounds: map.getBounds(),
-                keyword: 'cafe'
+                    bounds: map.getBounds(),
+                    keyword: 'cafe'
                 };
                 service.radarSearch(request, callback);
             }
@@ -246,15 +248,17 @@
                     console.error(status);
                     return;
                 }
-                for (var i = 0, result; result = results[i]; i++) {
-                addMarker(result);
+                for (var i = 0, result; result = results[i]; i++) 
+                {
+                    addMarker(result);
                 }
             }
 
             function addMarker(place) 
             {
                 var marker = new google.maps.Marker({
-                map: map,
+                //animation: google.maps.Animation.DROP,
+                    map: map,
                 position: place.geometry.location,
                 /*
                     icon: {
@@ -272,10 +276,190 @@
                             console.error(status);
                             return;
                         }
-                    infoWindow.setContent(result.name);
+                    infoWindow.setContent('<div><strong>' + result.name + '</strong><br>' + result.formatted_address + '</div>');
                     infoWindow.open(map, marker);
+                        document.getElementById("end").value = result.formatted_address;
                     });
                 });
+            }
+            
+            
+            function directionMap() {
+                var directionsService = new google.maps.DirectionsService;
+                var directionsDisplay = new google.maps.DirectionsRenderer;
+
+                directionsDisplay.setMap(map);
+
+                var onChangeHandler = function () {
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                };
+
+                document.getElementById("route").addEventListener("click", function () {
+                    calculateAndDisplayRoute(directionsService, directionsDisplay);
+                });
+
+                document.getElementById("start").addEventListener("change", onChangeHandler);
+
+                document.getElementById("end").addEventListener("change", onChangeHandler);
+            }
+
+            ////////---function: 6---calculte route///////////////////
+            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                directionsService.route({
+
+                    origin: document.getElementById("start").value, ///////route start point
+                    destination: document.getElementById("end").value, ///////route end point
+                    travelMode: "WALKING"
+                }, function (response, status) {
+
+                    if (status === "OK") {
+                        directionsDisplay.setDirections(response);
+                    }
+                });
+            }
+            
+            ////////---function: 7---end location box address autocomplete////////
+            function endLocAuto() {
+
+                var input = (document.getElementById("end"));
+
+                var types = "address"; ///user input type: address
+
+                var autocomplete = new google.maps.places.Autocomplete(input);
+
+                autocomplete.bindTo("bounds", map);
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker = new google.maps.Marker({
+
+                    map: map,
+
+                    anchorPoint: new google.maps.Point(0, -29)
+
+                });
+
+                autocomplete.addListener("place_changed", function () {
+
+                    infowindow.close();
+
+                    marker.setVisible(false);
+
+                    var place = autocomplete.getPlace();
+
+                    if (!place.geometry) {
+                        window.alert("Autocomplete's returned place contains no geometry");
+                        return;
+                    }
+
+                    // If the place has a geometry, then present it on a map.
+
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
+                    marker.setIcon( /** @type {google.maps.Icon} */ ({
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(35, 35)
+                    }));
+
+                    marker.setPosition(place.geometry.location);
+
+                    marker.setVisible(true);
+
+                    var address = '';
+
+                    if (place.address_components) {
+                        address = [
+
+                            (place.address_components[0] && place.address_components[0].short_name || ''),
+                            (place.address_components[1] && place.address_components[1].short_name || ''),
+                            (place.address_components[2] && place.address_components[2].short_name || '')
+                        ].join(' ');
+                    }
+
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                    infowindow.open(map, marker);
+
+                });
+
+            }
+
+            ////////---function: 8---start location box address autocomplete////////
+            function startLocAuto() {
+
+                var input = (document.getElementById("start"));
+
+                var types = "address"; ///user input type: address
+
+                var autocomplete = new google.maps.places.Autocomplete(input);
+
+                autocomplete.bindTo("bounds", map);
+
+                var infowindow = new google.maps.InfoWindow();
+
+                var marker = new google.maps.Marker({
+
+                    map: map,
+
+                    anchorPoint: new google.maps.Point(0, -29)
+
+                });
+
+                autocomplete.addListener("place_changed", function () {
+
+                    infowindow.close();
+
+                    marker.setVisible(false);
+
+                    var place = autocomplete.getPlace();
+
+                    if (!place.geometry) {
+                        window.alert("Autocomplete's returned place contains no geometry");
+                        return;
+                    }
+
+                    // If the place has a geometry, then present it on a map.
+
+                    if (place.geometry.viewport) {
+                        map.fitBounds(place.geometry.viewport);
+                    } else {
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(17);
+                    }
+                    marker.setIcon( /** @type {google.maps.Icon} */ ({
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(35, 35)
+                    }));
+
+                    marker.setPosition(place.geometry.location);
+
+                    marker.setVisible(true);
+
+                    var address = '';
+
+                    if (place.address_components) {
+                        address = [
+
+                            (place.address_components[0] && place.address_components[0].short_name || ''),
+                            (place.address_components[1] && place.address_components[1].short_name || ''),
+                            (place.address_components[2] && place.address_components[2].short_name || '')
+                        ].join(' ');
+                    }
+
+                    infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+                    infowindow.open(map, marker);
+
+                });
+
             }
 
 
