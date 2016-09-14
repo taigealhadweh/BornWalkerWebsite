@@ -233,7 +233,7 @@
                     markersArray[i].setMap(null);
                 }
 
-                //markersArray.length = 0;
+                markersArray.length = 0;
             }
             
             /////////////////////////////////////////
