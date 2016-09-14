@@ -1,7 +1,6 @@
 <?php
-$my_id = 1;
+$currentId = 1;
 $user = 4;
-$query = "INSERT INTO frnd_req VALUES ('', $my_id, $user)";
-$test = 'location: profile.php?user='.$user;
-print_r($test);
+$query = "SELECT 'user_one', 'user_two' from frnds where user_one = $currentId OR user_two = $currentId";
+print_r($query);
 ?>
