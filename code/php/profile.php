@@ -55,7 +55,7 @@
                                 echo "<a href='#' class='box'>Cancel Request</a>";
                                 
                             } else {
-                                echo "<a href='' class='box'>Send friend request</a>";
+                                echo "<a href='actions.php?action=send&user=$user' class='box'>Send friend request</a>";
                             }
                         }
                     }
