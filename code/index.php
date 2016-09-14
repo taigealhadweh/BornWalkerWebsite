@@ -143,7 +143,7 @@ $uvIndex = $_SESSION['uvIndex'];
             <div class="row featurette">
                 <div class="col-md-7">
                     <h2 class="featurette-heading">Find places within walking distance. <span class="text-muted">It'll make life that little bit easier.</span></h2>
-                    <p class="lead">Just enter the amount of time you would like to walk for and we'll figure out points of interest within that walking distance!</p>
+                    <p class="lead">Just enter the amount of time you would like to walk for and we'll figure out the rest.</p>
                 </div>
                 <div class="col-md-5">
                     <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">

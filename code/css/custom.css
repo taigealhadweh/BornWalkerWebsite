@@ -48,3 +48,56 @@ BODY {
 .userNameDisplay {
     padding-top: 50px;
 }
+
+#title_bar {
+    background: #000;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#title_bar ul {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+#title_bar ul li {
+    float: left;
+    padding: 10px 0px;
+}
+
+#title_bar ul li a {
+    background: #000;
+    color: #333;
+    padding: 10px;
+    text-decoration: none;
+}
+
+#title_bar ul li a:hover {
+    background: #333;
+    color: #fff;
+}
+
+.container1 {
+    background: #000;
+    color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    width: 50%;
+    min-height: 500px;
+}
+
+.clear {
+    clear: both;
+}
+
+.box {
+    background: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px 0px;
+    text-decoration: none;
+}

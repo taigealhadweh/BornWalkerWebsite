@@ -9,26 +9,24 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             die("<p>connect error</p>");
         }
         $userQuery = "SELECT * FROM user WHERE email='$mail'";
+        
         $databaseQuery = "SELECT userid FROM user";
         $sendDatabaseQuery = mysqli_query($conn, $userQuery);
         $resultOfDatabaseQuery = mysqli_fetch_row($sendDatabaseQuery) or die(location('ID or password does not exist.', 'login.php'));
         $errorDatabaseQuery = mysqli_query($conn, $userQuery);
         //this gets the position of each element so that we can check the password at element 2
         $resultArray = mysqli_fetch_row($errorDatabaseQuery) or die('search error' . mysqli_error());
-        if ($resultArray[2] === $password) //check password
+        if ($resultArray[1] === $password) //check password
         {
-            //these print_r are for testing purposes
-//            print_r("PASSWORD OK<br>");
-//            print_r("POST=$_POST<br>");
-//            print_r("SESSION=$_SESSION<br>");
-//            printArray("resultArray", $resultArray);
+            
 
             // Authenticated, set session variables
-            $_SESSION['user_id'] = $resultArray[0];
-            $_SESSION['username'] = $resultArray[1];
-            $_SESSION['userPassword'] = $resultArray[2];
-            $_SESSION['userEmail'] = $resultArray[3];
-            $_SESSION['userPhone'] = $resultArray[4];
+            
+            $_SESSION['username'] = $resultArray[0];
+            $_SESSION['userPassword'] = $resultArray[1];
+            $_SESSION['userEmail'] = $resultArray[2];
+            $_SESSION['userPhone'] = $resultArray[3];
+            $_SESSION['user_id'] = $resultArray[4];
             
             // printArray("_SESSION", $_SESSION);
 
