@@ -43,16 +43,16 @@
                     if($user != $my_id){
                        $check_frnd_query = mysqli_query($conn, "SELECT id from frnds where (user_one= $my_id AND user_two= $user) OR (user_one= $user AND user_two= $my_id)");
                         if(mysqli_num_rows($check_frnd_query) == 1){
-                            echo "<a href='#' class='box'>Already friends</a> | <a href='#'> Unfriend $username</a>";
+                            echo "<a href='#' class='box'>Already friends</a> | <a href='actions.php?action=unfriend&user=$user' class='box'> Unfriend $username</a>";
                             
                         } else {
                             $from_query = mysqli_query($conn, "SELECT id from frnd_req WHERE (from_request = $user AND to_request = $my_id)");
                             $to_query = mysqli_query($conn, "SELECT id from frnd_req WHERE (from_request = $my_id AND to_request = $user)");
                             
                             if (mysqli_num_rows($from_query) == 1) {
-                                echo "<a href='#' class='box'>Accept</a> | <a href='' class='box'>Ignore</a>";
+                                echo "<a href='actions.php?action=accept&user=$user' class='box'>Accept</a> | <a href='' class='box'>Ignore</a>";
                             } else if (mysqli_num_rows($to_query) == 1){
-                                echo "<a href='#' class='box'>Cancel Request</a>";
+                                echo "<a href='actions.php?action=cancel&user=$user' class='box'>Cancel Request</a>";
                                 
                             } else {
                                 echo "<a href='actions.php?action=send&user=$user' class='box'>Send friend request</a>";

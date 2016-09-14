@@ -18,6 +18,20 @@ if($action == 'send') {
         mysqli_query($conn, "INSERT INTO frnd_req (from_request, to_request) VALUES ($currentId, $user)");
 }
 
+if($action == 'cancel') {
+    mysqli_query($conn, "DELETE FROM frnd_req WHERE from_request=$currentId AND to_request=$user");
+}
+
+if($action == 'accept'){
+    mysqli_query($conn, "DELETE FROM frnd_req WHERE from_request=$user AND to_request=$currentId");
+    mysqli_query($conn, "INSERT INTO frnds (user_one, user_two) VALUES ($user, $currentId)");
+
+}
+
+if($action == 'unfriend'){
+    mysqli_query($conn, "DELETE from frnds where (user_one=$currentId AND user_two=$user) OR (user_one=$user AND user_two=$currentId)");
+}
+
 header("Location: profile.php?user=".$user);
 
 
