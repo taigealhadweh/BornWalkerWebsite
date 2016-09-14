@@ -80,8 +80,8 @@ BODY {
 }
 
 .container1 {
-    background: #000;
-    color: #333;
+    background: black;
+    color: white;
     padding: 10px;
     border-radius: 5px;
     margin: 10px 0px;
@@ -99,5 +99,5 @@ BODY {
     padding: 10px;
     border-radius: 5px;
     margin: 10px 0px;
-    text-decoration: none;
+    text-decoration: #111;
 }

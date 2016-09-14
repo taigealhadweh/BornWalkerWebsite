@@ -36,7 +36,13 @@
                 <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="login.php">Login</a>
+                <a class="nav-link" href="friends.php">Friends</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="req.php">Requests</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="logout.php">Logout</a>
             </li>
         </ul>
     </nav>
@@ -73,7 +79,7 @@
                             $from_username = $run_from['name'];
                             echo "<a href='profile.php?user=$from_request' class='box' style='display:block'>$from_username</a>";
                         }
-                        echo "<a href='profile.php?user=$user' class='box' style='display:block'>$username</a>";
+//                        echo "<a href='profile.php?user=$user' class='box' style='display:block'>$username</a>";
                     }
                     
                     

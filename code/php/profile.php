@@ -29,23 +29,29 @@
     <nav class="navbar navbar-static-top navbar-light bg-faded">
         <a href="#" class="navbar-brand">BornWalker</a>
         <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../html/mapRadius.php">Take a walk</a>
+            </li>
             <li class="nav-item active">
-                <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="html/mapRadius.php">Take a walk</a>
+                <a class="nav-link" href="friends.php">Friends</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="php/profile.php">Profile</a>
+                <a class="nav-link" href="req.php">Requests</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="php/login.php">Login</a>
+                <a class="nav-link" href="logout.php">Logout</a>
             </li>
         </ul>
     </nav>
 
     <?php include 'functions.php';?>
-        <!--        <?php include'header.php';?>-->
+
         <?php include 'connect.php';?>
 
 
