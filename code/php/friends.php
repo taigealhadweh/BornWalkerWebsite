@@ -77,7 +77,7 @@
                         $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
                         while($run_from = mysqli_fetch_array($from_query)){
                             $from_username = $run_from['name'];
-                            echo "<a href='profile.php?user=$from_request' class='box' style='display:block'>$from_username</a>";
+                            echo "<a href='profile.php?user=$user' class='box' style='display:block'>$from_username</a>";
                         }
 //                        echo "<a href='profile.php?user=$user' class='box' style='display:block'>$username</a>";
                     }

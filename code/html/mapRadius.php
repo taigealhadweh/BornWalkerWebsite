@@ -559,30 +559,24 @@
 
 <body>
 
-    <!-- navbar code should be same on all pages -->
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only"> Toggle Navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <!-- Need to resize the logo to fit in line with the navbar -->
-                <!-- <a href="" class="navbar-left"><img src=""></a> -->
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="../index.html">Home</a></li>
-                    <li class="active"><a href="mapRadius.php">Take a walk</a></li>
-                    <li><a href="../php/profile.php">Profile</a></li>
-                    <li><a href="../php/login.php">Login</a></li>
+    <nav class="navbar navbar-static-top navbar-light bg-faded">
+        <a href="#" class="navbar-brand">BornWalker</a>
+        <ul class="nav navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../index.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="../html/mapRadius.php">Take a walk</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../php/profile.php">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="../php/login.php">Login</a>
+            </li>
+        </ul>
+    </nav>
 
-                </ul>
-            </div>
-        </div>
-    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
