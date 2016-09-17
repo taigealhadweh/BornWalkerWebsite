@@ -346,6 +346,7 @@
                                 });
                             
                             markersArray.push(marker);
+                            var thisMarker = markersArray.indexOf(marker);
                     
                             //put place names into the list
                             service.getDetails(place, function(result, status) {
@@ -356,7 +357,8 @@
                                 }
                                 
                                 placesArray.push(result);
-                                placesList.innerHTML += '<li><a href="javascript:activeList(0);"><strong>' + result.name + '</strong></a></li>';
+                                
+                                placesList.innerHTML += '<li><a href="javascript:activeList(' + thisMarker + ');"><strong>' + result.name + '</strong></a></li>';
                             
                             google.maps.event.addListener(marker, 'click', function() {
                                 service.getDetails(place, function(result, status) {
