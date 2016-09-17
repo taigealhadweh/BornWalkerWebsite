@@ -238,7 +238,8 @@
                 document.getElementById("submit").addEventListener("click", function () {
                     
                     clearOverlays();
-                    performSearch();
+                    performSearchToilet();
+                    performSearchCafe();
                     
                 });
                 
@@ -262,13 +263,27 @@
             }
             
             // get places data from google places
-            function performSearch() 
+            function performSearchCafe() 
             {
         
                 var request = {
                     
                     bounds: map.getBounds(),
                     keyword: 'cafe'
+                    
+                };
+                
+                service.radarSearch(request, callback);
+            
+            }
+        
+        function performSearchToilet() 
+            {
+        
+                var request = {
+                    
+                    bounds: map.getBounds(),
+                    keyword: 'toilet'
                     
                 };
                 
@@ -381,7 +396,6 @@
                     } 
                 });
                 
-                //return marker;
             }
             
             
@@ -622,16 +636,8 @@
         
         function activeList(x)
             {
-                
-                
+
                 google.maps.event.trigger(markersArray[x], "click");
-                
-                /*
-                for (var i = 0; i < markersArray.length; i++) 
-                {
-                    google.maps.event.trigger(markersArray[i], "click");
-                }
-                */
                 
                 return false;
             }
