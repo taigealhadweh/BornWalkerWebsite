@@ -100,6 +100,7 @@
             var startLocLatlng;
             var placesList;
             var placesArray = [];
+            var directionsDisplay;
         //jQuery(document).ready(function ($) {
 
             //Get data, and replace it on the form
@@ -238,6 +239,7 @@
                 document.getElementById("submit").addEventListener("click", function () {
                     
                     clearOverlays();
+                    directionsDisplay.setDirections({routes: []});
                     performSearchToilet();
                     performSearchCafe();
                     
@@ -403,7 +405,7 @@
             
             function directionMap() {
                 var directionsService = new google.maps.DirectionsService;
-                var directionsDisplay = new google.maps.DirectionsRenderer;
+                directionsDisplay = new google.maps.DirectionsRenderer;
 
                 directionsDisplay.setMap(map);
 
