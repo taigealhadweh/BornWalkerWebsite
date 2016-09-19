@@ -19,6 +19,7 @@ $uvIndex = $_SESSION['uvIndex'];
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="bootstrap-4.0.0-alpha.4/docs/favicon.ico">
+        <link href="css/custom.css" rel="stylesheet">
 
         <title>BornWalker</title>
 
@@ -27,168 +28,12 @@ $uvIndex = $_SESSION['uvIndex'];
 
         <!-- Custom styles for this template -->
         <link href="bootstrap-4.0.0-alpha.4/docs/examples/carousel/carousel.css" rel="stylesheet">
+        <link href="css/weather-icons.min.css" rel="stylesheet">
     </head>
 
-    <body>
-
-        <nav class="navbar navbar-static-top navbar-light bg-faded">
-            <a href="#" class="navbar-brand">BornWalker</a>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="html/mapRadius.php">Take a walk</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="php/profile.php">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="php/login.php">Login</a>
-                </li>
-            </ul>
-        </nav>
-
-
-        <!-- Carousel
-    ================================================== -->
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <!-- Indicators -->
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-                <div class="carousel-item active">
-                    <img class="first-slide" src="kid.jpg" alt="First slide">
-                    <div class="container">
-                        <div class="carousel-caption text-xs-left">
-                            <h1>Get motivated, stay fit and have fun doing it!</h1>
-                            <p>All you have to do is put your walking shoes on!</p>
-                            <p><a class="btn btn-lg btn-primary" href="php/register.php" role="button">Sign up today</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
-                    <div class="container">
-                        <div class="carousel-caption">
-                            <h1>Exercise and socialise</h1>
-                            <p>Walk with your friends</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
-                    <div class="container">
-                        <div class="carousel-caption text-xs-right">
-                            <h1>Be aware of your environment</h1>
-                            <p>All you need to know where to walk and what to bring.</p>
-                            <p><a class="btn btn-lg btn-primary" href="#" role="button">Browse gallery</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-        <!-- /.carousel -->
-
-
-        <!-- Marketing messaging and featurettes
-    ================================================== -->
-        <!-- Wrap the rest of the page in another container to center all the content. -->
-
-        <div class="container marketing">
-
-            <!-- Three columns of text below the carousel -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>Weather details</h2>
-                    <p>Get up to date weather information for the current hour, the following hour and later in the day. We figure the more information you have the better!</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>UV index</h2>
-                    <p>Get an idea of how strong the suns rays are today. This way you can protext yoourself and your children.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-                <!-- /.col-lg-4 -->
-                <div class="col-lg-4">
-                    <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-                    <h2>Air quality</h2>
-                    <p>Seem a bit smogy? Check out the air quality of the area you're in, and if its no good easily find surrounding areas with better air quality.</p>
-                    <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-                </div>
-                <!-- /.col-lg-4 -->
-            </div>
-            <!-- /.row -->
-
-
-            <!-- START THE FEATURETTES -->
-
-            <hr class="featurette-divider">
-
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">Find places within walking distance. <span class="text-muted">It'll make life that little bit easier.</span></h2>
-                    <p class="lead">Just enter the amount of time you would like to walk for and we'll figure out the rest.</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-                </div>
-            </div>
-
-            <hr class="featurette-divider">
-
-            <div class="row featurette">
-                <div class="col-md-7 push-md-5">
-                    <h2 class="featurette-heading">Found a place you'd like to go to? <span class="text-muted">Just click on your destination and we'll plot a path for you.</span></h2>
-                    <p class="lead">You'll never have to wait for your partner to ask for directions again.</p>
-                </div>
-                <div class="col-md-5 pull-md-7">
-                    <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-                </div>
-            </div>
-
-            <hr class="featurette-divider">
-
-            <div class="row featurette">
-                <div class="col-md-7">
-                    <h2 class="featurette-heading">And lastly, walk with your friends. <span class="text-muted">Exercise and socialise.</span></h2>
-                    <p class="lead">Start your walk and at any time you can send a request for your friends to join you!</p>
-                </div>
-                <div class="col-md-5">
-                    <img class="featurette-image img-fluid m-x-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-                </div>
-            </div>
-
-            <hr class="featurette-divider">
-
-            <!-- /END THE FEATURETTES -->
-
-
-            <!-- FOOTER -->
-            <footer>
-                <p class="pull-xs-right"><a href="#">Back to top</a></p>
-                <p>&copy; 2016 Spaghetti Structures &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-            </footer>
-
-        </div>
-        <!-- /.container -->
-
-
+    <body style="background: #FF5F6D;
+background: -webkit-linear-gradient(to left, #FF5F6D , #FFC371);
+background: linear-gradient(to left, #FFEDBC , #ED4264)">
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -202,6 +47,67 @@ $uvIndex = $_SESSION['uvIndex'];
         <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/vendor/holder.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+
+        <nav id="bootstrapNavbar" class="navbar navbar-static-top navbar-light bg-transparent">
+
+            <a href="index.php" class="navbar-brand">BornWalker</a>
+            <ul class="nav navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.php">Home|<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="html/mapRadius.php">Take a walk|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">About us|</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="">Coming soon|</a>
+                </li>
+            </ul>
+        </nav>
+
+        <div id="welcomeMessage" class="container">
+            <p>Hey there! </p>
+        </div>
+
+        <div id="temperatureAndUvContainer" class="container">
+            <div id="weatherIconContainer" class="row">
+                <div class="col-md-1">
+                    <i id="weatherIcon" class="wi" aria-hidden="true"></i>
+                </div>
+                <div class="col-md-3" id="temperatureAndUv">
+                    <div id="currentTemperature">
+                    
+                    </div>
+                    
+                    <div id="uvInformation">
+                        UV index: 
+                        <?php print_r($uvIndex); ?>
+                    <a href="homepage.php" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
+                    
+                    </div>
+                    
+                    
+                </div>
+            </div>
+
+        </div>
+
+        <div id="takeAWalkButton" class="container">
+        <a href="php/listPlaces.php"  role="button" class="btn btn-primary btn-block">Let's go for a walk!</a>
+        </div>
+
+
+
+
+
+
+
+
+
+        <script src="js/weatherRequest.js"></script>
+
     </body>
 
     </html>

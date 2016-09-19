@@ -8,29 +8,36 @@ $.ajax({
         //Convert the farenheit temp to celcius with 2 decimal places
         var currentTemperatureCelcius = Math.round((weatherData.currently.apparentTemperature - 32) * (5 / 9) * 100) / 100
 
-        //console.log(currentTemperatureCelcius)
-        //Display the current temperature in the table
+        
+        currentTemperatureCelcius += "℃";
         $("#currentTemperature").text(currentTemperatureCelcius.toString())
 
         var hourlyWeatherCelcius = Math.round((weatherData.hourly.data[1].apparentTemperature - 32) * (5 / 9) * 100) / 100
 
-        $("#hourlyWeather").text(hourlyWeatherCelcius).toString()
-        $("#")
+        $("#hourlyWeather").text(hourlyWeatherCelcius).toString();
+        
+        var weatherIcon = weatherData.currently.icon;
+        var wiString = iconMapping[weatherIcon];
+        //If the string returned by the api doesn't match any entries in the iconMapping, return the default icon
+        if (wiString === undefined){
+            wiString = iconMapping["default"];
+        }
+        
+        $("#weatherIcon").addClass(wiString);
+        
     }
 });
 
-
-
-//var currentTimestamp = Math.floor(Date.now() / 1000)
-//        var desiredTime = currentTimestamp + 60 * 60
-//       var tonightsWeather = null
-//        weatherData.hourly.data.forEach(function(currentValue, index, array){
-//            if currentValue.time = desiredTimestamp
-//              then set tonightsWeather = currentValue
-//              break
-//        } )
-
-
-//set time out
-//javascript date
-//take todays date, figure out 8pm unix timestamp, then find that in the hourly array
+var iconMapping = {
+    'clear-day': "wi-day-sunny",
+    'clear-night': "wi-night-clear",
+    'rain': "wi-rain",
+    'snow': "wi-snow",
+    'sleet': "wi-sleet",
+    'wind': "wi-strong-wind",
+    'fog': "wi-fog",
+    'cloudy': "wi-cloudy",
+    'partly-cloudy-day': "wi-day-cloudy",
+    'partly-cloudy-night': "wi-night-alt-cloudy",
+    'default': "wi-na"
+}

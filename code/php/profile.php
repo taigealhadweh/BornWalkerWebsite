@@ -39,6 +39,9 @@
                 <a class="nav-link" href="profile.php">Profile</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="members.php">Members</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="friends.php">Friends</a>
             </li>
             <li class="nav-item">
@@ -59,7 +62,11 @@
                 <h3>Your profile</h3>
 
                 <?php 
+                
                     session_start();
+                    if (logged_in() == false) {
+	                  redirect_to("login.php");
+                    }
                     if (isset($_GET['user']) && !empty($_GET['user'])) {
                         $user = $_GET['user'];
                        

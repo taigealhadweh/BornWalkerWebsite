@@ -54,6 +54,7 @@ BODY {
     color: #333;
     padding: 10px;
     border-radius: 5px;
+   
 }
 
 #title_bar ul {
@@ -100,4 +101,44 @@ BODY {
     border-radius: 5px;
     margin: 10px 0px;
     text-decoration: #111;
+}
+
+#weatherIcon{
+    display: inline;
+    font-size: 5em;
+    color: peachpuff;
+    padding-right: 15px;
+    
+}
+
+#bootstrapNavbar{
+    border-bottom: 2px solid;
+    margin: 20px;
+}
+
+#currentTemperature{
+    display: block; 
+    clear: right;
+    color: peachpuff;
+}
+
+#welcomeMessage{
+    font-size: 5em;
+    color: peachpuff;
+}
+
+#temperatureAndUvContainer{
+    align-content: center;
+}
+
+#temperatureAndUv{
+    padding-left: 45px;
+}
+
+#uvInformation{
+    color: peachpuff;
+}
+
+#takeAWalkButton{
+    padding-top: 200px;
 }
