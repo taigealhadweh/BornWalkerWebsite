@@ -1,5 +1,5 @@
 <?php 
-require_once("php/printXML.php");
+require_once("printXML.php");
 //any page that has sessions needs this session_start()
 session_start();
 
@@ -18,17 +18,17 @@ $uvIndex = $_SESSION['uvIndex'];
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="bootstrap-4.0.0-alpha.4/docs/favicon.ico">
-        <link href="css/custom.css" rel="stylesheet">
+        <link rel="icon" href="../bootstrap-4.0.0-alpha.4/docs/favicon.ico">
+        <link href="../css/custom.css" rel="stylesheet">
 
         <title>BornWalker</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap-4.0.0-alpha.4/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../bootstrap-4.0.0-alpha.4/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
-        <link href="bootstrap-4.0.0-alpha.4/docs/examples/carousel/carousel.css" rel="stylesheet">
-        <link href="css/weather-icons.min.css" rel="stylesheet">
+        <link href="../bootstrap-4.0.0-alpha.4/docs/examples/carousel/carousel.css" rel="stylesheet">
+        <link href="../css/weather-icons.min.css" rel="stylesheet">
     </head>
 
     <body style="background: #FF5F6D;
@@ -42,11 +42,11 @@ background: linear-gradient(to left, #DCAFA6 , #ED4264)">
             window.jQuery || document.write('<script src="bootstrap-4.0.0-alpha.4/docs/assets/js/vendor/jquery.min.js"><\/script>')
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
-        <script src="bootstrap-4.0.0-alpha.4/dist/js/bootstrap.min.js"></script>
+        <script src="../bootstrap-4.0.0-alpha.4/dist/js/bootstrap.min.js"></script>
         <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-        <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/vendor/holder.min.js"></script>
+        <script src="../bootstrap-4.0.0-alpha.4/docs/assets/js/vendor/holder.min.js"></script>
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
+        <script src="../bootstrap-4.0.0-alpha.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
         <nav id="bootstrapNavbar" class="navbar navbar-static-top navbar-light bg-transparent">
 
@@ -67,44 +67,16 @@ background: linear-gradient(to left, #DCAFA6 , #ED4264)">
             </ul>
         </nav>
 
-        <div id="welcomeMessage" class="container">
-            <p>Hey there! </p>
-        </div>
 
-        <div id="temperatureAndUvContainer" class="container">
-            <div id="weatherIconContainer" class="row">
-                <div class="col-md-1">
-                    <i id="weatherIcon" class="wi" aria-hidden="true"></i>
-                </div>
-                <div class="col-md-3" id="temperatureAndUv">
-                    <div id="currentTemperature">
-                    
-                    </div>
-                    
-                    <div id="uvInformation">
-                        UV index: 
-                        <?php print_r($uvIndex); ?>
-                    <a href="php/environmentInformation.php" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>
-                    
-                    </div>
-                    
-                    
-                </div>
-            </div>
+
+        <div id="uvInformation">
+            Current UV index:
+            <?php print_r($uvIndex); ?>
+
 
         </div>
-
-        <div id="takeAWalkButton" class="container">
-        <a href="php/listPlaces.php"  role="button" class="btn btn-primary btn-block">Let's go for a walk!</a>
-        </div>
-
-
-
-
-
-
-
-
+        
+        <img src="http://www.bom.gov.au/images/uv/uv-panel-exp.png">
 
         <script src="js/weatherRequest.js"></script>
 
