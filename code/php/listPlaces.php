@@ -39,9 +39,9 @@
         #map {
             position: relative;
             top: 120px;
-            left: 30px;
+            left: 300px;
             border: 3px solid #73AD21;
-            width: 95%;
+            width: 70%;
             padding-bottom: 40%;
         }
         
@@ -79,6 +79,50 @@
         #walkingTime {
             display: inline;
         }
+        
+        #list{
+            align-content: left;
+            top: 0;
+        }
+        
+        .dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn:hover, .dropbtn:focus {
+    background-color: #3e8e41;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+        
     </style>
     <!-- add comment -->
     <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry"></script>
@@ -99,8 +143,10 @@
             var service;
             var startLocLatlng;
             var placesList;
-            var placesArray = [];
             var directionsDisplay;
+            var ifCheckCafe;
+            var ifCheckToilet;
+            var ifCheckPlayground;
         //jQuery(document).ready(function ($) {
 
             //Get data, and replace it on the form
@@ -143,6 +189,9 @@
                 var latlng = getCurrentLoc(position);
 
                 geocoder = new google.maps.Geocoder();
+                
+                
+
 
                 if (map) {
                     map.panTo(latlng);
@@ -240,15 +289,52 @@
                     
                     clearOverlays();
                     directionsDisplay.setDirections({routes: []});
-                    performSearchToilet();
-                    performSearchCafe();
                     
+                    //performSearchToilet();
+                    //performSearchCafe();
+                    //performSearchPlayground();
+                    
+                    
+                    if (ifCheckToilet)
+                        {
+                            performSearchToilet();
+                            //document.getElementById("dropPoi").value="Toilet";
+
+                        }
+                    if (ifCheckPlayground)
+                        {
+                            performSearchPlayground();
+                        }
+                    if (ifCheckCafe)
+                        {
+                            performSearchCafe();
+                        }
+                        
                 });
                 
                 directionMap();
                 startLocAuto();
                 endLocAuto();
             }
+        
+  function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches(".dropbtn")) {
+
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var j;
+    for (j = 0; j < dropdowns.length; j++) {
+      var openDropdown = dropdowns[j];
+      if (openDropdown.classList.contains("show")) {
+        openDropdown.classList.remove("show");
+      }
+    }
+  }
+}
 
             // clear all markers on the map
             function clearOverlays() 
@@ -271,7 +357,9 @@
                 var request = {
                     
                     bounds: map.getBounds(),
-                    keyword: 'cafe'
+                    //keyword: "cafe"
+                    type: 'cafe'
+                    
                     
                 };
                 
@@ -286,6 +374,20 @@
                     
                     bounds: map.getBounds(),
                     keyword: 'toilet'
+                    
+                };
+                
+                service.radarSearch(request, callback);
+            
+            }
+        
+        function performSearchPlayground() 
+            {
+        
+                var request = {
+                    
+                    bounds: map.getBounds(),
+                    keyword: 'playground'
                     
                 };
                 
@@ -342,8 +444,9 @@
                     {
                         var latitude = results[0].geometry.location.lat();
                         var longitude = results[0].geometry.location.lng();
-              
                         startLocLatlng = new google.maps.LatLng(latitude, longitude);
+                        
+                        var openOrNot;
  
                         if (google.maps.geometry.spherical.computeDistanceBetween(startLocLatlng, place.geometry.location) <= radius)
                         {
@@ -351,7 +454,6 @@
                                 animation: google.maps.Animation.DROP,
                                 map: map,
                                 position: place.geometry.location,
-                                id: place.geometry.id,
                                 /*
                                     icon: {
                                 url: 'http://maps.gstatic.com/mapfiles/circle.png',
@@ -373,8 +475,7 @@
                                     return;
                                 }
                                 
-                                placesArray.push(result);
-                                
+                                                              
                                 placesList.innerHTML += '<li><a href="javascript:activeList(' + thisMarker + ');"><strong>' + result.name + '</strong></a></li>';
                             
                             google.maps.event.addListener(marker, 'click', function() {
@@ -384,7 +485,17 @@
                                         console.error(status);
                                         return;
                                     }
-                                infoWindow.setContent('<div><strong>' + result.name + '</strong><br>' + result.formatted_address + index + '</div>');
+                                    
+                                    if (result.opening_hours.open_now == true)
+                                        {
+                                            openOrNot = " (open)";
+                                        }
+                                    else
+                                        {
+                                            openOrNot = " (closed)";
+                                        }
+                                    
+                                infoWindow.setContent('<div><strong>' + result.name + '</strong>' + openOrNot + '<br>' + result.formatted_address + '</div>');
                                 infoWindow.open(map, marker);
                                 document.getElementById("end").value = result.formatted_address;
                                 });
@@ -643,6 +754,25 @@
                 
                 return false;
             }
+        
+        function changeButtonToilet()
+        {
+            document.getElementById("dropPoi").innerHTML="Toilet";
+        }
+        
+        function changeButtonCafe()
+        {
+            document.getElementById("dropPoi").innerHTML="Cafe";
+        }
+        
+        function changeButtonPlayground()
+        {
+            document.getElementById("dropPoi").innerHTML="Playground";
+        }
+    
+    
+    
+    
     </script>
 
 
@@ -712,12 +842,32 @@
     <div id="map"></div>
     
     
-    <div class="col-md-4">
+    <div id="list" class="col-md-2">
         <ul id="places" class="nav nav-pills nav-stacked"></ul>
     </div>
+    
+    
+   <div class="dropdown">
+<button id="dropPoi" onclick="myFunction()" class="dropbtn">Dropdown</button>
+  <div id="myDropdown" class="dropdown-content">
+    <a href="javascript: ifCheckToilet = true; ifCheckCafe = false; ifCheckPlayground = false; changeButtonToilet();">Toilet</a>
+    <a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe();">Cafe</a>
+    <a href="javascript: ifCheckPlayground = true; ifCheckCafe = false; ifCheckToilet = false; changeButtonPlayground();">Playground</a>
+  </div>
+</div>
 
 
+<!--
+    <div class="checkBox" id="checkBox">
+        <div class="col-lg-8">
+            Toilet<input type="checkbox" id="checkToilet">
+            Cafe<input type="checkbox" id="checkCafe">
+            Playground/Park<input type="checkbox" id="checkPlayground">
 
+
+        </div>
+    </div>
+-->
 
 
 
