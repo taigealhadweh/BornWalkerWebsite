@@ -1,7 +1,7 @@
 <?php 
 require_once("php/printXML.php");
 //any page that has sessions needs this session_start()
-session_start();
+//session_start();
 
 $uvIndex = $_SESSION['uvIndex'];
 ?>
@@ -22,16 +22,29 @@ $uvIndex = $_SESSION['uvIndex'];
         <title>BornWalker</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="bootstrap-4.0.0-alpha.4/dist/css/bootstrap.min.css" rel="stylesheet">
+<!--        <link href="bootstrap-4.0.0-alpha.4/dist/css/bootstrap.min.css" rel="stylesheet">-->
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="bootstrap-4.0.0-alpha.4/docs/examples/carousel/carousel.css" rel="stylesheet">
         <link href="css/weather-icons.min.css" rel="stylesheet">
+        
+        <!-- Custom Fonts -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+        
+        <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="css/creative.min.css" rel="stylesheet">
+        
     </head>
 
     <body style="background: #FF5F6D;
 background: -webkit-linear-gradient(to left, #FF5F6D , #FFC371);
-background: linear-gradient(to left, #DCAFA6 , #ED4264)">
+background: linear-gradient(to left, #FFEDBC , #ED4264)">
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -46,12 +59,13 @@ background: linear-gradient(to left, #DCAFA6 , #ED4264)">
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
+<!--
         <nav id="bootstrapNavbar" class="navbar navbar-static-top navbar-light bg-transparent">
 
             <a href="index.php" class="navbar-brand">BornWalker</a>
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="index.php">Home|<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="index.php">BornWalker<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="html/mapRadius.php">Take a walk|</a>
@@ -64,31 +78,81 @@ background: linear-gradient(to left, #DCAFA6 , #ED4264)">
                 </li>
             </ul>
         </nav>
+-->
+        <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">BornWalker</a>
+            </div>
 
-        <div id="welcomeMessage" class="container">
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="#">About us</a>
+                    </li>
+                    <li>
+                        <a href="#">Coming soon</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+
+        <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 id="homeHeading">Hey there!</h1>
+<!--
+            <div id="welcomeMessage" class="container">
             <p>Hey there! </p>
         </div>
+-->
 
-        <div id="temperatureAndUvContainer" class="container">
+        <hr>
+                <div id="temperatureAndUvContainer" class="container">
             <div id="weatherIconContainer" class="row">
                 <div class="col-md-1">
-                    <i id="weatherIcon" class="wi" aria-hidden="true"></i>
                 </div>
-                <div class="col-md-3" id="temperatureAndUv">
-                    <div id="currentTemperature">
-                    </div>  
-                    <div id="uvInformation">
-                        UV index: 
-                        <?php print_r($uvIndex); ?>
-                    <a href="php/environmentInformation.php" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>  
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
+                    
+                    <div>
+                        <h2><i id="weatherIcon" class="wi" aria-hidden="true"></i></h2>
                     </div>
+                </div>
+                
+                <div class="col-md-3" id="temperatureAndUv" align="center">
+                    <h2><div id="currentTemperature">
+                        </div></h2>  
+                    <div><p> </p></div>
+                    <div id="uvInformation" align="center">
+                        <h2 align="center">UV index 
+                            <?php print_r($uvIndex); ?>
+                    <a href="php/environmentInformation.php" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true"></i></a>  
+                        </h2></div>
+                </div>
+                <div class="col-md-2">
+                </div>
+                <div class="col-md-2">
                 </div>
             </div>
         </div>
 
-        <div id="takeAWalkButton" class="container">
-        <a href="php/listPlaces.php"  role="button" class="btn btn-primary btn-block">Let's go for a walk!</a>
+        <hr>
+                <a href="php/listPlaces.php"  role="button" class="btn btn-primary btn-xl page-scroll"><h3>Let's go for a walk!</h3></a>
+        
+            </div>
         </div>
+                </header>
 
         <script src="js/weatherRequest.js"></script>
 
