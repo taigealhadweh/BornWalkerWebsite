@@ -802,6 +802,26 @@
                 
              
                 
+<!--                <br>-->
+                
+<!--                Bootstrap dropdown menu-->
+<!--
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    Place of interest
+                    <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="javascript: ifCheckToilet = true; ifCheckCafe = false; ifCheckPlayground = false; changeButtonToilet();">Toilet</a></li>
+                        <li><a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe();">Cafe</a></li>
+                        <li><a href="javascript: ifCheckPlayground = true; ifCheckCafe = false; ifCheckToilet = false; changeButtonPlayground();">Playground</a></li>
+                    
+                    </ul>
+                
+                
+                </div>
+-->
+                
                 <div class="dropdown">
                     <button id="dropPoi" onclick="myFunction()" class="dropbtn">Select place of interest</button>
                     <div id="myDropdown" class="dropdown-content">
