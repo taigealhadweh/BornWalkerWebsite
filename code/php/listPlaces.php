@@ -41,7 +41,7 @@
             top: 120px;
             left: 500px;
             border: 3px solid #73AD21;
-            width: 60%;
+            z-index: 0;
             padding-bottom: 40%;
         }
         
@@ -49,7 +49,7 @@
             position: absolute;
             top: 65px;
             /*            left: %;*/
-            z-index: 5;
+            z-index: 0;
             background-color: #fff;
             /*            padding: 5px;*/
             /*            border: 1px solid transparent;*/
@@ -65,30 +65,26 @@
             position: absolute;
             top: 65px;
             /*            left: 35%;*/
-            z-index: 6;
+            z-index: 0;
             background-color: #fff;
             /*            padding: 5px;*/
-            /*            border: 1px solid transparent;*/
+/*                        border: 1px solid transparent;*/
             font-family: 'Helvetica Neue', 'sans-serif';
             /*            line-height: 30px;*/
             left: 30px;
-            /*            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
+            
+/*                        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);*/
             outline: none;
         }
         
         
-        #walkingTimeLabel{
-            font-family: 'Helvetica Neue', 'sans-serif';
-        }
         
         
-        #walkingTime {
-            display: inline;
-        }
         
-        #list {
+        #placeList {
             align-content: left;
             top: 0;
+            border; 3px solid black;
         }
         
         .dropbtn {
@@ -795,17 +791,16 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-    <div class="fluid-container">
+    <div class="container">
         <div class="row" id="containerRow">
-            <div class="col-lg-4" id="walkingTimePanel">Walking time(minutes):
+            <div class="col-lg-4" id="walkingTimePanel"> <h4>Walking time(minutes):</h4>
                 <input type="text" id="walkingTime" placeholder="Enter a walking time">
                 
              
                 
-<!--                <br>-->
-                
+               
+                <br>
 <!--                Bootstrap dropdown menu-->
-<!--
                 <div class="dropdown">
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                     Place of interest
@@ -820,7 +815,6 @@
                 
                 
                 </div>
--->
                 
                 <div class="dropdown">
                     <button id="dropPoi" onclick="myFunction()" class="dropbtn">Select place of interest</button>
@@ -837,7 +831,7 @@
 
                 <br>
                 
-                <div id="list">
+                <div id="placeList">
 <!--                    can we set this dynamically?-->
                     <h3>List of places</h3>
                     <ul id="places" class="nav nav-pills nav-stacked"></ul>
@@ -847,24 +841,21 @@
 
                 <label for="end">End</label>
                 <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address">
-               
-
-                
-
-                
                 
                  <input type="submit" id="route" class="btn btn-primary" value="Route">
 
             </div>
+            </div>
+       
 
-            <div class="col-lg-8">
-                <div class="fluid-container" id="map">
+            <div class="col-md-8">
+                <div class="fixed-container" id="map">
 
                 </div>
 
             </div>
-        </div>
-    </div>
+        
+     </div>
 
 
     <!--
