@@ -151,14 +151,14 @@ BODY {
 
 #map {
     border: 3px solid #73AD21;
-    padding: 0 0 35% 0;
+    padding: 0 0 50% 0;
     float:left;
-    margin: 15px 0px 0 15px;
+    margin: 15px 0px 30px 15px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1265px) {
     #map {
-    width:90%
+        width:90%
     }
 }
 
@@ -178,7 +178,7 @@ BODY {
 }
 
 .row{
-    margin: 0 0 0 30px;
+    margin: 0 0 0 2%;
 }
 
 #walkingTimeLabel{
@@ -239,4 +239,27 @@ BODY {
 
 .show {
     display: block;
+}
+
+::-moz-selection { /* Code for Firefox */
+    color: red;
+    background: white;
+}
+
+::selection {
+    color: red; 
+    background: white;
+}
+
+
+@media (min-width: 768px)
+{
+    header .header-content .header-content-inner h1 {
+        font-size: 35px;
+        margin: 50PX 0 10PX 0;
+    }
+}
+
+.goBtn{
+    padding: 15px 30px;
 }

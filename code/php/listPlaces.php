@@ -84,7 +84,11 @@
         #placeList {
             align-content: left;
             top: 0;
+<<<<<<< .merge_file_st9ooB
             border; 3px solid black;
+=======
+            border: 3px solid black;
+>>>>>>> .merge_file_8Tbry5
         }
         
         .dropbtn {

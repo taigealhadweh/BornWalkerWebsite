@@ -194,8 +194,53 @@ function initMap(position) {
     endLocAuto();
 }
 
+function eventFire(el, etype) {
+    if (el.fireEvent) {
+        el.fireEvent('on' + etype);
+    } else {
+        var evObj = document.createEvent('Events');
+        evObj.initEvent(etype, true, false);
+        el.dispatchEvent(evObj);
+    }
+}
+
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
+}
+
+function checkDropDownValue(dropDownValue) {
+    switch (dropDownValue) {
+        case "Toilet":
+//            document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById('forToilet').click();
+            changeButtonToilet();
+            ifCheckToilet = true;
+            ifCheckCafe = false;
+            ifCheckPlayground = false;
+            document.getElementById('submit').click();
+
+            break;
+        case "Cafe":
+//            document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById('forCafe').click();
+            changeButtonCafe();
+            ifCheckCafe = true;
+            ifCheckToilet = false;
+            ifCheckPlayground = false;
+            document.getElementById('submit').click();
+
+            break;
+        case "Playground":
+//            document.getElementById("myDropdown").classList.toggle("show");
+            document.getElementById('forPlayground').click();
+            changeButtonPlayground();
+            ifCheckPlayground = true;
+            ifCheckCafe = false;
+            ifCheckToilet = false;
+            document.getElementById('submit').click();
+
+            break;
+    }
 }
 
 // Close the dropdown if the user clicks outside of it
