@@ -84,7 +84,7 @@
         #placeList {
             align-content: left;
             top: 0;
-            border; 3px solid black;
+            border: 3px solid black;
         }
         
         .dropbtn {
