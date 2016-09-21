@@ -156,7 +156,7 @@ BODY {
     margin: 15px 0px 30px 15px;
 }
 
-@media screen and (max-width: 1300px) {
+@media screen and (max-width: 1265px) {
     #map {
         width:90%
     }
