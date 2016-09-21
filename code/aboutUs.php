@@ -1,12 +1,4 @@
-<?php 
-require_once("php/printXML.php");
-//any page that has sessions needs this session_start()
-//session_start();
-
-$uvIndex = $_SESSION['uvIndex'];
-?>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
     <html lang="en">
 
     <head>
@@ -38,13 +30,13 @@ $uvIndex = $_SESSION['uvIndex'];
     <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
     <!-- Theme CSS -->
-    <link href="css/creative.min.css" rel="stylesheet">
+    <link href="css/goForWalk.css" rel="stylesheet">
         
     </head>
 
-    <body style="background: #FF5F6D;
+    <body style = "background: #FF5F6D;
 background: -webkit-linear-gradient(to left, #FF5F6D , #FFC371);
-background: linear-gradient(to left, #FFEDBC , #ED4264)">
+background: linear-gradient(to left, #FF5F6D , #FFC371)">
         <!-- Bootstrap core JavaScript
     ================================================== -->
         <!-- Placed at the end of the document so the pages load faster -->
@@ -59,26 +51,6 @@ background: linear-gradient(to left, #FFEDBC , #ED4264)">
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="bootstrap-4.0.0-alpha.4/docs/assets/js/ie10-viewport-bug-workaround.js"></script>
 
-<!--
-        <nav id="bootstrapNavbar" class="navbar navbar-static-top navbar-light bg-transparent">
-
-            <a href="index.php" class="navbar-brand">BornWalker</a>
-            <ul class="nav navbar-nav">
-                <li class="nav-item active">
-                    <a class="nav-link" href="index.php">BornWalker<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="html/mapRadius.php">Take a walk|</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">About us|</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="">Coming soon|</a>
-                </li>
-            </ul>
-        </nav>
--->
         <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -86,7 +58,7 @@ background: linear-gradient(to left, #FFEDBC , #ED4264)">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand page-scroll" href="#page-top">BornWalker</a>
+                <a class="navbar-brand page-scroll" href="index.php">BornWalker</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -109,53 +81,43 @@ background: linear-gradient(to left, #FFEDBC , #ED4264)">
         <header>
         <div class="header-content">
             <div class="header-content-inner">
-                <h1 id="homeHeading">Hey there!</h1>
-<!--
-            <div id="welcomeMessage" class="container">
-            <p>Hey there! </p>
-        </div>
--->
+                <h1 id="homeHeading">How long do you feel like walking?</h1>
+                
 
-        <hr>
-                <div id="temperatureAndUvContainer" class="container">
-            <div id="weatherIconContainer" class="row">
-                <div class="col-md-1">
+                
+                <div id="walkingTimeInput" class="row">
+                    <div class="col-md-3">
                 </div>
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-2">
-                    
-                    <div>
-                        <h2><i id="weatherIcon" class="wi" aria-hidden="true"></i></h2>
+                    <div class="col-md-6">
+                    <input class="form-control" type="text" id="start" placeholder="minutes" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
                     </div>
+                    <div class="col-md-3">
+                </div>
+                </div>
+
+        
+                <h1 id="homeHeading">What place would you prefer going?</h1>
+                
+                <div id="interestInput" class="row">
+                    <div class="col-md-3">
+                </div>
+                    <div class="col-md-6">
+                    <input class="form-control" type="text" id="start" placeholder="this should be a dropdown button" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
+                    </div>
+                    <div class="col-md-3">
+                </div>
                 </div>
                 
-                <div class="col-md-3" id="temperatureAndUv" align="center">
-                    <h2><div id="currentTemperature">
-                        </div></h2>  
-                    <div><p> </p></div>
-                    <div id="uvInformation" align="center">
-                        <h2 align="center">UV index 
-                            <?php print_r($uvIndex); ?>
-                    <a id="info" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true" style="color:rgba(239, 119, 127, 1)"></i></a>  
-                        </h2></div>
-                </div>
-                <div class="col-md-2">
-                </div>
-                <div class="col-md-2">
-                </div>
-            </div>
-        </div>
+                <h1><p></p></h1>
 
         <hr>
-                <a href="goForWalk.php"  role="button" class="btn btn-primary btn-xl page-scroll"><h3>Plan a walk now</h3></a>
+                <a href="listPlaces.php"  role="button" class="btn btn-primary btn-xl page-scroll"><h3>Let's go</h3></a>
         
             </div>
         </div>
                 </header>
 
         <script src="js/weatherRequest.js"></script>
-        
 
     </body>
 
