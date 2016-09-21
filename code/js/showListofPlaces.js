@@ -367,12 +367,13 @@ function addMarker(place) {
                 var thisMarker = markersArray.indexOf(marker);
 
                 //put place names into the list
+
+                placesList.innerHTML = "";
                 service.getDetails(place, function (result, status) {
                     if (status !== google.maps.places.PlacesServiceStatus.OK) {
                         console.error(status);
                         return;
                     }
-                    placesList.innerHTML = "";
                     placesList.innerHTML += '<li><a href="javascript:activeList(' + thisMarker + ');"><strong>' + result.name + '</strong></a></li>';
 
                     google.maps.event.addListener(marker, 'click', function () {

@@ -31,7 +31,7 @@ include("php/header.php");
 
         <label for="end">End</label>
         <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
-        <input id="route" class="btn btn-primary" value="Route">
+        <button id="route" class="dropbtn" >Find Route</button>
     </div>
     <div class="col-lg-7" id="map" style="border:0px"></div>
 </div>        
