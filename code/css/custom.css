@@ -1,3 +1,8 @@
+*, input{
+    font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+
+
 .column-padding {
     padding: 100px;
 }
@@ -16,11 +21,6 @@ body {
     padding: 0px
 }
 
-BODY {
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    color: #000000;
-    font-size: 13px;
-}
 
 #map_canvas {
     height: 100%;
@@ -54,7 +54,7 @@ BODY {
     color: #333;
     padding: 10px;
     border-radius: 5px;
-   
+
 }
 
 #title_bar ul {
@@ -108,7 +108,7 @@ BODY {
     font-size: 5em;
     color: peachpuff;
     padding-right: 15px;
-    
+
 }
 
 #bootstrapNavbar{
@@ -141,4 +141,102 @@ BODY {
 
 #takeAWalkButton{
     padding-top: 200px;
+}
+
+BODY {
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-size: 13px;
+}
+
+#map {
+    border: 3px solid #73AD21;
+    padding: 0 0 35% 0;
+    float:left;
+    margin: 15px 0px 0 15px;
+}
+
+@media screen and (max-width: 1300px) {
+    #map {
+    width:90%
+    }
+}
+
+#routePanel {
+    z-index: 5;
+    background-color: #fff;
+    padding-left: 500px;
+    outline: none;
+}
+
+#walkingTimePanel {
+    z-index: 6;
+    background-color: #fff;
+    font-family: 'Helvetica Neue', 'sans-serif';
+    outline: none;
+    float:left;
+}
+
+.row{
+    margin: 0 0 0 30px;
+}
+
+#walkingTimeLabel{
+    font-family: 'Helvetica Neue', 'sans-serif';
+}
+
+
+#walkingTime {
+    display: inline;
+}
+
+#list {
+    align-content: left;
+    top: 0;
+}
+
+.dropbtn {
+    background-color: rgba(255, 226, 223, 0.2);
+    color: rgba(254, 255, 221, 0.9);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    -webkit-transition:all .35s;
+    -moz-transition:all .35s;
+    transition:all .35s;
+    cursor: pointer;
+}
+
+.dropbtn:hover,
+.dropbtn:focus {
+    background-color: #FF5F6D;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    overflow: auto;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown a:hover {
+    background-color: #f1f1f1
+}
+
+.show {
+    display: block;
 }
