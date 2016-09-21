@@ -4,7 +4,7 @@ $.ajax({
     crossDomain: true,
     dataType: 'jsonp',
     success: function (weatherData) {
-        console.log(weatherData);
+//        console.log(weatherData);
         //Convert the farenheit temp to celcius with 2 decimal places
         var currentTemperatureCelcius = Math.round((weatherData.currently.apparentTemperature - 32) * (5 / 9) * 100) / 100
 

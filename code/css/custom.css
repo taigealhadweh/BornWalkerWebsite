@@ -224,6 +224,8 @@ BODY {
     min-width: 160px;
     overflow: auto;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 9999;
+
 }
 
 .dropdown-content a {
@@ -262,4 +264,8 @@ BODY {
 
 .goBtn{
     padding: 15px 30px;
+}
+
+a{
+    color:#8a001b;
 }

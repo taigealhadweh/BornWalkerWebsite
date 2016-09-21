@@ -75,6 +75,7 @@ function initMap(position) {
     if (map) {
         map.panTo(latlng);
         mapMarker.setPosition(latlng);
+
     } else {
         var myOptions = {
             zoom: 14,
@@ -88,6 +89,9 @@ function initMap(position) {
         };
 
         map = new google.maps.Map(document.getElementById("map"), myOptions);
+        google.maps.event.addListenerOnce(map, 'idle', function () {
+            clickButton();
+        });
 
         map.setTilt(0); // turns off default 45-deg view
 
@@ -213,34 +217,20 @@ function checkDropDownValue(dropDownValue) {
         case "Toilet":
 //            document.getElementById("myDropdown").classList.toggle("show");
             document.getElementById('forToilet').click();
-            changeButtonToilet();
-            ifCheckToilet = true;
-            ifCheckCafe = false;
-            ifCheckPlayground = false;
-            document.getElementById('submit').click();
-
             break;
         case "Cafe":
 //            document.getElementById("myDropdown").classList.toggle("show");
             document.getElementById('forCafe').click();
-            changeButtonCafe();
-            ifCheckCafe = true;
-            ifCheckToilet = false;
-            ifCheckPlayground = false;
-            document.getElementById('submit').click();
-
             break;
         case "Playground":
 //            document.getElementById("myDropdown").classList.toggle("show");
             document.getElementById('forPlayground').click();
-            changeButtonPlayground();
-            ifCheckPlayground = true;
-            ifCheckCafe = false;
-            ifCheckToilet = false;
-            document.getElementById('submit').click();
-
             break;
     }
+}
+
+function clickButton() {
+    document.getElementById('submit').click();
 }
 
 // Close the dropdown if the user clicks outside of it
@@ -266,7 +256,7 @@ function clearOverlays() {
     }
 
     markersArray.length = 0;
-    document.getElementById("places").innerHTML = "";
+    document.getElementById("places").innerHTML = "No result match your search<br/><br/><br/>";
 
 }
 
@@ -382,8 +372,7 @@ function addMarker(place) {
                         console.error(status);
                         return;
                     }
-
-
+                    placesList.innerHTML = "";
                     placesList.innerHTML += '<li><a href="javascript:activeList(' + thisMarker + ');"><strong>' + result.name + '</strong></a></li>';
 
                     google.maps.event.addListener(marker, 'click', function () {
@@ -653,13 +642,13 @@ function activeList(x) {
 }
 
 function changeButtonToilet() {
-    document.getElementById("dropPoi").innerHTML = "Toilet";
+    document.getElementById("dropPoi").innerHTML = "Toilet <i class='fa fa-sort-desc' aria-hidden='true'></i>";
 }
 
 function changeButtonCafe() {
-    document.getElementById("dropPoi").innerHTML = "Cafe";
+    document.getElementById("dropPoi").innerHTML = "Cafe <i class='fa fa-sort-desc' aria-hidden='true'></i>";
 }
 
 function changeButtonPlayground() {
-    document.getElementById("dropPoi").innerHTML = "Playground";
+    document.getElementById("dropPoi").innerHTML = "Playground <i class='fa fa-sort-desc' aria-hidden='true'></i>";
 }
