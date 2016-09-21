@@ -10,7 +10,7 @@ include("php/header.php");
         }
         ?>"  class="form-control" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
         <div class="dropdown">
-            <button id="dropPoi" onclick="myFunction()"  class="dropbtn2">Select place of interest <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
+            <button id="dropPoi" onclick="myFunction()"  class="dropbtn">Select place of interest <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
             <div id="myDropdown" class="dropdown-content">
                 <a href="javascript: ifCheckToilet = true; ifCheckCafe = false; ifCheckPlayground = false; changeButtonToilet(); " id="forToilet" onclick="clickButton()">Toilet</a>
                 <a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe();" id="forCafe" onclick="clickButton()">Cafe</a>
@@ -31,7 +31,7 @@ include("php/header.php");
 
         <label style='color:rgba(255, 208, 209, 1)' for="end">End</label>
         <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
-        <button id="route" class="dropbtn2" >Get me there</button>
+        <button id="route" class="dropbtn" >Get me there</button>
     </div>
     <div class="col-lg-7" id="map" style="border:0px"></div>
 </div>        
