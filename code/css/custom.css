@@ -215,6 +215,24 @@ BODY {
     background-color: #FF5F6D;
 }
 
+.dropbtn2 {
+    background-color: rgba(255, 226, 223, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    -webkit-transition:all .35s;
+    -moz-transition:all .35s;
+    transition:all .35s;
+    cursor: pointer;
+    margin:10px 0 0 0;
+}
+
+.dropbtn2:hover,
+.dropbtn2:focus {
+    background-color: #FF5F6D;
+}
+
 .dropbtn-content {
     display: none;
     position: absolute;

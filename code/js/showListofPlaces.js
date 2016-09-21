@@ -179,6 +179,7 @@ function initMap(position) {
         //performSearchPlayground();
 
 
+        /*
         if (ifCheckToilet) {
             performSearchToilet();
             //document.getElementById("dropPoi").value="Toilet";
@@ -190,6 +191,7 @@ function initMap(position) {
         if (ifCheckCafe) {
             performSearchCafe();
         }
+        */
 
     });
 
@@ -235,7 +237,7 @@ function clickButton() {
 
 // Close the dropdown if the user clicks outside of it
 window.onclick = function (event) {
-    if (!event.target.matches(".dropbtn")) {
+    if (!event.target.matches(".dropbtn2")) {
 
         var dropdowns = document.getElementsByClassName("dropdown-content");
         var j;
