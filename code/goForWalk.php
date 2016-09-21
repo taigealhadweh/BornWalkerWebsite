@@ -102,7 +102,7 @@ background: linear-gradient(to left, #FF5F6D , #FFC371)">
                     <div class="col-md-3">
                 </div>
                     <div class="col-md-6">
-                    <input class="form-control" type="text" id="start" placeholder="minutes" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
+                    <input class="form-control" type="text" id="start" placeholder="this should be a dropdown button" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
                     </div>
                     <div class="col-md-3">
                 </div>
