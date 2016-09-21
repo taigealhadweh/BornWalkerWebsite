@@ -16,11 +16,6 @@ include("php/header.php");
                 <a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe();" id="forCafe" onclick="clickButton()">Cafe</a>
                 <a href="javascript: ifCheckPlayground = true; ifCheckCafe = false; ifCheckToilet = false; changeButtonPlayground();" id="forPlayground" onclick="clickButton()">Playground</a>
             </div>
-<!--            <select name="dpText" id="dpText">
-                <option selected="<?php // if ($_POST["dpText"] == "Toilet") echo "selected";          ?>" onchange="performSearchToilet();" value="Toilet">Toilet</option>
-                <option selected="<?php // if ($_POST["dpText"] == "Cafe") echo "selected";          ?>" value="Cafe">Cafe</option>
-                <option selected="<?php // if ($_POST["dpText"] == "Playground") echo "selected";          ?>" value="Playground">Playground</option>
-            </select>-->
         </div>
 
         <div class="btn btn-primary" style="display: none;" id="submit" >Show places!</div>
