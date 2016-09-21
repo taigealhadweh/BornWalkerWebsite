@@ -36,7 +36,7 @@
                 <h1><p></p></h1>
 
                 <hr>
-                <button class="btn btn-primary btn-xl page-scroll goBtn">Let's go</button>
+                <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Let's go</h3></button>
 
             </div>
         </div>
