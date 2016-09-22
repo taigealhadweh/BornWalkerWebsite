@@ -207,7 +207,24 @@ BODY {
     cursor: pointer;
     margin:10px 0 0 0;
 /*    width: 463px;*/
-    height: 35px;
+   
+}
+
+#dpText{
+    
+    background-color: rgba(255, 226, 223, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    -webkit-transition:all .35s;
+    -moz-transition:all .35s;
+    transition:all .35s;
+    cursor: pointer;
+    margin:10px 0 0 0;
+    width: 360px;
+   height: 35px;
+
 }
 
 .dropbtn:hover,
