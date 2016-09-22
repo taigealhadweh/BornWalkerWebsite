@@ -179,7 +179,7 @@ function initMap(position) {
         //performSearchPlayground();
 
 
-        /*
+        
         if (ifCheckToilet) {
             performSearchToilet();
             //document.getElementById("dropPoi").value="Toilet";
@@ -191,7 +191,7 @@ function initMap(position) {
         if (ifCheckCafe) {
             performSearchCafe();
         }
-        */
+        
 
     });
 

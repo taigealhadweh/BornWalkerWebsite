@@ -40,8 +40,8 @@
         <![endif]-->
 
         <!-- add comment -->
-        <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyBdzH3HmpWqyn5qFr2fAjxL-GAUXwVDsw0&libraries=geometry"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA41m8wwBCBtcIaUfWiNKeM_sUtMdsT-kQ&libraries=places" async defer></script>
+        <script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyCoMNOtHFJuP-YFymOzvOqKqiSUZBGwpiA&libraries=geometry"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEzMYpMZRG3pBdKUK_GjFgBRxn-xC3aeA&libraries=places" async defer></script>
 
         <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
