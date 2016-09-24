@@ -1,0 +1,5 @@
+AuthUserFile /Applications/MAMP/htdocs/BornWalkerWebsite/code/.htpasswd
+AuthName "Please Log In"
+AuthType Basic
+
+require valid-user
