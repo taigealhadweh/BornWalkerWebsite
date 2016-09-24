@@ -33,7 +33,7 @@ include("php/header.php");
                         <div id="uvInformation" align="center">
                             <h2 align="center">UV index 
                                 <?php print_r($uvIndex); ?>
-                                <a href="uvInfo.php" class="btn btn-link" role="button"><i class="fa fa-info-circle" aria-hidden="true" style="color:rgba(239, 119, 127, 1)"></i></a>  
+                                <a href="uvInfo.php" class="btn btn-link btn-lg" role="button"><i class="fa fa-info-circle" aria-hidden="true" style="color:rgba(239, 119, 127, 1)"></i></a>  
                             </h2></div>
                     </div>
                     <div class="col-md-2">

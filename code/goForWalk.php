@@ -36,7 +36,19 @@
                 <h1><p></p></h1>
 
                 <hr>
-                <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Let's go</h3></button>
+                <div id="button" class="row">
+                    <div class="col-md-3">
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Back</h3></button>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Let's go</h3></button>
+                    </div>
+                    <div class="col-md-3">
+                    </div>
+                
+                </div>
 
             </div>
         </div>
