@@ -16,7 +16,7 @@
                 </div>
 
 
-                <h1 id="homeHeading">What place would you prefer going?</h1>
+                <h1 id="homeHeading">What would you like on your trip?</h1>
 
                 <div id="interestInput" class="row">
                     <div class="col-md-3">

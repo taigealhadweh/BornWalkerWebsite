@@ -23,10 +23,13 @@ include("php/header.php");
 
                         <div>
                             <h2><i id="weatherIcon" class="wi" aria-hidden="true"></i></h2>
+<!--                            <h2 id="weatherSummary"></h2>-->
                         </div>
                     </div>
 
                     <div class="col-md-3" id="temperatureAndUv" align="center">
+                        <h2>Currently</h2>
+                        <div><p></p></div>
                         <h2><div id="currentTemperature">
                             </div></h2>  
                         <div><p> </p></div>

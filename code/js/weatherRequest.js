@@ -4,7 +4,7 @@ $.ajax({
     crossDomain: true,
     dataType: 'jsonp',
     success: function (weatherData) {
-//        console.log(weatherData);
+        console.log(weatherData);
         //Convert the farenheit temp to celcius with 2 decimal places
         var currentTemperatureCelcius = Math.round((weatherData.currently.apparentTemperature - 32) * (5 / 9) * 100) / 100
 
@@ -15,6 +15,8 @@ $.ajax({
         var hourlyWeatherCelcius = Math.round((weatherData.hourly.data[1].apparentTemperature - 32) * (5 / 9) * 100) / 100
 
         $("#hourlyWeather").text(hourlyWeatherCelcius).toString();
+        
+        $("#weatherSummary").text(weatherData.currently.summary).toString();
         
         var weatherIcon = weatherData.currently.icon;
         var wiString = iconMapping[weatherIcon];

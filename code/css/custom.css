@@ -129,6 +129,7 @@ body {
 
 #temperatureAndUvContainer{
     align-content: center;
+    
 }
 
 #temperatureAndUv{
@@ -305,7 +306,7 @@ BODY {
 }
 
 .goBtn{
-    padding: 1px 60px;
+    padding: 5px 40px;
 }
 
 a{
