@@ -12,9 +12,9 @@ include("php/header.php");
         <div class="dropdown">
             <button id="dropPoi" onclick="myFunction()"  class="dropbtn">Select place of interest <i class="fa fa-sort-desc" aria-hidden="true"></i></button>
             <div id="myDropdown" class="dropdown-content">
-                <a href="javascript: ifCheckToilet = true; ifCheckCafe = false; ifCheckPlayground = false; changeButtonToilet(); " id="forToilet" onclick="clickButton()">Toilet</a>
-                <a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe();" id="forCafe" onclick="clickButton()">Cafe</a>
-                <a href="javascript: ifCheckPlayground = true; ifCheckCafe = false; ifCheckToilet = false; changeButtonPlayground();" id="forPlayground" onclick="clickButton()">Playground</a>
+                <a href="javascript: ifCheckToilet = true; ifCheckCafe = false; ifCheckPlayground = false; changeButtonToilet(); clickButton(); " id="forToilet">Toilet</a>
+                <a href="javascript: ifCheckCafe = true; ifCheckToilet = false; ifCheckPlayground = false; changeButtonCafe(); clickButton();" id="forCafe" >Cafe</a>
+                <a href="javascript: ifCheckPlayground = true; ifCheckCafe = false; ifCheckToilet = false; changeButtonPlayground(); clickButton();" id="forPlayground">Playground</a>
             </div>
         </div>
 
@@ -37,11 +37,7 @@ include("php/header.php");
 </div>        
 <?php include("php/footer.php") ?>
 <script>
-
     $(document).ready(function () {
-        checkDropDownValue('<?php echo $_POST["dpText"] ?>')
+        checkDropDownValue('<?php if(isset($_POST["dpText"])){ echo $_POST["dpText"];} ?>')
     });
-
-
-
 </script>
