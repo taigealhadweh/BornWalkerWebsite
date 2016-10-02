@@ -116,9 +116,7 @@ function initMap(position) {
                     document.getElementById("start").value = results[1].formatted_address;
 
                 } else {
-
                     alert("No results found");
-
                 }
 
             }
@@ -169,7 +167,7 @@ function initMap(position) {
 
     document.getElementById("submit").addEventListener("click", function () {
 
-        clearOverlays();
+//        clearOverlays();
         directionsDisplay.setDirections({
             routes: []
         });
@@ -177,13 +175,9 @@ function initMap(position) {
         //performSearchToilet();
         //performSearchCafe();
         //performSearchPlayground();
-
-
-        
         if (ifCheckToilet) {
             performSearchToilet();
             //document.getElementById("dropPoi").value="Toilet";
-
         }
         if (ifCheckPlayground) {
             performSearchPlayground();
@@ -191,24 +185,40 @@ function initMap(position) {
         if (ifCheckCafe) {
             performSearchCafe();
         }
-        
-
     });
 
     directionMap();
     startLocAuto();
     endLocAuto();
+
 }
 
-function eventFire(el, etype) {
-    if (el.fireEvent) {
-        el.fireEvent('on' + etype);
-    } else {
-        var evObj = document.createEvent('Events');
-        evObj.initEvent(etype, true, false);
-        el.dispatchEvent(evObj);
-    }
-}
+//function performSearch() {
+//    clearOverlays();
+//    directionsDisplay.setDirections({
+//        routes: []
+//    });
+//
+//    if (ifCheckToilet) {
+//        performSearchToilet();
+//    }
+//    if (ifCheckPlayground) {
+//        performSearchPlayground();
+//    }
+//    if (ifCheckCafe) {
+//        performSearchCafe();
+//    }
+//}
+
+//function eventFire(el, etype) {
+//    if (el.fireEvent) {
+//        el.fireEvent('on' + etype);
+//    } else {
+//        var evObj = document.createEvent('Events');
+//        evObj.initEvent(etype, true, false);
+//        el.dispatchEvent(evObj);
+//    }
+//}
 
 function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
@@ -264,7 +274,7 @@ function clearOverlays() {
 
 // get places data from google places
 function performSearchCafe() {
-
+    clearOverlays();
     var request = {
         bounds: map.getBounds(),
         //keyword: "cafe"
@@ -278,7 +288,7 @@ function performSearchCafe() {
 }
 
 function performSearchToilet() {
-
+    clearOverlays();
     var request = {
         bounds: map.getBounds(),
         keyword: 'toilet'
@@ -286,11 +296,10 @@ function performSearchToilet() {
     };
 
     service.radarSearch(request, callback);
-
 }
 
 function performSearchPlayground() {
-
+    clearOverlays();
     var request = {
         bounds: map.getBounds(),
         keyword: 'playground'
@@ -330,9 +339,7 @@ function addMarker(place) {
     geocoder = new google.maps.Geocoder();
 
     var address = document.getElementById("start").value;
-
     var marker;
-
     var index;
 
     walkingTime = document.getElementById("walkingTime").value;
@@ -384,22 +391,27 @@ function addMarker(place) {
                                 console.error(status);
                                 return;
                             }
-
-                            if (result.opening_hours.open_now == true) {
-                                openOrNot = " (open)";
+//                            console.log(result.keys("opening_hours"),("open_now"));
+                            //if (result["opening_hours"] !== "" || result["opening_hours"] !== null) {
+//                            if (typeof(result.opening_hours.open_now) !== "undefined") {
+                            if (result.hasOwnProperty("opening_hours")) {
+                                console.log(result.opening_hours.open_now);
+                                if (result.opening_hours.open_now === true) {
+                                    // if (result.opening_hours.open_now === true) {
+                                    openOrNot = " (Open)";
+                                } else {
+                                    openOrNot = " (Closed)";
+                                }
                             } else {
-                                openOrNot = " (closed)";
+                                openOrNot = "";
                             }
+                            // }
 
                             infoWindow.setContent('<div><strong>' + result.name + '</strong>' + openOrNot + '<br>' + result.formatted_address + '</div>');
                             infoWindow.open(map, marker);
                             document.getElementById("end").value = result.formatted_address;
                         });
                     });
-
-
-
-
                 });
             }
         }
@@ -622,7 +634,8 @@ window.onload = function () {
     if ((geo = getGeoLocation())) {
         startWatching();
     } else {
-        alert('Geolocation not supported.')
+        console.log("Geolocation not supported");
+        // alert('Geolocation not supported.')
     }
 }
 
@@ -646,12 +659,15 @@ function activeList(x) {
 
 function changeButtonToilet() {
     document.getElementById("dropPoi").innerHTML = "Toilet <i class='fa fa-sort-desc' aria-hidden='true'></i>";
+//    performSearch();
 }
 
 function changeButtonCafe() {
     document.getElementById("dropPoi").innerHTML = "Cafe <i class='fa fa-sort-desc' aria-hidden='true'></i>";
+//    performSearch();
 }
 
 function changeButtonPlayground() {
     document.getElementById("dropPoi").innerHTML = "Playground <i class='fa fa-sort-desc' aria-hidden='true'></i>";
+//    performSearch();
 }
