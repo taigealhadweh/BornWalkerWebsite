@@ -1,0 +1,3 @@
+function clearMarkers() {
+        setMapOnAll(null);
+      }
