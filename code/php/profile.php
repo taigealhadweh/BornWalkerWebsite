@@ -75,8 +75,70 @@ $userGoal = 7;
 <!--                            this will have to be gotten via php and passed into a session variable-->
                                 <h4>Walk <?php echo $userGoal ?> times a week</h4> 
                 
-                                <h3>Set a new goal:</h3>
-                                <h4>How many times a week do you want to go for a walk?</h4>
+                                
+                                
+                                <form method="post" action="listPlaces.php" name="listPlaces" id="listPlaces">
+                                    <div class="header-content">
+                                        <div class="header-content-inner">
+                                            <h3 id="goalHeading" >Set a new goal: How many times do you want to walk for?</h3>
+                                                <div id="goalInput" class="row">
+                                                    <div class="col-md-3">
+                                                    </div>
+                                                        <div class="col-md-6">
+      <div class="checkbox">
+    <label>
+        <input type="checkbox" value="">1</label>
+</div>
+<div class="checkbox">
+    <label>
+        <input type="checkbox" value="">2</label>
+</div>
+<div class="checkbox">
+    <label>
+        <input type="checkbox" value="" >3</label>
+</div>
+<div class="checkbox">
+    <label>
+        <input type="checkbox" value="">4</label>
+</div> 
+                                                            <div class="checkbox">
+    <label>
+        <input type="checkbox" value="" >5</label>
+</div> 
+                                                            <div class="checkbox">
+    <label>
+        <input type="checkbox" value="" >6</label>
+</div> 
+                                                            <div class="checkbox">
+    <label>
+        <input type="checkbox" value="" >7</label>
+</div> 
+                                                            
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                            </form>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                             </div>
                         <div class="col-md-3">
                             <h2>Friends activity</h2>
