@@ -1,11 +1,11 @@
 <?php
-	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv'])&&isset($_GET['pv']))
+	if(isset($_GET['userName'])&&isset($_GET['pwv'])&&isset($_GET['cpwv'])&&isset($_GET['mailv']))
 	{
 		$name=checkUserName($_GET['userName']);
 		$password=checkPassword($_GET['pwv']);
 		$conpassword=$_GET['cpwv'];
 		$mail=checkemail($_GET['mailv']);
-		$phone=checkPhone($_GET['pv']);
+//		$phone=checkPhone($_GET['pv']);
 	
 		if($password===$conpassword)
 		{
@@ -64,12 +64,12 @@
 	 * @param string $_string the phone number entered by user.
 	 * @return string $_string the checked phone number.
 	 */
-    function checkPhone($_string) {
-		if (!preg_match('/^[0-9]{9,10}$/',$_string)) {
-			location('Invalid phone number, please try again :)','register.php');
-		}
-	return $_string;
-    }
+//    function checkPhone($_string) {
+//		if (!preg_match('/^[0-9]{9,10}$/',$_string)) {
+//			location('Invalid phone number, please try again :)','register.php');
+//		}
+//	return $_string;
+//    }
     
     /**
 	 * checkUserName() check the format of this user name
@@ -129,25 +129,27 @@
                     <form>
                         <h1>BornWalker Registration</h1>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Name:</label>
+                            <label class="col-sm-12 col-form-label">Name:</label>
                             <input type="text" name="userName">
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Password:</label>
+                            <label class="col-sm-12 col-form-label">Password:</label>
                             <input type="password" name="pwv">
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Confirm password:</label>
+                            <label class="col-sm-12 col-form-label">Confirm password:</label>
                             <input type="password" name="cpwv">
                         </div>
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Email:</label>
+                            <label class="col-sm-12 col-form-label">Email:</label>
                             <input type="text" name="mailv">
                         </div>
+<!--
                         <div class="row">
-                            <label class="col-sm-2 col-form-label">Phone:</label>
+                            <label class="col-sm-12 col-form-label">Phone:</label>
                             <input type="text" name="pv">
                         </div>
+-->
                         <div class="row">
                             <label class="col-form-label"></label>
                             <input type="submit" value="Register">
