@@ -23,9 +23,9 @@
                     </div>
                     <div class="col-md-6">
                         <select name="dpText" id="dpText" class="dropbtn">
-                            <option value="Toilet">Toilet</option>
-                            <option value="Cafe">Cafe</option>
                             <option value="Playground">Playground</option>
+                            <option value="Cafe">Cafe</option>
+                            <option value="Restroom">Restroom</option>
                         </select>
                         <!--<input class="form-control" type="text" id="start" name="dpText" placeholder="this should be a dropdown button" style="background-color:rgba(255, 226, 223, 0.6);border:0px">-->
                     </div>
