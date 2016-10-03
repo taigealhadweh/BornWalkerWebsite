@@ -150,9 +150,26 @@ $userGoal = 7;
                         $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
                         while($run_from = mysqli_fetch_array($from_query)){
                             $from_username = $run_from['name'];
+                            
+                            
+                            
+                            $query = "select goal.goal_name from goal, user where user.userid = $user and user.goal_ID = goal.goal_ID";
+                            $userGoal_query = mysqli_query($conn, $query);
+
+                        while($run_mem = mysqli_fetch_array($userGoal_query)){
+                            $friendsGoal = $run_mem['goal_name'];
+     
+                        }
+
 //                            echo "<a href='profile.php?user=$user' class='btn btn-primary btn-xl' style='display:block'>$from_username's goal: </a>";
                             //gets friends and shows the goals of friends with progress bar
-                            print_r("$from_username's goal: <br>");
+                            if ($friendsGoal == 0){
+                                print_r("$from_username hasnt set a goal yet. <br>" );
+                            }
+                            else{
+                               print_r("$from_username's goal: $friendsGoal times per week <br>"); 
+                            }
+                            
                             
                         }
 //                        echo "<a href='profile.php?user=$user' class='box' style='display:block'>$username</a>";
