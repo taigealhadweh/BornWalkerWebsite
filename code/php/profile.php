@@ -70,7 +70,7 @@ $userGoal = 7;
                     ?>
                 <div class="container" id="userProfileStats">
                     <div class="row" id="userGoalContainer">
-                        <div class="col-md-6">
+                        <div class="col-md-6 border-right" >
                                 <h3>Your current goal:</h3>
 <!--                            this will have to be gotten via php and passed into a session variable-->
                                 <h4>Walk <?php echo $_SESSION['userGoal'] ?> times a week</h4> 
@@ -78,7 +78,7 @@ $userGoal = 7;
                                 
                                 
                                 <form method="post" action="profile.php" name="userGoalInsert" id="userGoalInsert">
-                                    <div class="">
+                                    <div class="" id="usersNewGoal">
                                         <div class="">
                                             <h3 id="goalHeading" >Set a new goal: How many times do you want to walk for?</h3>
                                                 <div id="goalInput" class="row">
@@ -124,7 +124,7 @@ $userGoal = 7;
                             </form>
   
                             </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3 border-right">
                             <h2>Friends activity</h2>
                  
                             <h4>
@@ -164,10 +164,10 @@ $userGoal = 7;
 //                            echo "<a href='profile.php?user=$user' class='btn btn-primary btn-xl' style='display:block'>$from_username's goal: </a>";
                             //gets friends and shows the goals of friends with progress bar
                             if ($friendsGoal == 0){
-                                print_r("$from_username hasnt set a goal yet. <br>" );
+                                print_r("$from_username hasn't set a goal yet <br>" );
                             }
                             else{
-                               print_r("$from_username's goal: $friendsGoal times per week <br>"); 
+                               print_r("$from_username's goal: walk $friendsGoal times per week <br>"); 
                             }
                             
                             
