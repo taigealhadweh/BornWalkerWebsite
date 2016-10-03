@@ -226,7 +226,7 @@ function myFunction() {
 
 function checkDropDownValue(dropDownValue) {
     switch (dropDownValue) {
-        case "Toilet":
+        case "Restroom":
 //            document.getElementById("myDropdown").classList.toggle("show");
             document.getElementById('forToilet').click();
             break;
@@ -657,8 +657,8 @@ function activeList(x) {
     return false;
 }
 
-function changeButtonToilet() {
-    document.getElementById("dropPoi").innerHTML = "Toilet <i class='fa fa-sort-desc' aria-hidden='true'></i>";
+function changeButtonPlayground() {
+    document.getElementById("dropPoi").innerHTML = "Playground <i class='fa fa-sort-desc' aria-hidden='true'></i>";
 //    performSearch();
 }
 
@@ -667,7 +667,10 @@ function changeButtonCafe() {
 //    performSearch();
 }
 
-function changeButtonPlayground() {
-    document.getElementById("dropPoi").innerHTML = "Playground <i class='fa fa-sort-desc' aria-hidden='true'></i>";
+function changeButtonToilet() {
+    document.getElementById("dropPoi").innerHTML = "Restroom <i class='fa fa-sort-desc' aria-hidden='true'></i>";
 //    performSearch();
 }
+
+
+
