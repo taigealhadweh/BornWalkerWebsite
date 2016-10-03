@@ -2,15 +2,15 @@
 
 
 include("headerforphp.php");
+include("insertUserGoal.php");
+include("readUserGoal.php");
 $userGoal = 7;
+
 
 ?>
 
 
 <header>
-
-   
-
     <?php include 'functions.php';?>
 
         <?php include 'connect.php';?>
@@ -73,72 +73,56 @@ $userGoal = 7;
                         <div class="col-md-6">
                                 <h3>Your current goal:</h3>
 <!--                            this will have to be gotten via php and passed into a session variable-->
-                                <h4>Walk <?php echo $userGoal ?> times a week</h4> 
+                                <h4>Walk <?php echo $_SESSION['userGoal'] ?> times a week</h4> 
                 
                                 
                                 
-                                <form method="post" action="listPlaces.php" name="listPlaces" id="listPlaces">
-                                    <div class="header-content">
-                                        <div class="header-content-inner">
+                                <form method="post" action="profile.php" name="userGoalInsert" id="userGoalInsert">
+                                    <div class="">
+                                        <div class="">
                                             <h3 id="goalHeading" >Set a new goal: How many times do you want to walk for?</h3>
                                                 <div id="goalInput" class="row">
                                                     <div class="col-md-3">
                                                     </div>
                                                         <div class="col-md-6">
-      <div class="checkbox">
-    <label>
-        <input type="checkbox" value="">1</label>
-</div>
-<div class="checkbox">
-    <label>
-        <input type="checkbox" value="">2</label>
-</div>
-<div class="checkbox">
-    <label>
-        <input type="checkbox" value="" >3</label>
-</div>
-<div class="checkbox">
-    <label>
-        <input type="checkbox" value="">4</label>
-</div> 
-                                                            <div class="checkbox">
-    <label>
-        <input type="checkbox" value="" >5</label>
-</div> 
-                                                            <div class="checkbox">
-    <label>
-        <input type="checkbox" value="" >6</label>
-</div> 
-                                                            <div class="checkbox">
-    <label>
-        <input type="checkbox" value="" >7</label>
-</div> 
-                                                            
-                                                    
-                                                    
-                                                    
-                                                    
-                                                    
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="1"> 1</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="2"> 2</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="3" > 3</label>
+                                                            </div>
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="4"> 4</label>
+                                                            </div> 
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="5"> 5</label>
+                                                            </div> 
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="6"> 6</label>
+                                                            </div> 
+                                                            <div class="form-check">
+                                                                <label class="form-check">
+                                                                    <input class="form-check-input" type="radio" name="value" id="value" value="7"> 7</label>
+                                                            </div> 
+                                                             <button type="submit" class="btn btn-primary">Set goal</button>
                                                     </div>
                                                     <div class="col-md-3">
                                                     </div>
                                                 </div>
                                         </div>
                                     </div>
+                                   
                             </form>
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
+  
                             </div>
                         <div class="col-md-3">
                             <h2>Friends activity</h2>
