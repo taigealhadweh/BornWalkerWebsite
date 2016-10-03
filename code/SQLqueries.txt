@@ -29,6 +29,16 @@ and achievement.achieved = 'false';
 
 ———————————————————————————
 
+--
+-- update user’s goal by userid
+--
 update user
 set goal_ID = 1
 where userid = 1;
+
+--
+-- show user’s current goal
+--
+select goal.goal_name from goal, user
+where user.userid = 4
+and user.goal_ID = goal.goal_ID;
