@@ -26,3 +26,9 @@ where goal.goal_ID = achievement.goal_ID
 and user.userid = achievement.userid
 and user.userid = 1
 and achievement.achieved = 'false';
+
+———————————————————————————
+
+update user
+set goal_ID = 1
+where userid = 1;
