@@ -24,6 +24,7 @@ var directionsDisplay;
 var ifCheckCafe;
 var ifCheckToilet;
 var ifCheckPlayground;
+//var icon;
 //jQuery(document).ready(function ($) {
 
 //Get data, and replace it on the form
@@ -100,6 +101,7 @@ function initMap(position) {
         mapMarker = new google.maps.Marker({
             animation: google.maps.Animation.DROP,
             position: latlng,
+            //icon: "../icon/homeMarker.png",
             content: "You are here"
         });
 
@@ -372,11 +374,13 @@ function addMarker(place) {
                     map: map,
                     position: place.geometry.location,
                     
-                     icon: {
-                     url: 'http://maps.gstatic.com/mapfiles/circle.png',
-                     anchor: new google.maps.Point(10, 10),
-                     scaledSize: new google.maps.Size(10, 17)
-                     }
+                     //icon: "../homeMarker.png"
+//                    {
+//                     url: '../icon/homeMarker.png',
+//                     anchor: new google.maps.Point(10, 10),
+//                     scaledSize: new google.maps.Size(10, 17)
+//                     }
+                     
                      
 
                 });
