@@ -71,7 +71,7 @@
                             <a href="php/register.php">Register</a>
                         </li>
                         <li>
-                            <a href="php/login.php">Log in</a>
+                            <a href="php/login.php">Login</a>
                         </li>
                     </ul>
                 </div>
