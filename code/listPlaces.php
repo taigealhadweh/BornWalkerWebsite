@@ -1,5 +1,11 @@
-<?php
-include("php/header.php");
+<?php 
+session_start();
+include("php/functions.php");
+if (logged_in()== true) {
+			include("php/headerLoggedin.php");
+		} else {
+			include("php/header.php");
+		}
 ?>
 <div class="row">
     <p> </p>
