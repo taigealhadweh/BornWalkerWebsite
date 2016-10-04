@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['username'] = $resultArray[0];
             $_SESSION['userPassword'] = $resultArray[1];
             $_SESSION['userEmail'] = $resultArray[2];
-            $_SESSION['userPhone'] = $resultArray[3];
+            //$_SESSION['userPhone'] = $resultArray[3];
             $_SESSION['user_id'] = $resultArray[4];
             
             // printArray("_SESSION", $_SESSION);
