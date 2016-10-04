@@ -1,6 +1,11 @@
 <?php
 
-
+//include("functions.php");
+//if (logged_in() == true) {
+//			include("headerLoggedinPhp.php");
+//		} else {
+//			include("headerforphp.php");
+//		}
 include("headerforphp.php");
 include("insertUserGoal.php");
 include("readUserGoal.php");
