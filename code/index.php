@@ -25,20 +25,19 @@ if (logged_in()== true) {
                     </div>
                     <div class="col-md-2">
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-1">
 
                         <div>
                             <h2><i id="weatherIcon" class="wi" aria-hidden="true"></i></h2>
-<!--                            <h2 id="weatherSummary"></h2>-->
                         </div>
                     </div>
 
-                    <div class="col-md-3" id="temperatureAndUv" align="center">
-                        <h2>Currently</h2>
-                        <div><p></p></div>
+                    <div class="col-md-4" id="temperatureAndUv" align="center">
+                        <h2 style="color:rgba(255, 218, 185, 1)">Currently</h2>
+                        
                         <h2><div id="currentTemperature">
                             </div></h2>  
-                        <div><p> </p></div>
+                        
                         <div id="uvInformation" align="center">
                             <h2 align="center">UV index 
                                 <?php print_r($uvIndex); ?>
