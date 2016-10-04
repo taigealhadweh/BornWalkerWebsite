@@ -1,6 +1,7 @@
 <?php
-include("headerforphp.php");
 session_start();
+include("headerforphp.php");
+
 ?>
 
 <?php
