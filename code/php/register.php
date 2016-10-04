@@ -23,7 +23,7 @@ include("headerforphp.php");
 			{
 				location('This E-mail had been used.','register.php');
 			}
-			$reg="INSERT INTO user(name,password,email,phone) VALUE('$name','$password','$mail',$phone)";
+			$reg="INSERT INTO user(name,password,email) VALUE('$name','$password','$mail')";
 			@mysqli_query($conn,$reg) or die('add error'.mysql_error());
 			
 			
