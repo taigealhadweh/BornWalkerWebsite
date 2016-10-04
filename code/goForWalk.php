@@ -1,4 +1,12 @@
-<?php include("php/header.php") ?>
+<?php 
+session_start();
+include("php/functions.php");
+if (logged_in()== true) {
+			include("php/headerLoggedin.php");
+		} else {
+			include("php/header.php");
+		}
+?>
 
 <header>
     <form method="post" action="listPlaces.php" name="listPlaces" id="listPlaces">
@@ -39,10 +47,7 @@
                 <div id="button" class="row">
                     <div class="col-md-3">
                     </div>
-                    <div class="col-md-3">
-                        <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Back</h3></button>
-                    </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                         <button class="btn btn-primary btn-xl page-scroll goBtn"><h3>Let's go</h3></button>
                     </div>
                     <div class="col-md-3">
