@@ -5,6 +5,7 @@ session_start();
 $action = $_GET['action'];
 //print_r($action);
 $user = $_GET['user'];
+$loggedInUser = $_SESSION['user_id'];
 //print_r($user);
 
 $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
@@ -32,7 +33,7 @@ if($action == 'unfriend'){
     mysqli_query($conn, "DELETE from frnds where (user_one=$currentId AND user_two=$user) OR (user_one=$user AND user_two=$currentId)");
 }
 
-header("Location: profile.php?user=".$user);
+header("Location: profile.php?user=".$loggedInUser);
 
 
 
