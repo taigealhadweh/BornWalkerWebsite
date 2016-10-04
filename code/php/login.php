@@ -1,5 +1,6 @@
 <?php
 include("headerforphp.php");
+session_start();
 ?>
 
 <?php
@@ -30,9 +31,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['userPassword'] = $resultArray[1];
             $_SESSION['userEmail'] = $resultArray[2];
             //$_SESSION['userPhone'] = $resultArray[3];
-            $_SESSION['user_id'] = $resultArray[4];
+            $_SESSION['user_id'] = $resultArray[3];
             
-            // printArray("_SESSION", $_SESSION);
+//             printArray("_SESSION", $_SESSION);
 
             redirect_to("profile.php");
         } else {

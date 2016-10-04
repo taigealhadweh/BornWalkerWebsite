@@ -6,10 +6,11 @@
 //		} else {
 //			include("headerforphp.php");
 //		}
-include("headerforphp.php");
+include("headerLoggedinPhp.php");
 include("insertUserGoal.php");
 include("readUserGoal.php");
-$userGoal = 7;
+
+print_r($_SESSION['name']);
 
 
 ?>
@@ -26,7 +27,7 @@ $userGoal = 7;
 
                 <?php 
                 
-                    session_start();
+                    
                     if (logged_in() == false) {
 	                  redirect_to("login.php");
                     }
@@ -36,6 +37,8 @@ $userGoal = 7;
                     } else {
                         $user = $_SESSION['user_id'];
                     }
+                
+               
                     
                       $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
 

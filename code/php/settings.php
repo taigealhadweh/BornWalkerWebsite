@@ -1,7 +1,8 @@
 <?php
-include("headerforphp.php");
+include("headerLoggedinPhp.php");
 session_start();
 $userId = $_SESSION['user_id'];
+print_r($userId);
 
 ?>
 <header>
