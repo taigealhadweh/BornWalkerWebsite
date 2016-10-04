@@ -274,6 +274,9 @@ function clearOverlays() {
 
 // get places data from google places
 function performSearchCafe() {
+    directionsDisplay.setDirections({
+        routes: []
+    });
     clearOverlays();
     var request = {
         bounds: map.getBounds(),
@@ -288,6 +291,9 @@ function performSearchCafe() {
 }
 
 function performSearchToilet() {
+    directionsDisplay.setDirections({
+        routes: []
+    });
     clearOverlays();
     var request = {
         bounds: map.getBounds(),
@@ -299,6 +305,9 @@ function performSearchToilet() {
 }
 
 function performSearchPlayground() {
+    directionsDisplay.setDirections({
+        routes: []
+    });
     clearOverlays();
     var request = {
         bounds: map.getBounds(),
@@ -362,13 +371,13 @@ function addMarker(place) {
                     animation: google.maps.Animation.DROP,
                     map: map,
                     position: place.geometry.location,
-                    /*
+                    
                      icon: {
                      url: 'http://maps.gstatic.com/mapfiles/circle.png',
                      anchor: new google.maps.Point(10, 10),
                      scaledSize: new google.maps.Size(10, 17)
                      }
-                     */
+                     
 
                 });
 
