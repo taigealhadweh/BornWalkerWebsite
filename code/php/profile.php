@@ -1,18 +1,8 @@
 <?php
-
-//include("functions.php");
-//if (logged_in() == true) {
-//			include("headerLoggedinPhp.php");
-//		} else {
-//			include("headerforphp.php");
-//		}
-include("headerLoggedinPhp.php");
 include("insertUserGoal.php");
 include("readUserGoal.php");
-
 print_r($_SESSION['name']);
-
-
+include("headerLoggedinPhp.php");
 ?>
 
 
@@ -141,10 +131,7 @@ print_r($_SESSION['name']);
                  
                             <h4>
                                 <?php
-                                    if(!isset($_SESSION)) 
-    { 
-        session_start(); 
-    } 
+                                    session_start(); 
                                     $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
                                     $currentId = $_SESSION['user_id'];
                         
