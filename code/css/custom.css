@@ -114,11 +114,6 @@ body {
 
 }
 
-#bootstrapNavbar{
-    border-bottom: 2px solid;
-    margin: 20px;
-}
-
 #currentTemperature{
     display: block; 
     clear: right;

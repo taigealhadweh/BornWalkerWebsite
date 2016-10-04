@@ -84,7 +84,7 @@ function location($_info,$_url) {
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-2">
-                                <label id="homeHeading" style="font-size:25px">Email</label>
+                                <label id="homeHeading" style="font-size:20px">Email</label>
                             </div>
                             <div class="col-md-6">
                             <input class="form-control" type="text" id="userEmail" name="userEmail" placeholder="Email address" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
@@ -99,7 +99,7 @@ function location($_info,$_url) {
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-2">
-                                <label style="font-size:25px">Password</label>
+                                <label style="font-size:20px">Password</label>
                             </div>
                             <div class="col-md-6">
                             <input class="form-control" type="password" name="userPassword" placeholder="Password" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
@@ -114,7 +114,6 @@ function location($_info,$_url) {
                             <button type="submit" class="btn btn-primary btn-xl"><h3>Login   </h3></button>
                         </div>
                         </div>
-
                         <h3 >New member? <a href="register.php" role="button" class="btn btn-primary btn-xl">Register now</a></h3>
 
                     </form>

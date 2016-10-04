@@ -1,6 +1,15 @@
 <?php
 include("php/header.php");
 ?>
+<div class="row">
+    <p> </p>
+</div>
+<div class="row">
+    <p> </p>
+</div>
+<div class="row">
+    <p> </p>
+</div>
 <div class="row" id="containerRow">
     <div class="col-lg-4 .col-md-4" id="walkingTimePanel" style="background-color:rgba(255, 226, 223, 0)">
         <label style='color:rgba(255, 208, 209, 1)' for="walkingTime">Walking time</label>
