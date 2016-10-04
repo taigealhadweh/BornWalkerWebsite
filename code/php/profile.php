@@ -68,6 +68,8 @@ $userGoal = 7;
                         }
                     }
                     ?>
+                
+<!--                User profile stats (goals and set new goal)-->
                 <div class="container" id="userProfileStats">
                     <div class="row" id="userGoalContainer">
                         <div class="col-md-6 border-right" >
@@ -124,64 +126,81 @@ $userGoal = 7;
                             </form>
   
                             </div>
+                        
+<!--                        This is the part were the friends are displayed along with their goals-->
                         <div class="col-md-3 border-right">
                             <h2>Friends activity</h2>
                  
                             <h4>
-               <?php
-                    session_start();
-                    $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
-                    $currentId = $_SESSION['user_id'];
+                                <?php
+                                    session_start();
+                                    $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
+                                    $currentId = $_SESSION['user_id'];
+                        
+                                    $frnd_query = mysqli_query($conn, "SELECT user_one, user_two from frnds where user_one = $currentId OR user_two = $currentId");
+                                    while ($run_frnd = mysqli_fetch_array($frnd_query)){
                      
-                    $frnd_query = mysqli_query($conn, "SELECT user_one, user_two from frnds where user_one = $currentId OR user_two = $currentId");
-                    while ($run_frnd = mysqli_fetch_array($frnd_query)){
-                     
-                        $user_one = $run_frnd['user_one'];
-                        $user_two = $run_frnd['user_two'];
-                        if($user_one == $currentId){
-                            $user = $user_two;
-                        } else{
-                            $user = $user_one;
-                        } 
+                                        $user_one = $run_frnd['user_one'];
+                                        $user_two = $run_frnd['user_two'];
+                                        if($user_one == $currentId){
+                                            $user = $user_two;
+                                        } else{
+                                            $user = $user_one;
+                                        } 
                         
                        // print_r($user);                        
                        
                         
-                        $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
-                        while($run_from = mysqli_fetch_array($from_query)){
-                            $from_username = $run_from['name'];
+                                        $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
+                                        while($run_from = mysqli_fetch_array($from_query)){
+                                            $from_username = $run_from['name'];
+                               
                             
                             
-                            
-                            $query = "select goal.goal_name from goal, user where user.userid = $user and user.goal_ID = goal.goal_ID";
-                            $userGoal_query = mysqli_query($conn, $query);
+                                            $query = "select goal.goal_name from goal, user where user.userid = $user and user.goal_ID = goal.goal_ID";
+                                            $userGoal_query = mysqli_query($conn, $query);
 
-                        while($run_mem = mysqli_fetch_array($userGoal_query)){
-                            $friendsGoal = $run_mem['goal_name'];
+                                            while($run_mem = mysqli_fetch_array($userGoal_query)){
+                                                $friendsGoal = $run_mem['goal_name'];
      
-                        }
+                                            }
 
 //                            echo "<a href='profile.php?user=$user' class='btn btn-primary btn-xl' style='display:block'>$from_username's goal: </a>";
                             //gets friends and shows the goals of friends with progress bar
-                            if ($friendsGoal == 0){
-                                print_r("$from_username hasn't set a goal yet <br>" );
-                            }
-                            else{
-                               print_r("$from_username's goal: walk $friendsGoal times per week <br>"); 
-                            }
+                                            if ($friendsGoal == 0){
+                                                print_r("$from_username hasn't set a goal yet <br>" );
+                                            }
+                                            else{
+                                                print_r("$from_username's goal: walk $friendsGoal times per week <br>"); 
+                                            }
+                                
                             
-                            
-                        }
-//                        echo "<a href='profile.php?user=$user' class='box' style='display:block'>$username</a>";
-                    }
+                                        }
+                                    }
                     
                     
-                    ?>
+                            ?>
+
                                 </h4>
                         
                         </div>
                         
                         <div class="col-md-3">
+<!--                                Add friend search-->
+                                <h3>Want to add a friend?</h3>
+                                <form method="post" action="displayMembers.php" >
+                                    <div class="form-check">
+                                    <label class="form-check-input">
+                                        <input class="form-control" type="text" name="friendUserNameSearch" id="friendUserNameSearch" style="background-color:rgba(255, 226, 223, 0.6);border:0px" placeholder="Search by username">
+                                        </label>
+                                    
+                                    </div>
+                                      <button type="submit" class="btn btn-primary">Find friends!</button>  
+                               
+                                
+                                
+                                </form>
+                            
                         <h2>Friend requests</h2>
                             <?php
                     
@@ -196,7 +215,7 @@ $userGoal = 7;
                         $from_query = mysqli_query($conn, "SELECT name from user where userid = $from_request");
                         while($run_from = mysqli_fetch_array($from_query)){
                             $from_username = $run_from['name'];
-                            echo "<a href='profile.php?user=$from_request' class='btn btn-primary btn-xl' style='display:block'>$from_username</a>";
+                            echo "<a href='friendRequest.php?user=$from_request' class='btn btn-primary btn-xl' style='display:block'>$from_username</a>";
                         }
                     }
                     ?>
