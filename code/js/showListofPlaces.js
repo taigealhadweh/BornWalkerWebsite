@@ -101,7 +101,7 @@ function initMap(position) {
         mapMarker = new google.maps.Marker({
             animation: google.maps.Animation.DROP,
             position: latlng,
-            //icon: "../icon/homeMarker.png",
+            icon: "http://bornwalker.me/homeMarker.png",
             content: "You are here"
         });
 
