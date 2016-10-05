@@ -5,7 +5,7 @@
     const DB_PASS = 'password';
     const DB_NAME = 'bornWalkerMap';
 
-mysqli_connect('40.126.240.245', 'k10838a', 'password');
+mysqli_connect('40.126.240.245', 'k10838a', 'password','bornWalkerMap');
 
-mysqli_select_db('bornWalkerMap');
+//mysqli_select_db('bornWalkerMap');
 ?>

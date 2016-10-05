@@ -127,7 +127,7 @@ body {
 
 #temperatureAndUvContainer{
     align-content: center;
-    
+
 }
 
 #temperatureAndUv{
@@ -205,12 +205,12 @@ BODY {
     transition:all .35s;
     cursor: pointer;
     margin:10px 0 0 0;
-/*    width: 463px;*/
-   
+    /*    width: 463px;*/
+
 }
 
 #dpText{
-    
+
     background-color: rgba(255, 226, 223, 0.5);
     color: rgb(255, 107, 109);
     padding: 5px;
@@ -222,7 +222,7 @@ BODY {
     cursor: pointer;
     margin:10px 0 0 0;
     width: 360px;
-   height: 35px;
+    height: 35px;
 
 }
 
@@ -309,4 +309,12 @@ BODY {
 
 a{
     color:#8a001b;
+}
+
+.setGoal {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    padding: 15px 30px;
+    margin: 20px 0 0 0;
 }
