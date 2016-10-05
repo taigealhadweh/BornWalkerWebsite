@@ -1,23 +1,17 @@
 <?php
 include("insertUserGoal.php");
 include("readUserGoal.php");
-print_r($_SESSION['name']);
 include("headerLoggedinPhp.php");
 ?>
 
 
 <header>
     <?php include 'functions.php';?>
-
-        <?php include 'connect.php';?>
-
-
+    <?php include 'connect.php';?>
             <div class="container1">
                 
-
-                <?php 
-                
-                    
+<!--Checks whether the user is logged in. If there is a user logged in, gets the corresponding user id and username-->
+                <?php    
                     if (logged_in() == false) {
 	                  redirect_to("login.php");
                     }
@@ -26,25 +20,21 @@ include("headerLoggedinPhp.php");
                        
                     } else {
                         $user = $_SESSION['user_id'];
-                    }
-                
-               
-                    
-                      $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
-
+                    }                    
+                    $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
                     $query = "SELECT name FROM user where userid = '$user'";
-                    
                     $mem_query = mysqli_query($conn, $query);
-                    
                     while($run_mem = mysqli_fetch_array($mem_query)){
-//                    $user_id = $run_mem['userid'];
-                    //the get user function will get the username according to the id
                     $username = $run_mem['name'];
                      $my_id = $_SESSION['user_id'];
                     }
-                    ?>
+                ?>
+                
 <!--                    Display the users name-->
                     <h2>Welcome <?php echo $username; ?>! </h2>
+                
+                
+<!--                Searches for friend requests-->
                     <?php
                     if($user != $my_id){
                        $check_frnd_query = mysqli_query($conn, "SELECT id from frnds where (user_one= $my_id AND user_two= $user) OR (user_one= $user AND user_two= $my_id)");
@@ -67,16 +57,16 @@ include("headerLoggedinPhp.php");
                     }
                     ?>
                 
+                
 <!--                User profile stats (goals and set new goal)-->
                 <div class="container" id="userProfileStats">
                     <div class="row" id="userGoalContainer">
                         <div class="col-md-6 border-right" >
                                 <h3>Your current goal:</h3>
-<!--                            this will have to be gotten via php and passed into a session variable-->
+<!--                            Displays the users current goal-->
                                 <h4>Walk <?php echo $_SESSION['userGoal'] ?> times a week</h4> 
                 
-                                
-                                
+<!--                            Radio buttons to select the new goal-->
                                 <form method="post" action="profile.php" name="userGoalInsert" id="userGoalInsert">
                                     <div class="" id="usersNewGoal">
                                         <div class="">
@@ -145,16 +135,9 @@ include("headerLoggedinPhp.php");
                                         } else{
                                             $user = $user_one;
                                         } 
-                        
-                       // print_r($user);                        
-                       
-                        
                                         $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
                                         while($run_from = mysqli_fetch_array($from_query)){
                                             $from_username = $run_from['name'];
-                               
-                            
-                            
                                             $query = "select goal.goal_name from goal, user where user.userid = $user and user.goal_ID = goal.goal_ID";
                                             $userGoal_query = mysqli_query($conn, $query);
 
@@ -163,20 +146,15 @@ include("headerLoggedinPhp.php");
      
                                             }
 
-//                            echo "<a href='profile.php?user=$user' class='btn btn-primary btn-xl' style='display:block'>$from_username's goal: </a>";
-                            //gets friends and shows the goals of friends with progress bar
+                            //gets friends and shows the goals of friends
                                             if ($friendsGoal == 0){
                                                 print_r("$from_username hasn't set a goal yet <br>" );
                                             }
                                             else{
                                                 print_r("$from_username's goal: walk $friendsGoal times per week <br>"); 
                                             }
-                                
-                            
                                         }
                                     }
-                    
-                    
                             ?>
 
                                 </h4>
@@ -191,32 +169,29 @@ include("headerLoggedinPhp.php");
                                     <label class="form-check-input">
                                         <input class="form-control" type="text" name="friendUserNameSearch" id="friendUserNameSearch" style="background-color:rgba(255, 226, 223, 0.6);border:0px" placeholder="Search by username">
                                         </label>
-                                    
                                     </div>
                                       <button type="submit" class="btn btn-primary">Find friends!</button>  
-                               
-                                
-                                
                                 </form>
                             
+                            
+                            
+<!--                            Shows all pending friend requests-->
                         <h2>Friend requests</h2>
                             <?php
                     
-                    $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
-                    $currentId = $_SESSION['user_id'];
-                    $req_query = mysqli_query($conn, "SELECT from_request from frnd_req where to_request = $currentId");
+                            $conn = mysqli_connect("40.126.240.245", "k10838a", "password","bornWalkerMap");
+                            $currentId = $_SESSION['user_id'];
+                            $req_query = mysqli_query($conn, "SELECT from_request from frnd_req where to_request = $currentId");
                     
-                    while($run_req = mysqli_fetch_array($req_query)) {
-                        $from_request = $run_req['from_request'];
-//                        print_R($from_request);
-                        
-                        $from_query = mysqli_query($conn, "SELECT name from user where userid = $from_request");
-                        while($run_from = mysqli_fetch_array($from_query)){
-                            $from_username = $run_from['name'];
-                            echo "<a href='friendRequest.php?user=$from_request' class='btn btn-primary btn-xl' style='display:block'>$from_username</a>";
-                        }
-                    }
-                    ?>
+                            while($run_req = mysqli_fetch_array($req_query)) {
+                                $from_request = $run_req['from_request'];
+                                $from_query = mysqli_query($conn, "SELECT name from user where userid = $from_request");
+                                while($run_from = mysqli_fetch_array($from_query)){
+                                    $from_username = $run_from['name'];
+                                    echo "<a href='friendRequest.php?user=$from_request' class='btn btn-primary btn-xl' style='display:block'>$from_username</a>";
+                                }
+                            }
+                            ?>
                         
                         </div>
                     </div>
