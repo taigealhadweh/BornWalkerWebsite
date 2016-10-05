@@ -1,7 +1,7 @@
 <?php
 
 
-include("headerforphp.php");
+include("headerLoggedinPhp.php");
 
 ?>
 
