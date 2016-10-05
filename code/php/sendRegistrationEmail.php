@@ -1,3 +1,5 @@
+
+<!--This is inserting the user registrations details into the database-->
 <?php
 	if(isset($_POST['userName'])&&isset($_POST['userPassword'])&&isset($_POST['confirmUserPassword'])&&isset($_POST['userEmail']))
 	{
@@ -83,6 +85,7 @@
     }
 ?>
 
+<!--This is for sending an email to the new users email account-->
 <?php
 
 require '../phpmailer/PHPMailerAutoload.php';
@@ -127,3 +130,4 @@ if(!$mail->send()) {
 }
 
 ?>
+    
