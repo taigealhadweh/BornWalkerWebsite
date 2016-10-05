@@ -8,7 +8,9 @@ include("headerLoggedinPhp.php");
 <header>
     <?php include 'functions.php'; ?>
     <?php include 'connect.php'; ?>
-    <div class="container1">
+    <div class="container">
+        <div class="row"></div>
+        <div class="row"></div>
 
         <!--Checks whether the user is logged in. If there is a user logged in, gets the corresponding user id and username-->
         <?php
@@ -30,7 +32,7 @@ include("headerLoggedinPhp.php");
         ?>
 
         <!--                    Display the users name-->
-        <h2>Welcome <?php echo $username; ?>! </h2>
+        <h2 id="welcomeMessage">Welcome <?php echo $username; ?>! </h2>
 
 
         <!--                Searches for friend requests-->

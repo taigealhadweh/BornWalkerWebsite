@@ -7,11 +7,13 @@ include("headerLoggedinPhp.php");
 <?php include 'functions.php'; ?>
 
     <?php include 'connect.php'; ?>
-
+<div class="row"> </div>
+    <div class="row"> </div>
+    
     <div>
-        <h2>
+        <h1 id="displayMembers">
             Members:
-        </h2>
+        </h1>
 
     </div>
 <?php
@@ -28,8 +30,8 @@ if (isset($_POST['friendUserNameSearch'])) {
         $friendsName = $run_mem['name'];
         $friendsUserId = $run_mem['userid'];
 
-        print_r($friendsName);
-        print_r($friendsUserId);
+//        print_r($friendsName);
+//        print_r($friendsUserId);
         echo "<a href='friendRequest.php?user=$friendsUserId' class='btn btn-primary btn-xl' style='display:block'>$friendsName</a>";
     }
 } else {

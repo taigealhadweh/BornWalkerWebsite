@@ -21,6 +21,17 @@ body {
     padding: 0px
 }
 
+#welcomeMessage{
+    padding-top: 50px;
+}
+
+#displayMembers{
+    padding-top: 100px;
+}
+
+#beFriendsWith{
+    padding-top: 100px;
+}
 
 #map_canvas {
     height: 100%;

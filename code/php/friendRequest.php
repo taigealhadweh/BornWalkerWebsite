@@ -42,7 +42,7 @@ include("headerLoggedinPhp.php");
                     }
                     ?>
 <!--                    Display the users name-->
-                    <h2>Be friends with <?php echo $username; ?>?</h2>
+                    <h2 id="beFriendsWith">Be friends with <?php echo $username; ?>?</h2>
                     <?php
                     if($user != $my_id){
                        $check_frnd_query = mysqli_query($conn, "SELECT id from frnds where (user_one= $my_id AND user_two= $user) OR (user_one= $user AND user_two= $my_id)");
