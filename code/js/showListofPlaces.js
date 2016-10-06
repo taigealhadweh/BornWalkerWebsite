@@ -404,6 +404,7 @@ function addMarker(place) {
                                 console.error(status);
                                 return;
                             }
+                           // console.log(result);
 //                            console.log(result.keys("opening_hours"),("open_now"));
                             //if (result["opening_hours"] !== "" || result["opening_hours"] !== null) {
 //                            if (typeof(result.opening_hours.open_now) !== "undefined") {

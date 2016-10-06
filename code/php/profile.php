@@ -1,4 +1,5 @@
 <?php
+session_start();
 include("insertUserGoal.php");
 include("readUserGoal.php");
 include("headerLoggedinPhp.php");
@@ -17,8 +18,8 @@ include("headerLoggedinPhp.php");
         if (logged_in() == false) {
             redirect_to("login.php");
         }
-        if (isset($_GET['user']) && !empty($_GET['user'])) {
-            $user = $_GET['user'];
+        if (isset($_POST['user']) && !empty($_POST['user'])) {
+            $user = $_POST['user'];
         } else {
             $user = $_SESSION['user_id'];
         }
@@ -28,6 +29,7 @@ include("headerLoggedinPhp.php");
         while ($run_mem = mysqli_fetch_array($mem_query)) {
             $username = $run_mem['name'];
             $my_id = $_SESSION['user_id'];
+            
         }
         ?>
 
@@ -108,7 +110,7 @@ include("headerLoggedinPhp.php");
                                                     <span class="glyphicon glyphicon-minus"></span>
                                                 </button>
                                             </span>
-                                            <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="10">
+                                            <input type="text" name="quant[2]" class="form-control input-number" value="1" min="1" max="20">
                                             <span class="input-group-btn">
                                                 <button type="button" class="btn btn-success btn-number" data-type="plus" data-field="quant[2]">
                                                     <span class="glyphicon glyphicon-plus"></span>
