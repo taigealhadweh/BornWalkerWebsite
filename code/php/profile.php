@@ -127,7 +127,7 @@ include("headerLoggedinPhp.php");
                         </div>
 
                     </form>
-
+                    <hr>
                 </div>
 
                 <!--                        This is the part were the friends are displayed along with their goals-->
@@ -141,6 +141,8 @@ include("headerLoggedinPhp.php");
                         $currentId = $_SESSION['user_id'];
 
                         $frnd_query = mysqli_query($conn, "SELECT user_one, user_two from frnds where user_one = $currentId OR user_two = $currentId");
+                        
+//                        print_r($frnd_query['user_one']);
                         while ($run_frnd = mysqli_fetch_array($frnd_query)) {
 
                             $user_one = $run_frnd['user_one'];
@@ -172,22 +174,15 @@ include("headerLoggedinPhp.php");
 
                     </h4>
 
+                   
                 </div>
+                
+                
 
+                
+                
                 <div class="col-md-3">
-                    <!--                                Add friend search-->
-                    <h3>Want to add a friend?</h3>
-                    <form method="post" action="displayMembers.php" >
-                        <div class="form-check">
-                            <label class="form-check-input">
-                                <input class="form-control" type="text" name="friendUserNameSearch" id="friendUserNameSearch" style="background-color:rgba(255, 226, 223, 0.6);border:0px" placeholder="Search by username">
-                            </label>
-                        </div>
-                        <button type="submit" class="btn btn-primary setGoal">Find friends!</button>  
-                    </form>
-
-
-
+                    
                     <!--                            Shows all pending friend requests-->
                     <h2>Friend requests</h2>
                     <?php
@@ -204,6 +199,23 @@ include("headerLoggedinPhp.php");
                         }
                     }
                     ?>
+                    
+                    <hr>
+                    
+                    <!--                                Add friend search-->
+                    <h3>Want to add a friend?</h3>
+                    <form method="post" action="displayMembers.php" >
+                        <div class="form-check">
+                            <label class="form-check-input">
+                                <input class="form-control" type="text" name="friendUserNameSearch" id="friendUserNameSearch" style="background-color:rgba(255, 226, 223, 0.6);border:0px" placeholder="Search by username">
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary setGoal">Find friends!</button>  
+                    </form>
+
+
+
+                    
 
                 </div>
             </div>
