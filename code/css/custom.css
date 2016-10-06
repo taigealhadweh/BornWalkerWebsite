@@ -166,14 +166,15 @@ BODY {
 
 #map {
     border: 3px solid #73AD21;
-    padding: 0 0 50% 0;
+    padding: 0 0 80% 0;
     float:left;
     margin: 15px 0px 30px 15px;
 }
 
 @media screen and (max-width: 1265px) {
     #map {
-        width:90%
+        width:90%;
+        height:90%;
     }
 }
 
