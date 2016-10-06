@@ -97,7 +97,7 @@ include("headerforphp.php");
 require '../phpmailer/PHPMailerAutoload.php';
 
 $userEmail = $_POST['userEmail'];
-$userName = $_POST['userName'];
+$userName = ucfirst($_POST['userName']);
 
 
 
@@ -125,15 +125,15 @@ $mail->addAddress("$userEmail", "$userName");     // Add a recipient
 $mail->isHTML(true);                                  // Set email format to HTML
 
 $mail->Subject = 'BornWalker registration';
-$mail->Body    = 'Thank you for registering with BornWalker! Login, set your walking goal, add your friends and have fun!';
-$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+$mail->Body    = "Thank you for registering with BornWalker! Your username is $userName. Login, set your walking goal, add your friends and have fun!";
+$mail->AltBody = "Thank you for registering with BornWalker! Your username is $userName. Login, set your walking goal, add your friends and have fun!";
 
 if(!$mail->send()) {
-    echo 'Message could not be sent. ';
+    echo "Oh no, something went wrong...Please try again! " ;
     echo 'Mailer Error: ' . $mail->ErrorInfo;
     $messageError = 1;
 } else {
-    echo 'Message has been sent';
+    echo "Yayyy! Thanks for registering!";
     $messageError = 0;
 }
 
