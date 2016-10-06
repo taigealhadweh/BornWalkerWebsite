@@ -10,8 +10,7 @@ include("headerLoggedinPhp.php");
     <?php include 'functions.php'; ?>
     <?php include 'connect.php'; ?>
     <div class="container">
-        <div class="row"></div>
-        <div class="row"></div>
+        
 
         <!--Checks whether the user is logged in. If there is a user logged in, gets the corresponding user id and username-->
         <?php
@@ -62,7 +61,7 @@ include("headerLoggedinPhp.php");
         <!--                User profile stats (goals and set new goal)-->
         <div class="container" id="userProfileStats">
             <div class="row" id="userGoalContainer">
-                <div class="col-md-6 border-right" >
+                <div class="col-md-5 border-right" >
                     <h3>Your current goal:</h3>
                     <!--                            Displays the users current goal-->
                     <h4>Walk <?php if(isset($_SESSION["userGoal"])){echo $_SESSION['userGoal'];}else{echo 0;} ?> times a week</h4> 
@@ -137,22 +136,30 @@ include("headerLoggedinPhp.php");
                     <h4>
                         <?php
 //                        session_start();
-//                        $conn = mysqli_connect("40.126.240.245", "k10838a", "password", "bornWalkerMap");
+                        $conn = mysqli_connect("40.126.240.245", "k10838a", "password", "bornWalkerMap");
                         $currentId = $_SESSION['user_id'];
 
                         $frnd_query = mysqli_query($conn, "SELECT user_one, user_two from frnds where user_one = $currentId OR user_two = $currentId");
                         
-//                        print_r($frnd_query['user_one']);
+//                        if($frnd_query){
+//                            echo "You haven't added any friends!";
+//                           
+//                        }
+                        
+                        //need to show something when they dont have any friends
                         while ($run_frnd = mysqli_fetch_array($frnd_query)) {
-
+                            
                             $user_one = $run_frnd['user_one'];
                             $user_two = $run_frnd['user_two'];
+                            
                             if ($user_one == $currentId) {
                                 $user = $user_two;
                             } else {
                                 $user = $user_one;
                             }
                             $from_query = mysqli_query($conn, "SELECT name from user where userid = $user");
+                            
+                           
                             while ($run_from = mysqli_fetch_array($from_query)) {
                                 $from_username = $run_from['name'];
                                 $query = "select goal.goal_name from goal, user where user.userid = $user and user.goal_ID = goal.goal_ID";
@@ -176,11 +183,7 @@ include("headerLoggedinPhp.php");
 
                    
                 </div>
-                
-                
-
-                
-                
+    
                 <div class="col-md-3">
                     
                     <!--                            Shows all pending friend requests-->
@@ -212,10 +215,6 @@ include("headerLoggedinPhp.php");
                         </div>
                         <button type="submit" class="btn btn-primary setGoal">Find friends!</button>  
                     </form>
-
-
-
-                    
 
                 </div>
             </div>
