@@ -1,4 +1,7 @@
+<?php
+include("headerforphp.php");
 
+?>
 <!--This is inserting the user registrations details into the database-->
 <?php
 	if(isset($_POST['userName'])&&isset($_POST['userPassword'])&&isset($_POST['confirmUserPassword'])&&isset($_POST['userEmail']))
@@ -86,6 +89,9 @@
 ?>
 
 <!--This is for sending an email to the new users email account-->
+<header>
+<div class="container">
+    <h2 id="successMessage">
 <?php
 
 require '../phpmailer/PHPMailerAutoload.php';
@@ -123,11 +129,28 @@ $mail->Body    = 'Thank you for registering with BornWalker! Login, set your wal
 $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
 if(!$mail->send()) {
-    echo 'Message could not be sent.';
+    echo 'Message could not be sent. ';
     echo 'Mailer Error: ' . $mail->ErrorInfo;
+    $messageError = 1;
 } else {
     echo 'Message has been sent';
+    $messageError = 0;
 }
 
 ?>
+        </h2>
+    </div>
+    
+    <form action="register.php" method="get">
+    <input type="submit" value="Try again" class="btn btn-primary setGoal">
+    </form>
+
+    <form action="login.php" method="get">
+    <input type="submit" value="Login" class="btn btn-primary setGoal">
+    </form>
+    
+    
+</header>
+
+
     
