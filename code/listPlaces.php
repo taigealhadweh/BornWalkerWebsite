@@ -47,6 +47,9 @@ if (logged_in()== true) {
         <label style='color:rgba(255, 208, 209, 1)' for="end">End</label>
         <input class="form-control" type="text" id="end" placeholder="Pick a marker or enter an address" style="background-color:rgba(255, 226, 223, 0.6);border:0px">
         <button id="route" class="dropbtn" >Get me there</button>
+        <button id="startTimer" class="dropbtn" onclick="startTimer">Start timer</button>
+        <button id="startTimer" class="dropbtn" onclick="endTimer">Finish walk</button>
+    
     </div>
     <div class="col-lg-7" id="map" style="border:0px"></div>
 </div>        
