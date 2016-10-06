@@ -3,7 +3,7 @@
 <?php
 	if(isset($_POST['userName'])&&isset($_POST['userPassword'])&&isset($_POST['confirmUserPassword'])&&isset($_POST['userEmail']))
 	{
-		$name=checkUserName($_POST['userName']);
+		$name=checkUserName(ucfirst($_POST['userName']));
 		$password=checkPassword($_POST['userPassword']);
 		$conpassword=$_POST['confirmUserPassword'];
 		$mail=checkemail($_POST['userEmail']);
