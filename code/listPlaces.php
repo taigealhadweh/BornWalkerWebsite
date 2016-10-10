@@ -91,9 +91,9 @@ function stopCount()
         <button id="startTimer" class="dropbtn" onclick="endTimer">Finish walk</button> ?-->
 		
 		<form>
-<input type="button" value="Start count!" onClick="timedCount()">
+<input type="button" value="Start walking" onClick="timedCount()">
 <input type="text" id="txt">
-<input type="button" value="Stop count!" onClick="stopCount()">
+<input type="button" value="Stop walking" onClick="stopCount()">
 </form>
     
     </div>
