@@ -8,22 +8,22 @@ if (logged_in()== true) {
 		} else {
 			include("php/header.php");
 		}
+		$userid=$_SESSION['user_id'];
 ?>
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 
 <script type="text/javascript">
-
 var c=0
 var t
 
-function update()
+function update($userid)
 {
              $.ajax({
                 url: "update.php",
                 type: "POST",
-                data: { 'userid': 41, 'timer': c },                   
+                data: { 'userid':$userid, 'timer': c },                   
                 success: function()
                             {
                                 alert("ok");                                    
