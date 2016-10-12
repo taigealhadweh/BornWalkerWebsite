@@ -22,17 +22,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $errorDatabaseQuery = mysqli_query($conn, $userQuery);
         //this gets the position of each element so that we can check the password at element 2
         $resultArray = mysqli_fetch_row($errorDatabaseQuery) or die('search error' . mysqli_error());
-        if ($resultArray[1] === $password) //check password
+		$password = hash("sha256", $password);
+		// print_r($resultArray);
+        if ($resultArray[7] === $password) //check password
         {
             
 
             // Authenticated, set session variables
             
             $_SESSION['username'] = $resultArray[0];
-            $_SESSION['userPassword'] = $resultArray[1];
-            $_SESSION['userEmail'] = $resultArray[2];
+            $_SESSION['userPassword'] = $resultArray[7];
+            $_SESSION['userEmail'] = $resultArray[1];
             //$_SESSION['userPhone'] = $resultArray[3];
-            $_SESSION['user_id'] = $resultArray[3];
+            $_SESSION['user_id'] = $resultArray[2];
             
 //             printArray("_SESSION", $_SESSION);
 

@@ -18,12 +18,12 @@ if (logged_in()== true) {
 var c=0
 var t
 
-function update($userid)
+function update()
 {
              $.ajax({
                 url: "update.php",
                 type: "POST",
-                data: { 'userid':$userid, 'timer': c },                   
+                data: { 'userid':<?php echo $_SESSION['user_id']?>, 'timer': c },                   
                 success: function()
                             {
                                 alert("ok");                                    
@@ -34,7 +34,7 @@ function update($userid)
 
 function timedCount()
  {
- document.getElementById('txt').value=c
+ document.getElementById('txt').innerHTML=c
  c=c+1
  t=setTimeout("timedCount()",1000)
  }
@@ -91,9 +91,9 @@ function stopCount()
         <button id="startTimer" class="dropbtn" onclick="endTimer">Finish walk</button> ?-->
 		
 		<form>
-<input type="button" value="Start walking" onClick="timedCount()">
-<input type="text" id="txt">
-<input type="button" value="Stop walking" onClick="stopCount()">
+<input type="button" class="dropbtn" value="Start walking" onClick="timedCount()"><br/>
+<label>I have walked for</label><label id="txt">0</label><label>seconds</label><br/>
+<input type="button" class="dropbtn" value="Stop walking" onClick="stopCount()">
 </form>
     
     </div>

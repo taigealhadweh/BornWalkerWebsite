@@ -13,6 +13,7 @@ include("headerforphp.php");
 	
 		if($password===$conpassword)
 		{
+			$password = hash("sha256", $password);
 			@$conn=mysqli_connect("40.126.240.245","k10838a","password");
 			if(!$conn)
 			die("<p>connect error</p>");
