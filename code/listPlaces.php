@@ -92,7 +92,7 @@ function stopCount()
 		
 		<form>
 <input type="button" class="dropbtn" value="Start walking" onClick="timedCount()"><br/>
-<label>I have walked for</label><label id="txt">0</label><label>seconds</label><br/>
+<label style='color:rgba(255, 208, 209, 1)'>I have walked for</label><label style='color:rgba(255, 208, 209, 1)' id="txt">0</label><label style='color:rgba(255, 208, 209, 1)'>seconds</label><br/>
 <input type="button" class="dropbtn" value="Stop walking" onClick="stopCount()">
 </form>
     
