@@ -3,6 +3,7 @@ session_start();
 include("insertUserGoal.php");
 include("readUserGoal.php");
 include("headerLoggedinPhp.php");
+include("readUserWalk.php");
 ?>
 
 
@@ -28,7 +29,7 @@ include("headerLoggedinPhp.php");
         while ($run_mem = mysqli_fetch_array($mem_query)) {
             $username = $run_mem['name'];
             $my_id = $_SESSION['user_id'];
-            
+            $_SESSION['walkingTime'] = $run_mem['timer'];
         }
         ?>
 
@@ -62,6 +63,16 @@ include("headerLoggedinPhp.php");
         <div class="container" id="userProfileStats">
             <div class="row" id="userGoalContainer">
                 <div class="col-md-5 border-right" >
+                    <h3>Your previous walk:</h3>
+                    <h4>You walked 
+                        <?php 
+                        
+                        
+                        
+                        echo gmdate("H:i:s", $_SESSION['userWalkTime']);
+                        
+                         ?> last time
+                    </h4>
                     <h3>Your current goal:</h3>
                     <!--                            Displays the users current goal-->
                     <h4>Walk <?php if(isset($_SESSION["userGoal"])){echo $_SESSION['userGoal'];}else{echo 0;} ?> times a week</h4> 
