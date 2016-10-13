@@ -8,7 +8,7 @@
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
         <meta name="author" content="">
-        <link rel="icon" href="bootstrap-4.0.0-alpha.4/docs/favicon.ico">
+        <link rel="icon" href="https://bornwalker.me/iconBW.png">
 
         <title>BornWalker</title>
 
