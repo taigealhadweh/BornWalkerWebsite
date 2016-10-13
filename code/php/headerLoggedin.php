@@ -76,6 +76,9 @@
                             <a href="php/profile.php">Profile</a>
                         </li>
                         <li>
+                            <a href="php/settings.php">Settings</a>
+                        </li>
+                        <li>
                             <a href="php/logout.php">Logout</a>
                         </li>
                     </ul>
