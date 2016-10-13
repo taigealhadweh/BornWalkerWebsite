@@ -29,7 +29,7 @@ if (isset($_POST['friendUserNameSearch'])) {
     while ($run_mem = mysqli_fetch_array($searchUserQuery)) {
         $friendsName = $run_mem['name'];
         $friendsUserId = $run_mem['userid'];
-
+      
 //        print_r($friendsName);
 //        print_r($friendsUserId);
         echo "<a href='friendRequest.php?user=$friendsUserId' class='btn btn-primary btn-xl' style='display:block'>$friendsName</a>";
