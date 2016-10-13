@@ -26,7 +26,7 @@ function update()
                 data: { 'userid':<?php echo $_SESSION['user_id']?>, 'timer': c },                   
                 success: function()
                             {
-                                //alert("ok");                                    
+                                alert("Your walking time has been saved!");                                    
                             }
 							
             });
