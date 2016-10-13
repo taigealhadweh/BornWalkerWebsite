@@ -26,7 +26,7 @@ function update()
                 data: { 'userid':<?php echo $_SESSION['user_id']?>, 'timer': c },                   
                 success: function()
                             {
-                                alert("ok");                                    
+                                //alert("ok");                                    
                             }
 							
             });
@@ -34,7 +34,7 @@ function update()
 
 function timedCount()
  {
- document.getElementById('txt').innerHTML=c
+ document.getElementById('txt').innerHTML="<h3>"+c+"</h3>"
  c=c+1
  t=setTimeout("timedCount()",1000)
  }
@@ -90,10 +90,21 @@ function stopCount()
      <!-- <button id="startTimer" class="dropbtn" onclick="startTimer">Start timer</button>
         <button id="startTimer" class="dropbtn" onclick="endTimer">Finish walk</button> ?-->
 		
-		<form>
-<input type="button" class="dropbtn" value="Start walking" onClick="timedCount()"><br/>
-<label style='color:rgba(255, 208, 209, 1)'>I have walked for</label><label style='color:rgba(255, 208, 209, 1)' id="txt">0</label><label style='color:rgba(255, 208, 209, 1)'>seconds</label><br/>
-<input type="button" class="dropbtn" value="Stop walking" onClick="stopCount()">
+		
+        <form>
+            <label style='color:rgba(255, 208, 209, 1)'><h3>I have walked for</h3></label>
+            
+            <label> </label>
+            
+            <label style='color:rgba(255, 208, 209, 1)' id="txt"><h3>0</h3></label>
+            
+            <label> </label>
+            
+            <label style='color:rgba(255, 208, 209, 1)'><h3>seconds</h3></label><br/>
+            
+            <input type="button" class="dropbtn" value="Start walking" onClick="timedCount()">
+            
+            <input type="button" class="dropbtn" value="Stop walking" onClick="stopCount()">
 </form>
     
     </div>
